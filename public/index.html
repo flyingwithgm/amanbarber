@@ -2,134 +2,90 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Amanfour Barbers Place – Elite Grooming & Online Booking</title>
+  <title>Amanfour – Book Online (Acuity-style)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Elite grooming on Tamso New Road, Tarkwa. Precision cuts, beard trims, colour & extensions. Book in 3 seconds via our live scheduler.">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-  <!-- NAV -->
-  <nav>
-    <div class="logo">Amanfour</div>
-    <div class="nav-links">
-      <a href="#gallery">Gallery</a>
-      <a href="#services">Services</a>
-      <a href="#booking">Book</a>
-      <a href="admin.html" target="_blank">Admin</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
+  <!-- HERO (full-width banner) -->
+  <header class="hero-banner">
     <div class="hero-overlay"></div>
-    <div class="hero-content" data-aos="fade-up">
+    <div class="hero-content">
       <h1>Amanfour Barbers Place</h1>
-      <p>📍 Tamso New Road, Tarkwa · 8:30 AM – 9:00 PM Daily</p>
-      <a class="btn-hero" href="#booking">Book Appointment</a>
+      <h2>Elite grooming on Tamso New Road</h2>
+      <a href="#services" class="btn-book-now">Book Now</a>
     </div>
-  </section>
+  </header>
 
-  <!-- GALLERY 23 images -->
-  <section id="gallery">
-    <h2 data-aos="fade-up">Gallery</h2>
-    <div class="gallery-grid">
-      <img src="IMG-20250722-WA0027.jpg" loading="lazy" data-aos="zoom-in">
-      <img src="IMG-20250722-WA0025.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="100">
-      <img src="IMG-20250722-WA0024.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="200">
-      <img src="IMG-20250722-WA0022.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="300">
-      <img src="IMG-20250722-WA0023.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="400">
-      <img src="IMG-20250722-WA0020.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="500">
-      <img src="IMG-20250722-WA0021.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="600">
-      <img src="IMG-20250722-WA0019.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="700">
-      <img src="IMG-20250722-WA0018.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="800">
-      <img src="IMG-20250722-WA0016.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="900">
-      <img src="IMG-20250722-WA0017.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="1000">
-      <img src="IMG-20250722-WA0015.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="1100">
-      <img src="IMG-20250722-WA0014.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="1200">
-      <img src="IMG-20250722-WA0012.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="1300">
-      <img src="IMG-20250722-WA0013.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="1400">
-      <img src="IMG-20250722-WA0008.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="1500">
-      <img src="IMG-20250722-WA0007.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="1600">
-      <img src="IMG-20250722-WA0005.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="1700">
-      <img src="IMG-20250722-WA0006.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="1800">
-      <img src="IMG-20250722-WA0009.jpg" loading="lazy" data-aos="zoom-in" data.aos-delay="1900">
-      <img src="IMG-20250722-WA0029.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="2000">
-      <img src="IMG-20250722-WA0011.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="2100">
-      <img src="IMG-20250722-WA0010.jpg" loading="lazy" data-aos="zoom-in" data-aos-delay="2200">
-    </div>
-  </section>
-
-  <!-- SERVICES (static list) -->
+  <!-- SERVICES (Acuity-style grid) -->
   <section id="services">
-    <h2 data-aos="fade-up">Services & Prices</h2>
+    <h2>Choose Your Service</h2>
     <div class="service-grid">
-      <div class="service-card" data-aos="fade-up" data-aos-delay="100"><h3>Regular Haircut</h3><p>GHS 100</p></div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="200"><h3>Beard Trim & Line Up</h3><p>GHS 80</p></div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="300"><h3>Cut + Enhancement</h3><p>GHS 120</p></div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="400"><h3>Haircut with Texturizer</h3><p>GHS 180</p></div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="500"><h3>Pixie Cut</h3><p>GHS 250</p></div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="600"><h3>Extensions</h3><p>GHS 500</p></div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="700"><h3>Complete Colored Hair</h3><p>GHS 220</p></div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="800"><h3>Part-Colored Haircut</h3><p>GHS 180</p></div>
-    </div>
-  </section>
 
-  <!-- VISUAL PICKER WITH DIRECT LINKS TO booking.html -->
-  <section id="booking">
-    <h2 data-aos="fade-up">Pick & Book</h2>
-    <div class="service-visual-grid" data-aos="fade-up">
-      <div class="service-thumb">
+      <div class="service-card">
         <img src="https://i.imgur.com/rTqXw0L.jpg" alt="Regular Haircut">
-        <span>Regular Haircut – GHS 100</span>
-        <a href="booking.html?service=Regular%20Haircut%20–%20GHS%20100" class="btn-book-inline">Book</a>
+        <h3>Regular Haircut</h3>
+        <p>GHS 100</p>
+        <a href="booking.html?service=Regular%20Haircut%20–%20GHS%20100" class="btn-book">Book</a>
       </div>
-      <div class="service-thumb">
+
+      <div class="service-card">
         <img src="https://i.imgur.com/8l0xHMe.jpg" alt="Beard Trim">
-        <span>Beard Trim – GHS 80</span>
-        <a href="booking.html?service=Beard%20Trim%20–%20GHS%2080" class="btn-book-inline">Book</a>
+        <h3>Beard Trim</h3>
+        <p>GHS 80</p>
+        <a href="booking.html?service=Beard%20Trim%20–%20GHS%2080" class="btn-book">Book</a>
       </div>
-      <div class="service-thumb">
+
+      <div class="service-card">
         <img src="https://i.imgur.com/0wxvY4d.jpg" alt="Cut + Enhancement">
-        <span>Cut + Enhancement – GHS 120</span>
-        <a href="booking.html?service=Cut%20+%20Enhancement%20–%20GHS%20120" class="btn-book-inline">Book</a>
+        <h3>Cut + Edit</h3>
+        <p>GHS 120</p>
+        <a href="booking.html?service=Cut%20+%20Enhancement%20–%20GHS%20120" class="btn-book">Book</a>
       </div>
-      <div class="service-thumb">
+
+      <div class="service-card">
         <img src="https://i.imgur.com/Y0B9f9o.jpg" alt="Haircut + Texturizer">
-        <span>Haircut + Texturizer – GHS 180</span>
-        <a href="booking.html?service=Haircut%20with%20Texturizer%20–%20GHS%20180" class="btn-book-inline">Book</a>
+        <h3>Haircut + Texturizer</h3>
+        <p>GHS 180</p>
+        <a href="booking.html?service=Haircut%20with%20Texturizer%20–%20GHS%20180" class="btn-book">Book</a>
       </div>
-      <div class="service-thumb">
+
+      <div class="service-card">
         <img src="https://i.imgur.com/4w3QpXz.jpg" alt="Pixie Cut">
-        <span>Pixie Cut – GHS 250</span>
-        <a href="booking.html?service=Pixie%20Cut%20–%20GHS%20250" class="btn-book-inline">Book</a>
+        <h3>Pixie Cut</h3>
+        <p>GHS 250</p>
+        <a href="booking.html?service=Pixie%20Cut%20–%20GHS%20250" class="btn-book">Book</a>
       </div>
-      <div class="service-thumb">
+
+      <div class="service-card">
         <img src="https://i.imgur.com/5j8KQ9J.jpg" alt="Extensions">
-        <span>Extensions – GHS 500</span>
-        <a href="booking.html?service=Extensions%20–%20GHS%20500" class="btn-book-inline">Book</a>
+        <h3>Extensions</h3>
+        <p>GHS 500</p>
+        <a href="booking.html?service=Extensions%20–%20GHS%20500" class="btn-book">Book</a>
       </div>
-      <div class="service-thumb">
+
+      <div class="service-card">
         <img src="https://i.imgur.com/7z9vUuW.jpg" alt="Complete Color">
-        <span>Complete Color – GHS 220</span>
-        <a href="booking.html?service=Complete%20Colored%20Hair%20–%20GHS%20220" class="btn-book-inline">Book</a>
+        <h3>Complete Color</h3>
+        <p>GHS 220</p>
+        <a href="booking.html?service=Complete%20Colored%20Hair%20–%20GHS%20220" class="btn-book">Book</a>
       </div>
-      <div class="service-thumb">
+
+      <div class="service-card">
         <img src="https://i.imgur.com/K9W8oQd.jpg" alt="Part Color">
-        <span>Part Color – GHS 180</span>
-        <a href="booking.html?service=Part-Colored%20Haircut%20–%20GHS%20180" class="btn-book-inline">Book</a>
+        <h3>Part Color</h3>
+        <p>GHS 180</p>
+        <a href="booking.html?service=Part-Colored%20Haircut%20–%20GHS%20180" class="btn-book">Book</a>
       </div>
     </div>
   </section>
 
-  <footer data-aos="fade-up">
-    Amanfour Barbers Place | Tamso New Road, Tarkwa<br>
-    📱 +233 550 770 772 · Built by George Nuyekpe
+  <footer>
+    <p>© 2024 Amanfour Barbers Place | Tamso New Road, Tarkwa</p>
   </footer>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init({duration:800, once:true});</script>
 </body>
 </html>
