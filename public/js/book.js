@@ -1,20 +1,20 @@
 /* public/js/book.js
-   Save booking to Firestore & handle visual picker
+   Save booking to Firestore & handle every “Book” button
 */
 import { auth, db } from './firebase.js';
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-/* ---- Auto-select service when user clicks thumb ---- */
-document.querySelectorAll('.service-thumb').forEach(card=>{
-  card.addEventListener('click',()=>{
+/* Handle every inline “Book” button under thumbnails */
+document.querySelectorAll('.btn-book-inline').forEach(btn=>{
+  btn.addEventListener('click',()=>{
     const sel=document.getElementById('service');
-    sel.value=card.dataset.service;
+    sel.value=btn.dataset.service;
     sel.dispatchEvent(new Event('change'));
     document.getElementById('booking').scrollIntoView({behavior:'smooth'});
   });
 });
 
-/* ---- Main booking flow ---- */
+/* Main booking flow */
 const bookingForm = document.getElementById("bookingForm");
 const msg         = document.getElementById("bookingMsg");
 
