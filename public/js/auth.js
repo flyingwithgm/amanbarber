@@ -13,32 +13,48 @@ import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase
 const authForm  = document.getElementById("authForm");
 const authMsg   = document.getElementById("authMsg");
 const authCard  = document.getElementById("authCard");
-const bookCard  = document.getElementById("bookingCard");
+const mainContent = document.getElementById("mainContent");
 const logoutBtn = document.getElementById("logoutBtn");
 
-authForm.addEventListener("submit", async e => {
-  e.preventDefault();
-  const email = authForm.email.value.trim();
-  const pass  = authForm.password.value;
+// Handle form submission
+if (authForm) {
+  authForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    const email = authForm.email.value.trim();
+    const pass  = authForm.password.value;
+    authMsg.textContent = "Processing...";
 
-  try {
-    await signInWithEmailAndPassword(auth, email, pass);
-  } catch {
-    await createUserWithEmailAndPassword(auth, email, pass);
-    await setDoc(doc(db, "users", auth.currentUser.uid), { email });
-  }
-});
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+      authMsg.textContent = "Login successful!";
+    } catch (error) {
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        try {
+          await createUserWithEmailAndPassword(auth, email, pass);
+          await setDoc(doc(db, "users", auth.currentUser.uid), { email });
+          authMsg.textContent = "Account created and logged in!";
+        } catch (signupError) {
+          authMsg.textContent = "Error creating account: " + signupError.message;
+        }
+      } else {
+        authMsg.textContent = "Login error: " + error.message;
+      }
+    }
+  });
+}
 
-logoutBtn.addEventListener("click", () => signOut(auth));
+// Handle logout
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => signOut(auth));
+}
 
+// Handle auth state changes
 onAuthStateChanged(auth, user => {
   if (user) {
     authCard.hidden = true;
-    bookCard.hidden = false;
-    logoutBtn.hidden = false;
+    mainContent.hidden = false;
   } else {
     authCard.hidden = false;
-    bookCard.hidden = true;
-    logoutBtn.hidden = true;
+    mainContent.hidden = true;
   }
 });
