@@ -9,83 +9,109 @@
 </head>
 
 <body>
-  <!-- HERO (full-width banner) -->
-  <header class="hero-banner">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>Amanfour Barbers Place</h1>
-      <h2>Elite grooming on Tamso New Road</h2>
-      <a href="#services" class="btn-book-now">Book Now</a>
-    </div>
-  </header>
-
-  <!-- SERVICES (Acuity-style grid) -->
-  <section id="services">
-    <h2>Choose Your Service</h2>
-    <div class="service-grid">
-
-      <div class="service-card">
-        <img src="https://i.imgur.com/rTqXw0L.jpg" alt="Regular Haircut">
-        <h3>Regular Haircut</h3>
-        <p>GHS 100</p>
-        <a href="booking.html?service=Regular%20Haircut%20–%20GHS%20100" class="btn-book">Book</a>
+  <!-- AUTHENTICATION SECTION (shown first) -->
+  <div id="authCard">
+    <header class="hero-banner" style="min-height: 100vh;">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Amanfour Barbers Place</h1>
+        <h2>Elite grooming on Tamso New Road</h2>
+        
+        <div class="auth-form-container">
+          <h3>Login or Register</h3>
+          <form id="authForm">
+            <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #ddd;">
+            <input type="password" name="password" placeholder="Password" required style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #ddd;">
+            <button type="submit" class="btn-book-now" style="width: 100%; padding: 12px; margin: 10px 0;">Login / Register</button>
+          </form>
+          <p id="authMsg" style="color: #fff; text-align: center;"></p>
+        </div>
       </div>
+    </header>
+  </div>
 
-      <div class="service-card">
-        <img src="https://i.imgur.com/8l0xHMe.jpg" alt="Beard Trim">
-        <h3>Beard Trim</h3>
-        <p>GHS 80</p>
-        <a href="booking.html?service=Beard%20Trim%20–%20GHS%2080" class="btn-book">Book</a>
+  <!-- MAIN CONTENT (hidden until logged in) -->
+  <div id="mainContent" hidden>
+    <!-- HERO (full-width banner) -->
+    <header class="hero-banner">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Amanfour Barbers Place</h1>
+        <h2>Elite grooming on Tamso New Road</h2>
+        <button id="logoutBtn" class="btn-book-now">Logout</button>
+        <a href="#services" class="btn-book-now">Book Now</a>
       </div>
+    </header>
 
-      <div class="service-card">
-        <img src="https://i.imgur.com/0wxvY4d.jpg" alt="Cut + Enhancement">
-        <h3>Cut + Edit</h3>
-        <p>GHS 120</p>
-        <a href="booking.html?service=Cut%20+%20Enhancement%20–%20GHS%20120" class="btn-book">Book</a>
+    <!-- SERVICES (Acuity-style grid) -->
+    <section id="services">
+      <h2>Choose Your Service</h2>
+      <div class="service-grid">
+
+        <div class="service-card">
+          <img src=" https://i.imgur.com/rTqXw0L.jpg " alt="Regular Haircut">
+          <h3>Regular Haircut</h3>
+          <p>GHS 100</p>
+          <a href="booking.html?service=Regular%20Haircut%20–%20GHS%20100" class="btn-book">Book</a>
+        </div>
+
+        <div class="service-card">
+          <img src="https://i.imgur.com/8l0xHMe.jpg " alt="Beard Trim">
+          <h3>Beard Trim</h3>
+          <p>GHS 80</p>
+          <a href="booking.html?service=Beard%20Trim%20–%20GHS%2080" class="btn-book">Book</a>
+        </div>
+
+        <div class="service-card">
+          <img src="https://i.imgur.com/0wxvY4d.jpg " alt="Cut + Enhancement">
+          <h3>Cut + Edit</h3>
+          <p>GHS 120</p>
+          <a href="booking.html?service=Cut%20+%20Enhancement%20–%20GHS%20120" class="btn-book">Book</a>
+        </div>
+
+        <div class="service-card">
+          <img src="https://i.imgur.com/Y0B9f9o.jpg " alt="Haircut + Texturizer">
+          <h3>Haircut + Texturizer</h3>
+          <p>GHS 180</p>
+          <a href="booking.html?service=Haircut%20with%20Texturizer%20–%20GHS%20180" class="btn-book">Book</a>
+        </div>
+
+        <div class="service-card">
+          <img src="https://i.imgur.com/4w3QpXz.jpg " alt="Pixie Cut">
+          <h3>Pixie Cut</h3>
+          <p>GHS 250</p>
+          <a href="booking.html?service=Pixie%20Cut%20–%20GHS%20250" class="btn-book">Book</a>
+        </div>
+
+        <div class="service-card">
+          <img src="https://i.imgur.com/5j8KQ9J.jpg " alt="Extensions">
+          <h3>Extensions</h3>
+          <p>GHS 500</p>
+          <a href="booking.html?service=Extensions%20–%20GHS%20500" class="btn-book">Book</a>
+        </div>
+
+        <div class="service-card">
+          <img src="https://i.imgur.com/7z9vUuW.jpg " alt="Complete Color">
+          <h3>Complete Color</h3>
+          <p>GHS 220</p>
+          <a href="booking.html?service=Complete%20Colored%20Hair%20–%20GHS%20220" class="btn-book">Book</a>
+        </div>
+
+        <div class="service-card">
+          <img src="https://i.imgur.com/K9W8oQd.jpg " alt="Part Color">
+          <h3>Part Color</h3>
+          <p>GHS 180</p>
+          <a href="booking.html?service=Part-Colored%20Haircut%20–%20GHS%20180" class="btn-book">Book</a>
+        </div>
       </div>
+    </section>
 
-      <div class="service-card">
-        <img src="https://i.imgur.com/Y0B9f9o.jpg" alt="Haircut + Texturizer">
-        <h3>Haircut + Texturizer</h3>
-        <p>GHS 180</p>
-        <a href="booking.html?service=Haircut%20with%20Texturizer%20–%20GHS%20180" class="btn-book">Book</a>
-      </div>
+    <footer>
+      <p>© 2024 Amanfour Barbers Place | Tamso New Road, Tarkwa</p>
+    </footer>
+  </div>
 
-      <div class="service-card">
-        <img src="https://i.imgur.com/4w3QpXz.jpg" alt="Pixie Cut">
-        <h3>Pixie Cut</h3>
-        <p>GHS 250</p>
-        <a href="booking.html?service=Pixie%20Cut%20–%20GHS%20250" class="btn-book">Book</a>
-      </div>
-
-      <div class="service-card">
-        <img src="https://i.imgur.com/5j8KQ9J.jpg" alt="Extensions">
-        <h3>Extensions</h3>
-        <p>GHS 500</p>
-        <a href="booking.html?service=Extensions%20–%20GHS%20500" class="btn-book">Book</a>
-      </div>
-
-      <div class="service-card">
-        <img src="https://i.imgur.com/7z9vUuW.jpg" alt="Complete Color">
-        <h3>Complete Color</h3>
-        <p>GHS 220</p>
-        <a href="booking.html?service=Complete%20Colored%20Hair%20–%20GHS%20220" class="btn-book">Book</a>
-      </div>
-
-      <div class="service-card">
-        <img src="https://i.imgur.com/K9W8oQd.jpg" alt="Part Color">
-        <h3>Part Color</h3>
-        <p>GHS 180</p>
-        <a href="booking.html?service=Part-Colored%20Haircut%20–%20GHS%20180" class="btn-book">Book</a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2024 Amanfour Barbers Place | Tamso New Road, Tarkwa</p>
-  </footer>
-
-  <script>AOS.init({duration:800, once:true});</script>
+  <!-- Firebase SDK -->
+  <script type="module" src="/public/js/auth.js"></script>
 </body>
 </html>
