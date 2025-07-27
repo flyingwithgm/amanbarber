@@ -4,17 +4,16 @@
 import { auth, db } from './firebase.js';
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-/* Handle every inline “Book” button under thumbnails */
+/* Scroll to form & pre-select service */
 document.querySelectorAll('.btn-book-inline').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const sel=document.getElementById('service');
-    sel.value=btn.dataset.service;
-    sel.dispatchEvent(new Event('change'));
+    sel.value=btn.dataset.value;
     document.getElementById('booking').scrollIntoView({behavior:'smooth'});
   });
 });
 
-/* Main booking flow */
+/* Submit booking */
 const bookingForm = document.getElementById("bookingForm");
 const msg         = document.getElementById("bookingMsg");
 
