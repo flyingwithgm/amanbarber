@@ -11,8 +11,8 @@
 </head>
 
 <body>
-  <!-- FIXED NAV -->
-  <nav id="navbar">
+  <!-- NAV -->
+  <nav>
     <div class="logo">Amanfour</div>
     <div class="nav-links">
       <a href="#gallery">Gallery</a>
@@ -23,11 +23,11 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero-wrapper">
+  <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content" data-aos="fade-up">
       <h1>Amanfour Barbers Place</h1>
-      <p>📍 Tamso New Road, Tarkwa · 8:30 AM – 9:00 PM Daily</p>
+      <p>📍 Tamso New Road, Tarkwa · 8:30 AM – 9:00 PM Daily</p>
       <a class="btn-hero" href="#booking">Book Appointment</a>
     </div>
   </section>
@@ -62,43 +62,88 @@
     </div>
   </section>
 
-  <!-- VISUAL SERVICE PICKER -->
-  <section id="booking">
-    <h2 data-aos="fade-up">Book Your Style</h2>
+  <!-- SERVICES  (optional static list) -->
+  <section id="services">
+    <h2 data-aos="fade-up">Services & Prices</h2>
+    <div class="service-grid">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>Regular Haircut</h3><p>GHS 100</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Beard Trim & Line Up</h3><p>GHS 80</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+        <h3>Cut + Enhancement</h3><p>GHS 120</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+        <h3>Haircut with Texturizer</h3><p>GHS 180</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+        <h3>Pixie Cut</h3><p>GHS 250</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+        <h3>Extensions</h3><p>GHS 500</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="700">
+        <h3>Complete Colored Hair</h3><p>GHS 220</p>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="800">
+        <h3>Part-Colored Haircut</h3><p>GHS 180</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Thumbnails -->
+  <!-- VISUAL BOOKING PICKER WITH BUTTONS -->
+  <section id="booking">
+    <h2 data-aos="fade-up">Pick & Book</h2>
+
     <div class="service-visual-grid" data-aos="fade-up">
-      <div class="service-thumb" data-service="Regular Haircut – GHS 100">
+      <div class="service-thumb">
         <img src="https://i.imgur.com/rTqXw0L.jpg" alt="Regular Haircut">
         <span>Regular Haircut – GHS 100</span>
+        <button class="btn-book-inline" data-service="Regular Haircut – GHS 100">Book</button>
       </div>
-      <div class="service-thumb" data-service="Beard Trim – GHS 80">
+
+      <div class="service-thumb">
         <img src="https://i.imgur.com/8l0xHMe.jpg" alt="Beard Trim">
         <span>Beard Trim – GHS 80</span>
+        <button class="btn-book-inline" data-service="Beard Trim – GHS 80">Book</button>
       </div>
-      <div class="service-thumb" data-service="Cut + Enhancement – GHS 120">
+
+      <div class="service-thumb">
         <img src="https://i.imgur.com/0wxvY4d.jpg" alt="Cut + Enhancement">
         <span>Cut + Enhancement – GHS 120</span>
+        <button class="btn-book-inline" data-service="Cut + Enhancement – GHS 120">Book</button>
       </div>
-      <div class="service-thumb" data-service="Haircut with Texturizer – GHS 180">
+
+      <div class="service-thumb">
         <img src="https://i.imgur.com/Y0B9f9o.jpg" alt="Haircut + Texturizer">
         <span>Haircut + Texturizer – GHS 180</span>
+        <button class="btn-book-inline" data-service="Haircut with Texturizer – GHS 180">Book</button>
       </div>
-      <div class="service-thumb" data-service="Pixie Cut – GHS 250">
+
+      <div class="service-thumb">
         <img src="https://i.imgur.com/4w3QpXz.jpg" alt="Pixie Cut">
         <span>Pixie Cut – GHS 250</span>
+        <button class="btn-book-inline" data-service="Pixie Cut – GHS 250">Book</button>
       </div>
-      <div class="service-thumb" data-service="Extensions – GHS 500">
+
+      <div class="service-thumb">
         <img src="https://i.imgur.com/5j8KQ9J.jpg" alt="Extensions">
         <span>Extensions – GHS 500</span>
+        <button class="btn-book-inline" data-service="Extensions – GHS 500">Book</button>
       </div>
-      <div class="service-thumb" data-service="Complete Colored Hair – GHS 220">
+
+      <div class="service-thumb">
         <img src="https://i.imgur.com/7z9vUuW.jpg" alt="Complete Color">
         <span>Complete Color – GHS 220</span>
+        <button class="btn-book-inline" data-service="Complete Colored Hair – GHS 220">Book</button>
       </div>
-      <div class="service-thumb" data-service="Part-Colored Haircut – GHS 180">
+
+      <div class="service-thumb">
         <img src="https://i.imgur.com/K9W8oQd.jpg" alt="Part Color">
         <span>Part Color – GHS 180</span>
+        <button class="btn-book-inline" data-service="Part-Colored Haircut – GHS 180">Book</button>
       </div>
     </div>
 
@@ -122,7 +167,7 @@
         <input type="tel" id="phone" placeholder="Phone (07XXXXXXXX)" required>
         <button type="submit">Book Now</button>
       </form>
-      <p id="bookingMsg" style="margin-top:.8rem;font-weight:600;color:var(--gold)"></p>
+      <p id="bookingMsg"></p>
     </div>
 
     <button id="logoutBtn" class="btn-ghost" hidden>Logout</button>
