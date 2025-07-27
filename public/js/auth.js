@@ -10,34 +10,75 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
+console.log("Auth script loaded");
+
 const authForm  = document.getElementById("authForm");
 const authMsg   = document.getElementById("authMsg");
 const authCard  = document.getElementById("authCard");
 const mainContent = document.getElementById("mainContent");
 const logoutBtn = document.getElementById("logoutBtn");
 
+console.log("Elements found:", {
+  authForm: !!authForm,
+  authMsg: !!authMsg,
+  authCard: !!authCard,
+  mainContent: !!mainContent,
+  logoutBtn: !!logoutBtn
+});
+
 // Handle form submission
 if (authForm) {
   authForm.addEventListener("submit", async e => {
     e.preventDefault();
+    console.log("Form submitted");
+    
     const email = authForm.email.value.trim();
     const pass  = authForm.password.value;
-    authMsg.textContent = "Processing...";
+    
+    if (authMsg) {
+      authMsg.textContent = "Processing...";
+      authMsg.style.color = "#fff";
+    }
 
     try {
-      await signInWithEmailAndPassword(auth, email, pass);
-      authMsg.textContent = "Login successful!";
+      console.log("Attempting login for:", email);
+      const userCredential = await signInWithEmailAndPassword(auth, email, pass);
+      console.log("Login successful:", userCredential.user.email);
+      if (authMsg) {
+        authMsg.textContent = "Login successful! Redirecting...";
+        authMsg.style.color = "lightgreen";
+      }
     } catch (error) {
+      console.log("Login error:", error.code, error.message);
+      
       if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
         try {
-          await createUserWithEmailAndPassword(auth, email, pass);
-          await setDoc(doc(db, "users", auth.currentUser.uid), { email });
-          authMsg.textContent = "Account created and logged in!";
+          console.log("Creating new account for:", email);
+          const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+          console.log("Account created:", userCredential.user.email);
+          
+          await setDoc(doc(db, "users", userCredential.user.uid), { 
+            email: userCredential.user.email,
+            createdAt: new Date()
+          });
+          
+          if (authMsg) {
+            authMsg.textContent = "Account created and logged in!";
+            authMsg.style.color = "lightgreen";
+          }
         } catch (signupError) {
-          authMsg.textContent = "Error creating account: " + signupError.message;
+          console.error("Signup error:", signupError);
+          if (authMsg) {
+            authMsg.textContent = "Error: " + signupError.message;
+            authMsg.style.color = "red";
+          }
         }
       } else {
-        authMsg.textContent = "Login error: " + error.message;
+        console.error("Auth error:", error);
+        if (authMsg) {
+          authMsg.textContent = "Error: " + error.message;
+          authMsg.style.color = "red";
+        }
       }
     }
   });
@@ -45,16 +86,23 @@ if (authForm) {
 
 // Handle logout
 if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => signOut(auth));
+  logoutBtn.addEventListener("click", () => {
+    console.log("Logout clicked");
+    signOut(auth);
+  });
 }
 
 // Handle auth state changes
 onAuthStateChanged(auth, user => {
+  console.log("Auth state changed. User:", user ? user.email : "null");
+  
   if (user) {
-    authCard.hidden = true;
-    mainContent.hidden = false;
+    console.log("User logged in, showing main content");
+    if (authCard) authCard.hidden = true;
+    if (mainContent) mainContent.hidden = false;
   } else {
-    authCard.hidden = false;
-    mainContent.hidden = true;
+    console.log("No user, showing auth form");
+    if (authCard) authCard.hidden = false;
+    if (mainContent) mainContent.hidden = true;
   }
 });
