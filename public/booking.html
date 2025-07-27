@@ -8,32 +8,69 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="booking-header">
-    <div class="logo">Amanfour</div>
-    <a href="index.html" class="back-btn">← Back</a>
-  </header>
+  <!-- Loading state -->
+  <div id="loading" style="text-align: center; padding: 50px;">
+    <p>Checking authentication...</p>
+  </div>
 
-  <main class="booking-main">
-    <h1>Book Your Slot</h1>
-    <form id="bookingForm" class="booking-form">
-      <label>Service</label>
-      <select id="service" class="gold-select" required></select>
+  <!-- Auth required message -->
+  <div id="authRequired" style="text-align: center; padding: 50px; display: none;">
+    <h2>Authentication Required</h2>
+    <p>Please <a href="index.html">login</a> to book an appointment.</p>
+  </div>
 
-      <label>Date</label>
-      <input type="date" id="date" required>
+  <!-- Booking content (shown only when authenticated) -->
+  <div id="bookingContent" style="display: none;">
+    <header class="booking-header">
+      <div class="logo">Amanfour</div>
+      <a href="index.html" class="back-btn">← Back</a>
+    </header>
 
-      <label>Time</label>
-      <input type="time" id="time" required>
+    <main class="booking-main">
+      <h1>Book Your Slot</h1>
+      <form id="bookingForm" class="booking-form">
+        <label>Service</label>
+        <select id="service" class="gold-select" required></select>
 
-      <label>Phone</label>
-      <input type="tel" id="phone" placeholder="07XXXXXXXX" required>
+        <label>Date</label>
+        <input type="date" id="date" required>
 
-      <button type="submit" class="btn-submit">Book Now</button>
-      <p id="bookingMsg"></p>
-    </form>
-  </main>
+        <label>Time</label>
+        <input type="time" id="time" required>
 
+        <label>Phone</label>
+        <input type="tel" id="phone" placeholder="07XXXXXXXX" required>
+
+        <button type="submit" class="btn-submit">Book Now</button>
+        <p id="bookingMsg"></p>
+      </form>
+    </main>
+  </div>
+
+  <!-- Firebase & Auth Scripts -->
   <script type="module" src="js/firebase.js"></script>
-  <script type="module" src="js/booking-form.js"></script>
+  <script type="module">
+    // Authentication check
+    import { auth } from "./js/firebase.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
+    const loading = document.getElementById('loading');
+    const authRequired = document.getElementById('authRequired');
+    const bookingContent = document.getElementById('bookingContent');
+
+    onAuthStateChanged(auth, user => {
+      loading.style.display = 'none';
+      
+      if (user) {
+        // User is authenticated - show booking form
+        bookingContent.style.display = 'block';
+        // Load the booking form script only after auth is confirmed
+        import('./js/booking-form.js');
+      } else {
+        // User is not authenticated - show auth required message
+        authRequired.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
