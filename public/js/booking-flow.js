@@ -1,15 +1,19 @@
 import { auth, db } from './firebase.js';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 // Pre-select service
 const urlParams = new URLSearchParams(location.search);
 const wanted = decodeURIComponent(urlParams.get('service') || '');
-[...document.getElementById('service').options].forEach(opt => {
+[...document.getElementById('service').options].forEach(opt=>{
   if (opt.text === wanted) opt.selected = true;
 });
 
-// Instant sign-up / login
+// Instant login / sign-up
 document.getElementById('authForm')?.addEventListener('submit', async e=>{
   e.preventDefault();
   const email = document.getElementById('email').value.trim();
@@ -21,12 +25,13 @@ document.getElementById('authForm')?.addEventListener('submit', async e=>{
   }
 });
 
-// Show avatar + form after login
+// After login → show form & scroll it into view
 onAuthStateChanged(auth, user=>{
   if (user) {
-    document.getElementById('authCard')?.hidden = true;
-    document.getElementById('bookingForm')?.hidden = false;
-    document.getElementById('userAvatar')?.hidden = false;
+    document.getElementById('authCard').hidden = true;
+    document.getElementById('bookingForm').hidden = false;
+    document.getElementById('userAvatar').hidden = false;
+    document.getElementById('bookingForm').scrollIntoView({behavior:'smooth'});
   }
 });
 
