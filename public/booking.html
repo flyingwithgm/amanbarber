@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Book Appointment – Amanfour</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
   <header class="booking-header">
     <div class="logo">Amanfour</div>
   </header>
@@ -24,7 +22,7 @@
       </form>
     </div>
 
-    <!-- BOOKING FORM (hidden until login) -->
+    <!-- BOOKING FORM -->
     <form id="bookingForm" class="booking-form" hidden>
       <label>Service</label>
       <select id="service" class="gold-select" required>
@@ -54,7 +52,6 @@
       <button type="submit" class="btn-submit">Book Now</button>
       <p id="bookingMsg"></p>
 
-      <!-- WhatsApp share (after booking) -->
       <button type="button" id="btnShare" class="btn-whatsapp" onclick="shareOnWhatsApp()" hidden>
         Share Experience on WhatsApp
       </button>
