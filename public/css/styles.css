@@ -1,50 +1,592 @@
-/* ---------- PREMIUM BARBER SHOP ---------- */
-:root{--gold:#d4af37;--black:#0e0e0e;--white:#ffffff;--glass:rgba(255,255,255,.06);--shadow:0 0 25px rgba(212,175,55,.4);}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-html{scroll-behavior:smooth}
+/* ----------------------------------------------------
+   AMANFOUR BARBERS – ULTRA-PREMIUM 2025
+   cinematic • glass • liquid-gold • 3-D lifts
+   -------------------------------------------------- */
 
-/* HERO — cinematic fade + animations */
-.hero-banner{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;background:url('IMG-20250722-WA0027.jpg') center/cover fixed;overflow:hidden}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.4))}
-.hero-content{position:relative;z-index:2;text-align:center}
-.hero-content h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;letter-spacing:2px;color:var(--gold);text-shadow:0 0 12px var(--gold)}
-.hero-content h2{font-size:clamp(1rem,2.5vw,1.4rem);font-weight:300;margin:.5rem 0 1.5rem;color:var(--white)}
+/* ---------- 0.  ROOT TOKENS ------------------------- */
+:root{
+  --gold:#d4af37;
+  --gold-glow:#ffd700;
+  --black:#0e0e0e;
+  --white:#ffffff;
+  --glass:rgba(255,255,255,.07);
+  --shadow-soft:0 8px 32px rgba(0,0,0,.35);
+  --shadow-glow:0 0 25px var(--gold-glow);
+  --radius:18px;
+  --ff:'Poppins',sans-serif;
+}
 
-/* BUTTONS */
-.hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-primary,.btn-directions{background:linear-gradient(135deg,var(--gold),#c5a029);color:var(--black);padding:1rem 2.4rem;border:none;border-radius:50px;font-size:1rem;font-weight:700;text-decoration:none;transition:.3s;box-shadow:var(--shadow)}
-.btn-primary:hover,.btn-directions:hover{transform:scale(1.05)}
+/* ---------- 1.  GLOBAL RESET ------------------------ */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--ff);
+  background:var(--black);
+  color:var(--white);
+  line-height:1.6;
+}
 
-/* ANIMATED SCISSORS & CLIPPERS */
-.scissors{position:absolute;top:50%;left:5%;width:60px;height:60px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23d4af37" stroke-width="2"><path d="M9 14l5-5m0 0l5 5m-5-5v12"/></svg>') no-repeat center/contain;animation:snip 4s infinite ease-in-out}
-@keyframes snip{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(20deg)}}
-.clippers{position:absolute;bottom:10%;right:5%;width:70px;height:70px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d4af37"><path d="M8 3h8l-1 2H9zM12 5v14l4-2V7z"/></svg>') no-repeat center/contain;animation:buzz 2s infinite ease-in-out}
-@keyframes buzz{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(2deg)}}
+/* ---------- 2.  HERO – CINEMATIC PARALLAX ----------- */
+.hero-banner{
+  position:relative;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:url('IMG-20250722-WA0027.jpg') center/cover fixed;
+  overflow:hidden;
+}
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.7),rgba(0,0,0,.3));
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  animation:fadeUp 1.2s ease-out;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.hero-content h1{
+  font-size:clamp(2.6rem,7vw,4.5rem);
+  font-weight:800;
+  letter-spacing:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-glow));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 10px var(--gold-glow));
+}
+.hero-content h2{
+  font-size:clamp(1rem,2.5vw,1.5rem);
+  font-weight:300;
+  margin:.5rem 0 2rem;
+  color:var(--white);
+}
 
-/* SERVICE GRID — glass cards */
-.service-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem;padding:5rem 2rem;max-width:1200px;margin:auto}
-.service-card{position:relative;max-width:260px;margin:0 auto;background:linear-gradient(135deg,var(--glass),rgba(255,255,255,.02));border:1px solid var(--gold);border-radius:18px;padding:1.6rem;text-align:center;transition:.4s;box-shadow:var(--shadow)}
-.service-card:hover{transform:translateY(-6px) scale(1.02)}
-.service-card img{width:100%;height:140px;object-fit:cover;border-radius:12px}
-.service-card h3{color:var(--gold);font-size:1.2rem;margin:.6rem 0}
-.service-card p{font-size:1.1rem;font-weight:600;margin-bottom:.8rem;color:var(--white)}
-.btn-book{position:absolute;top:.4rem;right:.4rem;background:var(--gold);color:var(--black);padding:.4rem .8rem;border:none;border-radius:999px;font-size:.8rem;font-weight:700;transition:.3s}
-.btn-book:hover{transform:scale(1.1)}
+/* ---------- 3.  HERO BUTTONS – LIQUID GOLD ---------- */
+.hero-ctas{
+  display:flex;
+  gap:1rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.btn-primary,.btn-directions{
+  padding:1rem 2.6rem;
+  border:none;
+  border-radius:50px;
+  font-weight:700;
+  font-size:1rem;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.4s cubic-bezier(.25,.8,.25,1);
+  box-shadow:0 0 0 0 rgba(212,175,55,.4);
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
+  color:var(--black);
+}
+.btn-primary:hover{
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:0 8px 30px var(--gold-glow);
+}
+.btn-directions{
+  background:transparent;
+  color:var(--gold);
+  border:2px solid var(--gold);
+}
+.btn-directions:hover{
+  background:var(--gold);
+  color:var(--black);
+  transform:translateY(-4px) scale(1.03);
+}
 
-/* LOGIN & BOOKING CARDS */
-.login-card,.booking-form{max-width:420px;margin:5rem auto;padding:2.4rem;background:linear-gradient(135deg,var(--glass),rgba(255,255,255,.02));border:1px solid var(--gold);border-radius:18px}
-.login-card h2,.booking-form label{font-weight:700;color:var(--gold)}
-.login-card input,.booking-form input,.booking-form select{width:100%;padding:.9rem;margin:.6rem 0;border:1px solid var(--gold);border-radius:10px;background:var(--black);color:var(--white);font-size:1rem}
-.btn-login,.btn-submit{width:100%;background:linear-gradient(135deg,var(--gold),#c5a029);color:var(--black);padding:.9rem;border:none;border-radius:10px;font-weight:700;cursor:pointer;transition:.3s}
-.btn-login:hover,.btn-submit:hover{transform:scale(1.02)}
+/* ---------- 4.  FLOATING ICONS ---------------------- */
+.scissors,.clippers{
+  position:absolute;
+  width:60px;
+  height:60px;
+  fill:var(--gold);
+  opacity:.6;
+  animation:float 6s ease-in-out infinite alternate;
+}
+.scissors{top:20%;left:5%;animation-delay:-2s;}
+.clippers{bottom:15%;right:5%;animation-delay:-4s;}
+@keyframes float{
+  0%{transform:translateY(0) rotate(-5deg);}
+  100%{transform:translateY(-15px) rotate(5deg);}
+}
 
-/* ADMIN */
-.admin-wrapper{max-width:1000px;margin:5rem auto;padding:2.4rem;background:linear-gradient(135deg,var(--glass),rgba(255,255,255,.02));border:1px solid var(--gold);border-radius:12px}
-.admin-wrapper h2{text-align:center;font-size:2.2rem;color:var(--gold);margin-bottom:2rem}
-.admin-table{width:100%;border-collapse:collapse;background:linear-gradient(135deg,var(--glass),rgba(255,255,255,.02));border:1px solid var(--gold);border-radius:12px}
-.admin-table th,.admin-table td{padding:.8rem;border-bottom:1px solid var(--gold);text-align:left;font-size:.9rem}
-.admin-table th{background:var(--glass);color:var(--gold)}
-.admin-logout-btn{display:block;width:160px;margin:2rem auto;background:var(--gold);color:var(--black);border:none;padding:.8rem;border-radius:24px;font-weight:700;cursor:pointer}
+/* ---------- 5.  SERVICE GRID – GLASS + 3-D LIFT ----- */
+#services{
+  padding:6rem 1.5rem;
+  max-width:1200px;
+  margin:auto;
+}
+#services h2{
+  font-size:clamp(2rem,5vw,3rem);
+  text-align:center;
+  margin-bottom:3.5rem;
+  background:linear-gradient(90deg,var(--gold),var(--gold-glow));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2.4rem;
+}
 
-/* FOOTER */
-footer{text-align:center;padding:2rem;color:var(--gold);font-size:.9rem}
+/* ---------- 6.  SERVICE CARD ------------------------ */
+.service-card{
+  position:relative;
+  background:var(--glass);
+  border:1px solid rgba(212,175,55,.25);
+  border-radius:var(--radius);
+  padding:1.4rem 1.2rem 2rem;
+  backdrop-filter:blur(12px);
+  box-shadow:var(--shadow-soft);
+  transition:transform .45s,box-shadow .45s;
+}
+.service-card:hover{
+  transform:translateY(-12px) rotateX(4deg) rotateY(4deg);
+  box-shadow:0 16px 40px rgba(212,175,55,.25);
+}
+
+/* ---------- 7.  SERVICE IMAGE – CINEMATIC CROP ------ */
+.service-card img{
+  width:100%;
+  height:180px;                 /* 🔥 perfect size */
+  object-fit:cover;
+  border-radius:var(--radius);
+  transition:transform .5s ease;
+}
+.service-card:hover img{
+  transform:scale(1.1);
+}
+
+.service-card h3{
+  margin:.8rem 0 .3rem;
+  font-size:1.3rem;
+  font-weight:600;
+  color:var(--gold);
+}
+.service-card p{
+  font-size:1.15rem;
+  font-weight:700;
+  margin-bottom:.8rem;
+}
+
+/* ---------- 8.  BOOK BUTTON – TOP-RIGHT GLOW -------- */
+.btn-book{
+  position:absolute;
+  top:.7rem;
+  right:.7rem;
+  padding:.45em 1em;
+  font-size:.85rem;
+  font-weight:700;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
+  color:var(--black);
+  text-decoration:none;
+  transition:.3s;
+  z-index:3;
+}
+.btn-book:hover{
+  transform:scale(1.12);
+  box-shadow:0 0 15px var(--gold-glow);
+}
+
+/* ---------- 9.  LOGIN / BOOKING FORMS --------------- */
+.login-card,.booking-form{
+  max-width:420px;
+  margin:5rem auto;
+  padding:2.4rem;
+  background:var(--glass);
+  border:1px solid var(--gold);
+  border-radius:var(--radius);
+  backdrop-filter:blur(12px);
+}
+.login-card h2,
+.booking-form label{
+  font-weight:700;
+  color:var(--gold);
+}
+.login-card input,
+.booking-form input,
+.booking-form select{
+  width:100%;
+  padding:.9rem;
+  margin:.6rem 0;
+  border:1px solid var(--gold);
+  border-radius:8px;
+  background:var(--black);
+  color:var(--white);
+  font-size:1rem;
+}
+.btn-login,.btn-submit{
+  width:100%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
+  color:var(--black);
+  padding:.9rem;
+  border:none;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+.btn-login:hover,.btn-submit:hover{
+  transform:scale(1.03);
+  box-shadow:0 0 15px var(--gold-glow);
+}
+
+/* ---------- 10.  ADMIN TABLE ------------------------ */
+.admin-wrapper{
+  max-width:1000px;
+  margin:5rem auto;
+  padding:2.4rem;
+  background:var(--glass);
+  border:1px solid var(--gold);
+  border-radius:var(--radius);
+  backdrop-filter:blur(12px);
+}
+.admin-wrapper h2{
+  text-align:center;
+  font-size:2.2rem;
+  color:var(--gold);
+  margin-bottom:2rem;
+}
+.admin-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.admin-table th,
+.admin-table td{
+  padding:.8rem;
+  border-bottom:1px solid var(--gold);
+  text-align:left;
+  font-size:.9rem;
+}
+.admin-table th{
+  background:var(--glass);
+  color:var(--gold);
+}
+.admin-logout-btn{
+  display:block;
+  width:160px;
+  margin:2rem auto;
+  background:var(--gold);
+  color:var(--black);
+  border:none;
+  padding:.8rem;
+  border-radius:24px;
+  font-weight:700;
+  cursor:pointer;
+/* ----------------------------------------------------
+   AMANFOUR BARBERS – ULTRA-PREMIUM 2025
+   cinematic • glass • liquid-gold • 3-D lifts
+   -------------------------------------------------- */
+
+/* ---------- 0.  ROOT TOKENS ------------------------- */
+:root{
+  --gold:#d4af37;
+  --gold-glow:#ffd700;
+  --black:#0e0e0e;
+  --white:#ffffff;
+  --glass:rgba(255,255,255,.07);
+  --shadow-soft:0 8px 32px rgba(0,0,0,.35);
+  --shadow-glow:0 0 25px var(--gold-glow);
+  --radius:18px;
+  --ff:'Poppins',sans-serif;
+}
+
+/* ---------- 1.  GLOBAL RESET ------------------------ */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--ff);
+  background:var(--black);
+  color:var(--white);
+  line-height:1.6;
+}
+
+/* ---------- 2.  HERO – CINEMATIC PARALLAX ----------- */
+.hero-banner{
+  position:relative;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:url('IMG-20250722-WA0027.jpg') center/cover fixed;
+  overflow:hidden;
+}
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.7),rgba(0,0,0,.3));
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  animation:fadeUp 1.2s ease-out;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.hero-content h1{
+  font-size:clamp(2.6rem,7vw,4.5rem);
+  font-weight:800;
+  letter-spacing:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-glow));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 10px var(--gold-glow));
+}
+.hero-content h2{
+  font-size:clamp(1rem,2.5vw,1.5rem);
+  font-weight:300;
+  margin:.5rem 0 2rem;
+  color:var(--white);
+}
+
+/* ---------- 3.  HERO BUTTONS – LIQUID GOLD ---------- */
+.hero-ctas{
+  display:flex;
+  gap:1rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.btn-primary,.btn-directions{
+  padding:1rem 2.6rem;
+  border:none;
+  border-radius:50px;
+  font-weight:700;
+  font-size:1rem;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.4s cubic-bezier(.25,.8,.25,1);
+  box-shadow:0 0 0 0 rgba(212,175,55,.4);
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
+  color:var(--black);
+}
+.btn-primary:hover{
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:0 8px 30px var(--gold-glow);
+}
+.btn-directions{
+  background:transparent;
+  color:var(--gold);
+  border:2px solid var(--gold);
+}
+.btn-directions:hover{
+  background:var(--gold);
+  color:var(--black);
+  transform:translateY(-4px) scale(1.03);
+}
+
+/* ---------- 4.  FLOATING ICONS ---------------------- */
+.scissors,.clippers{
+  position:absolute;
+  width:60px;
+  height:60px;
+  fill:var(--gold);
+  opacity:.6;
+  animation:float 6s ease-in-out infinite alternate;
+}
+.scissors{top:20%;left:5%;animation-delay:-2s;}
+.clippers{bottom:15%;right:5%;animation-delay:-4s;}
+@keyframes float{
+  0%{transform:translateY(0) rotate(-5deg);}
+  100%{transform:translateY(-15px) rotate(5deg);}
+}
+
+/* ---------- 5.  SERVICE GRID – GLASS + 3-D LIFT ----- */
+#services{
+  padding:6rem 1.5rem;
+  max-width:1200px;
+  margin:auto;
+}
+#services h2{
+  font-size:clamp(2rem,5vw,3rem);
+  text-align:center;
+  margin-bottom:3.5rem;
+  background:linear-gradient(90deg,var(--gold),var(--gold-glow));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2.4rem;
+}
+
+/* ---------- 6.  SERVICE CARD ------------------------ */
+.service-card{
+  position:relative;
+  background:var(--glass);
+  border:1px solid rgba(212,175,55,.25);
+  border-radius:var(--radius);
+  padding:1.4rem 1.2rem 2rem;
+  backdrop-filter:blur(12px);
+  box-shadow:var(--shadow-soft);
+  transition:transform .45s,box-shadow .45s;
+}
+.service-card:hover{
+  transform:translateY(-12px) rotateX(4deg) rotateY(4deg);
+  box-shadow:0 16px 40px rgba(212,175,55,.25);
+}
+
+/* ---------- 7.  SERVICE IMAGE – CINEMATIC CROP ------ */
+.service-card img{
+  width:100%;
+  height:180px;                 /* 🔥 perfect size */
+  object-fit:cover;
+  border-radius:var(--radius);
+  transition:transform .5s ease;
+}
+.service-card:hover img{
+  transform:scale(1.1);
+}
+
+.service-card h3{
+  margin:.8rem 0 .3rem;
+  font-size:1.3rem;
+  font-weight:600;
+  color:var(--gold);
+}
+.service-card p{
+  font-size:1.15rem;
+  font-weight:700;
+  margin-bottom:.8rem;
+}
+
+/* ---------- 8.  BOOK BUTTON – TOP-RIGHT GLOW -------- */
+.btn-book{
+  position:absolute;
+  top:.7rem;
+  right:.7rem;
+  padding:.45em 1em;
+  font-size:.85rem;
+  font-weight:700;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
+  color:var(--black);
+  text-decoration:none;
+  transition:.3s;
+  z-index:3;
+}
+.btn-book:hover{
+  transform:scale(1.12);
+  box-shadow:0 0 15px var(--gold-glow);
+}
+
+/* ---------- 9.  LOGIN / BOOKING FORMS --------------- */
+.login-card,.booking-form{
+  max-width:420px;
+  margin:5rem auto;
+  padding:2.4rem;
+  background:var(--glass);
+  border:1px solid var(--gold);
+  border-radius:var(--radius);
+  backdrop-filter:blur(12px);
+}
+.login-card h2,
+.booking-form label{
+  font-weight:700;
+  color:var(--gold);
+}
+.login-card input,
+.booking-form input,
+.booking-form select{
+  width:100%;
+x  padding:.9rem;
+  margin:.6rem 0;
+  border:1px solid var(--gold);
+  border-radius:8px;
+  background:var(--black);
+  color:var(--white);
+  font-size:1rem;
+}
+.btn-login,.btn-submit{
+  width:100%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
+  color:var(--black);
+  padding:.9rem;
+  border:none;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+.btn-login:hover,.btn-submit:hover{
+  transform:scale(1.03);
+  box-shadow:0 0 15px var(--gold-glow);
+}
+
+/* ---------- 10.  ADMIN TABLE ------------------------ */
+.admin-wrapper{
+  max-width:1000px;
+  margin:5rem auto;
+  padding:2.4rem;
+  background:var(--glass);
+  border:1px solid var(--gold);
+  border-radius:var(--radius);
+  backdrop-filter:blur(12px);
+}
+.admin-wrapper h2{
+  text-align:center;
+  font-size:2.2rem;
+  color:var(--gold);
+  margin-bottom:2rem;
+}
+.admin-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.admin-table th,
+.admin-table td{
+  padding:.8rem;
+  border-bottom:1px solid var(--gold);
+  text-align:left;
+  font-size:.9rem;
+}
+.admin-table th{
+  background:var(--glass);
+  color:var(--gold);
+}
+.admin-logout-btn{
+  display:block;
+  width:160px;
+  margin:2rem auto;
+  background:var(--gold);
+  color:var(--black);
+  border:none;
+  padding:.8rem;
+  border-radius:24px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* ---------- 11.  FOOTER ----------------------------- */
+footer{
+  text-align:center;
+  padding:2.5rem 1rem;
+  color:var(--gold);
+  font-size:.9rem;
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(10px);
+}
+
+/* ---------- 12.  RESPONSIVE ------------------------- */
+@media (max-width:600px){
+  .service-grid{grid-template-columns:1fr;}
+  .hero-ctas{flex-direction:column;align-items:center;}
+}
+
