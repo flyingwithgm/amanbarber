@@ -1,3 +1,4 @@
+/* ----------  PREMIUM BARBERSHOP THEME  ---------- */
 :root{
   --gold:#d4af37;
   --black:#0e0e0e;
@@ -8,47 +9,9 @@
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);line-height:1.6}
 
-/* HERO — cinematic fade */
-.hero-banner{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:url('IMG-20250722-WA0027.jpg') center/cover fixed;}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.4))}
-.hero-content{position:relative;z-index:2}
-.hero-content h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;letter-spacing:2px;color:var(--gold);text-shadow:0 0 12px var(--gold)}
-.hero-content h2{font-size:clamp(1rem,2.5vw,1.4rem);font-weight:300;margin:.5rem 0 1.5rem;color:var(--white)}
-.hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-primary,.btn-directions{background:linear-gradient(135deg,var(--gold),#c5a029);color:var(--black);padding:1rem 2.4rem;border:none;border-radius:50px;font-size:1rem;font-weight:700;transition:.3s;box-shadow:var(--shadow)}
-.btn-primary:hover,.btn-directions:hover{transform:scale(1.05)}
-
-/* SERVICES — glass cards */
-#services{padding:5rem 2rem;max-width:1200px;margin:auto}
-#services h2{text-align:center;font-size:2.4rem;color:var(--gold);margin-bottom:3rem;text-shadow:0 0 8px var(--gold)}
-.service-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem}
-.service-card{position:relative;max-width:260px;margin:0 auto;background:linear-gradient(135deg,var(--glass),rgba(255,255,255,.02));border:1px solid var(--gold);border-radius:18px;padding:1.6rem;text-align:center;transition:.4s;box-shadow:var(--shadow)}
-.service-card:hover{transform:translateY(-6px) scale(1.02)}
-.service-card img{width:100%;height:140px;object-fit:cover;border-radius:12px}
-.service-card h3{color:var(--gold);font-size:1.2rem;margin:.6rem 0}
-.service-card p{font-size:1.1rem;font-weight:600;margin-bottom:.8rem;color:var(--white)}
-.btn-book{position:absolute;top:.4rem;right:.4rem;background:var(--gold);color:var(--black);padding:.4rem .8rem;border:none;border-radius:999px;font-size:.8rem;font-weight:700;transition:.3s}
-.btn-book:hover{transform:scale(1.1)}
-
-/* LOGIN & BOOKING CARDS */
-.login-card,.booking-form{max-width:420px;margin:4rem auto;padding:2.4rem;background:linear-gradient(135deg,var(--glass),rgba(255,255,255,.02));border:1px solid var(--gold);border-radius:18px}
-.login-card h2,.booking-form label{font-weight:700;color:var(--gold)}
-.login-card input,.booking-form input,.booking-form select{width:100%;padding:.9rem;margin:.6rem 0;border:1px solid var(--gold);border-radius:10px;background:var(--black);color:var(--white);font-size:1rem}
-.btn-login,.btn-submit{width:100%;background:linear-gradient(135deg,var(--gold),#c5a029);color:var(--black);padding:.9rem;border:none;border-radius:10px;font-weight:700;cursor:pointer;transition:.3s}
-.btn-login:hover,.btn-submit:hover{transform:scale(1.02)}
-
-/* ADMIN */
-.admin-wrapper{max-width:1000px;margin:4rem auto;padding:2rem}
-.admin-wrapper h2{text-align:center;font-size:2.2rem;color:var(--gold);margin-bottom:2rem}
-.admin-table{width:100%;border-collapse:collapse;background:linear-gradient(135deg,var(--glass),rgba(255,255,255,.02));border:1px solid var(--gold);border-radius:12px}
-.admin-table th,.admin-table td{padding:.8rem;border-bottom:1px solid var(--gold);text-align:left;font-size:.9rem}
-.admin-table th{background:var(--glass);color:var(--gold)}
-.admin-logout-btn{display:block;width:160px;margin:2rem auto;background:var(--gold);color:var(--black);border:none;padding:.8rem;border-radius:24px;font-weight:700;cursor:pointer}
-
-/* FOOTER */
-footer{text-align:center;padding:2rem;color:var(--gold);font-size:.9rem}
-/* ── HERO BARBER GLAM ── */
+/* HERO — cinematic fade + animations */
 .hero-banner{
   position:relative;
   height:100vh;
@@ -63,8 +26,6 @@ footer{text-align:center;padding:2rem;color:var(--gold);font-size:.9rem}
   inset:0;
   background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.4));
 }
-
-/* Scissors */
 .hero-content{
   position:relative;
   z-index:2;
@@ -99,10 +60,7 @@ footer{text-align:center;padding:2rem;color:var(--gold);font-size:.9rem}
   background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23d4af37" stroke-width="2"><path d="M9 14l5-5m0 0l5 5m-5-5v12"/></svg>') no-repeat center/contain;
   animation:snip 4s infinite ease-in-out;
 }
-@keyframes snip{
-  0%,100%{transform:rotate(-20deg)}
-  50%{transform:rotate(20deg)}
-}
+@keyframes snip{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(20deg)}}
 
 /* Clipper */
 .clippers{
@@ -112,12 +70,39 @@ footer{text-align:center;padding:2rem;color:var(--gold);font-size:.9rem}
   background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d4af37"><path d="M8 3h8l-1 2H9zM12 5v14l4-2V7z"/></svg>') no-repeat center/contain;
   animation:buzz 2s infinite ease-in-out;
 }
-@keyframes buzz{
-  0%,100%{transform:translateY(0) rotate(0)}
-  50%{transform:translateY(-4px) rotate(2deg)}
-}
+@keyframes buzz{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(2deg)}}
 
 /* Responsive tweak */
 @media(max-width:480px){
   .scissors,.clippers{width:40px;height:40px}
 }
+
+/* Service grid */
+#services{padding:5rem 2rem;max-width:1200px;margin:auto}
+#services h2{text-align:center;font-size:2.4rem;color:var(--gold);margin-bottom:3rem;text-shadow:0 0 8px var(--gold)}
+.service-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem}
+.service-card{position:relative;max-width:260px;margin:0 auto;background:linear-gradient(135deg,var(--glass),rgba(255,255,255,.02));border:1px solid var(--gold);border-radius:18px;padding:1.6rem;text-align:center;transition:.4s;box-shadow:var(--shadow)}
+.service-card:hover{transform:translateY(-6px) scale(1.02)}
+.service-card img{width:100%;height:140px;object-fit:cover;border-radius:12px}
+.service-card h3{color:var(--gold);font-size:1.2rem;margin:.6rem 0}
+.service-card p{font-size:1.1rem;font-weight:600;margin-bottom:.8rem;color:var(--white)}
+.btn-book{position:absolute;top:.4rem;right:.4rem;background:var(--gold);color:var(--black);padding:.4rem .8rem;border:none;border-radius:999px;font-size:.8rem;font-weight:700;transition:.3s}
+.btn-book:hover{transform:scale(1.1)}
+
+/* LOGIN & BOOKING CARDS */
+.login-card,.booking-form{max-width:420px;margin:5rem auto;padding:2.4rem;background:linear-gradient(135deg,var(--glass),rgba(255,255,255,.02));border:1px solid var(--gold);border-radius:18px}
+.login-card h2,.booking-form label{font-weight:700;color:var(--gold)}
+.login-card input,.booking-form input,.booking-form select{width:100%;padding:.9rem;margin:.6rem 0;border:1px solid var(--gold);border-radius:10px;background:var(--black);color:var(--white);font-size:1rem}
+.btn-login,.btn-submit{width:100%;background:linear-gradient(135deg,var(--gold),#c5a029);color:var(--black);padding:.9rem;border:none;border-radius:10px;font-weight:700;cursor:pointer;transition:.3s}
+.btn-login:hover,.btn-submit:hover{transform:scale(1.02)}
+
+/* ADMIN */
+.admin-wrapper{max-width:1000px;margin:5rem auto;padding:2rem}
+.admin-wrapper h2{text-align:center;font-size:2.2rem;color:var(--gold);margin-bottom:2rem}
+.admin-table{width:100%;border-collapse:collapse;background:linear-gradient(135deg,var(--glass),rgba(255,255,255,.02));border:1px solid var(--gold);border-radius:12px}
+.admin-table th,.admin-table td{padding:.8rem;border-bottom:1px solid var(--gold);text-align:left;font-size:.9rem}
+.admin-table th{background:var(--glass);color:var(--gold)}
+.admin-logout-btn{display:block;width:160px;margin:2rem auto;background:var(--gold);color:var(--black);border:none;padding:.8rem;border-radius:24px;font-weight:700;cursor:pointer}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem;color:var(--gold);font-size:.9rem}
