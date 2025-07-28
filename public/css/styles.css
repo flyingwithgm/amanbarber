@@ -45,3 +45,36 @@ body{background:var(--black);color:var(--white);line-height:1.6}
 .admin-table th{background:var(--glass);color:var(--gold)}
 .admin-logout-btn{display:block;width:160px;margin:1.5rem auto;background:var(--gold);color:var(--black);border:none;padding:.7rem 0;border-radius:24px;font-weight:700;cursor:pointer}
 @media(max-width:600px){.hero-content h1{font-size:2rem}.service-grid{grid-template-columns:1fr}}
+/* ----------  IMAGE & CARD REFINE ---------- */
+/* Hero image */
+.hero-banner {
+  background-size: cover;
+  background-position: center 25%; /* tighter crop */
+}
+
+.hero-content h1 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem); /* smaller hero title */
+}
+
+/* Service cards */
+.service-card {
+  max-width: 280px;
+  margin: 0 auto 1.5rem;
+  padding: 1.4rem;
+}
+.service-card img {
+  height: 140px;          /* crisp, small */
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Mobile tweak */
+@media (max-width: 480px) {
+  .service-card {
+    max-width: 90%;
+    padding: 1rem;
+  }
+  .service-card img {
+    height: 110px;
+  }
+}
