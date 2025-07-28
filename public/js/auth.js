@@ -9,32 +9,20 @@ import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase
 
 const authForm  = document.getElementById("authForm");
 const authMsg   = document.getElementById("authMsg");
-const authCard  = document.getElementById("authCard");
-const bookCard  = document.getElementById("bookingCard");
-const logoutBtn = document.getElementById("logoutBtn");
+const bookingForm = document.getElementById("bookingForm");
 
 authForm?.addEventListener("submit", async e => {
   e.preventDefault();
-  const email = authForm.email.value.trim();
-  const pass  = authForm.password.value;
+  const email = document.getElementById("email").value.trim();
+  const pass  = document.getElementById("password").value;
   try {
     await signInWithEmailAndPassword(auth, email, pass);
+    authForm.parentElement.hidden = true;
+    bookingForm.hidden = false;
   } catch {
     await createUserWithEmailAndPassword(auth, email, pass);
     await setDoc(doc(db, "users", auth.currentUser.uid), { email });
-  }
-});
-
-logoutBtn?.addEventListener("click", () => signOut(auth));
-
-onAuthStateChanged(auth, user => {
-  if (user) {
-    authCard && (authCard.hidden = true);
-    bookCard && (bookCard.hidden = false);
-    logoutBtn && (logoutBtn.hidden = false);
-  } else {
-    authCard && (authCard.hidden = false);
-    bookCard && (bookCard.hidden = true);
-    logoutBtn && (logoutBtn.hidden = true);
+    authForm.parentElement.hidden = true;
+    bookingForm.hidden = false;
   }
 });
