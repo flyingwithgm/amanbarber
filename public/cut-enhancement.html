@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Cut + Enhancement – Amanfour</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="booking-header">
+    <div class="logo">Amanfour</div>
+    <a href="index.html" class="back-btn">← Back</a>
+  </header>
+
+  <main class="booking-main">
+    <h1>Book Cut + Enhancement – GHS 120</h1>
+    <img src="cut+enhancements.jpg" alt="Cut + Enhancement" class="preview-img">
+
+    <form id="bookingForm" class="booking-form">
+      <label>Name</label><input type="text" id="name" placeholder="Your Name" required>
+      <label>Phone</label><input type="tel" id="phone" placeholder="07XXXXXXXX" required>
+      <label>Date</label><input type="date" id="date" required>
+      <label>Time</label><input type="time" id="time" required>
+      <button type="submit" class="btn-submit">Book Now</button>
+      <p id="bookingMsg"></p>
+      <button type="button" class="btn-whatsapp" onclick="shareOnWhatsApp('Cut + Enhancement')" hidden>Share Experience</button>
+    </form>
+  </main>
+  <script type="module" src="js/booking-gate.js"></script>
+</body>
+</html>
