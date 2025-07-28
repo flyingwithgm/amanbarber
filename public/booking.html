@@ -2,38 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Book Appointment – Amanfour Barbers</title>
+  <title>Book Appointment – Amanfour</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="booking-header">
     <div class="logo">Amanfour</div>
+    <div id="userAvatar" class="user-avatar" hidden>
+      <img src="https://i.imgur.com/7z9vUuW.jpg" alt="User">
+    </div>
     <a href="index.html" class="back-btn">← Back</a>
   </header>
 
   <main class="booking-main">
     <h1>Book Your Slot</h1>
-    <form id="bookingForm" class="booking-form">
+
+    <!-- Styled login -->
+    <div id="authCard" class="login-card">
+      <h3>Enter email & password</h3>
+      <form id="authForm">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password (≥6)" required>
+        <button type="submit" class="btn-login">Continue</button>
+        <p id="authMsg"></p>
+      </form>
+    </div>
+
+    <!-- Booking form -->
+    <form id="bookingForm" class="booking-form" hidden>
       <label>Service</label>
       <select id="service" class="gold-select" required></select>
-
-      <label>Date</label>
-      <input type="date" id="date" required>
-
-      <label>Time</label>
-      <input type="time" id="time" required>
-
+      <label>Name</label>
+      <input type="text" id="name" placeholder="Your Name" required>
       <label>Phone</label>
       <input type="tel" id="phone" placeholder="07XXXXXXXX" required>
-
+      <label>Date</label>
+      <input type="date" id="date" required>
+      <label>Time</label>
+      <input type="time" id="time" required>
       <button type="submit" class="btn-submit">Book Now</button>
       <p id="bookingMsg"></p>
     </form>
   </main>
 
   <script type="module" src="js/firebase.js"></script>
-  <script type="module" src="js/booking-form.js"></script>
+  <script type="module" src="js/booking-flow.js"></script>
 </body>
 </html>
