@@ -8,31 +8,24 @@
 </head>
 <body>
 
-  <!-- User avatar (top-right) -->
-  <div id="userAvatar" class="user-avatar" hidden>
-    <img src="https://i.imgur.com/7z9vUuW.jpg" alt="User">
-  </div>
-
   <header class="booking-header">
     <div class="logo">Amanfour</div>
     <a href="index.html" class="back-btn">← Back</a>
   </header>
 
   <main class="booking-main">
-    <h1>Book Your Slot</h1>
-
-    <!-- Sleek login card -->
-    <div id="authCard" class="login-card">
-      <h3>Continue with Email</h3>
-      <form id="authForm">
+    <!-- 1️⃣ LOGIN GATE -->
+    <div id="loginCard" class="login-card">
+      <h2>Please log in to book</h2>
+      <form id="loginForm">
         <input type="email" id="email" placeholder="Email" required>
         <input type="password" id="password" placeholder="Password (≥6)" required>
-        <button type="submit" class="btn-login">Continue</button>
-        <p id="authMsg"></p>
+        <button type="submit" class="btn-login">Log in / Sign up</button>
+        <p id="loginMsg"></p>
       </form>
     </div>
 
-    <!-- Booking form -->
+    <!-- 2️⃣ BOOKING FORM (hidden until login) -->
     <form id="bookingForm" class="booking-form" hidden>
       <label>Service</label>
       <select id="service" class="gold-select" required>
@@ -62,8 +55,10 @@
       <button type="submit" class="btn-submit">Book Now</button>
       <p id="bookingMsg"></p>
 
-      <!-- WhatsApp share -->
-      <button type="button" class="btn-whatsapp" onclick="shareOnWhatsApp()">Share Experience on WhatsApp</button>
+      <!-- 3️⃣ WhatsApp share (appears after booking) -->
+      <button type="button" id="btnShare" class="btn-whatsapp" onclick="shareOnWhatsApp()" hidden>
+        Share Experience on WhatsApp
+      </button>
     </form>
   </main>
 
@@ -71,7 +66,6 @@
     <p>Built by George Nuyekpe | Amanfour Barbers Palace, Tamso New Road, Tarkwa</p>
   </footer>
 
-  <script type="module" src="js/firebase.js"></script>
-  <script type="module" src="js/booking-flow.js"></script>
+  <script type="module" src="js/booking-gate.js"></script>
 </body>
 </html>
