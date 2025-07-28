@@ -2,41 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Book Appointment – Amanfour Barbers</title>
+  <title>Book Appointment – Amanfour</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <nav>
-    <div class="logo">Book Appointment</div>
-    <a href="index.html" class="nav-links">← Back</a>
-  </nav>
+  <header class="booking-header">
+    <div class="logo">Amanfour</div>
+    <a href="index.html" class="back-btn">← Back</a>
+  </header>
 
-  <section class="glass-card" style="margin-top:4rem">
-    <h2>Complete Your Booking</h2>
-    <form id="bookingForm">
-      <select id="service" class="gold-select" required>
-        <option value="" disabled selected>-- Pick a Service --</option>
-        <option>Regular Haircut – GHS 100</option>
-        <option>Beard Trim – GHS 80</option>
-        <option>Cut + Enhancement – GHS 120</option>
-        <option>Haircut with Texturizer – GHS 180</option>
-        <option>Pixie Cut – GHS 250</option>
-        <option>Extensions – GHS 500</option>
-        <option>Complete Colored Hair – GHS 220</option>
-        <option>Part-Colored Haircut – GHS 180</option>
-      </select>
+  <main class="booking-main">
+    <h1>Book Your Slot</h1>
 
+    <!-- 1-Click Sign-up / Login -->
+    <div id="authCard" class="glass-card">
+      <h3>Enter email & password</h3>
+      <form id="authForm">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password (≥6)" required>
+        <button type="submit">Continue</button>
+        <p id="authMsg"></p>
+      </form>
+    </div>
+
+    <!-- Booking form -->
+    <form id="bookingForm" class="booking-form" hidden>
+      <label>Service</label>
+      <select id="service" class="gold-select" required></select>
+
+      <label>Date</label>
       <input type="date" id="date" required>
+
+      <label>Time</label>
       <input type="time" id="time" required>
-      <input type="tel" id="phone" placeholder="Phone (07XXXXXXXX)" required>
-      <button type="submit">Book Now</button>
+
+      <label>Phone</label>
+      <input type="tel" id="phone" placeholder="07XXXXXXXX" required>
+
+      <button type="submit" class="btn-submit">Book Now</button>
+      <p id="bookingMsg"></p>
     </form>
-    <p id="bookingMsg"></p>
-  </section>
+  </main>
 
   <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
   <script type="module" src="js/booking-form.js"></script>
 </body>
 </html>
