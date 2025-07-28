@@ -48,3 +48,76 @@ html{scroll-behavior:smooth}
 
 /* FOOTER */
 footer{text-align:center;padding:2rem;color:var(--gold);font-size:.9rem}
+/* ── HERO BARBER GLAM ── */
+.hero-banner{
+  position:relative;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:url('IMG-20250722-WA0027.jpg') center/cover fixed;
+  overflow:hidden;
+}
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.4));
+}
+
+/* Scissors */
+.hero-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+.hero-content h1{
+  font-size:clamp(2.4rem,6vw,4rem);
+  font-weight:800;
+  letter-spacing:2px;
+  color:var(--gold);
+  text-shadow:0 0 12px var(--gold);
+  position:relative;
+}
+/* golden shimmer */
+.hero-content h1::after{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  background-size:200%;
+  animation:shimmer 3s infinite linear;
+  -webkit-background-clip:text;
+  color:transparent;
+}
+@keyframes shimmer{0%{background-position:-200%}100%{background-position:200%}}
+
+/* Scissors */
+.scissors{
+  position:absolute;
+  top:50%;left:5%;
+  width:60px;height:60px;
+  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23d4af37" stroke-width="2"><path d="M9 14l5-5m0 0l5 5m-5-5v12"/></svg>') no-repeat center/contain;
+  animation:snip 4s infinite ease-in-out;
+}
+@keyframes snip{
+  0%,100%{transform:rotate(-20deg)}
+  50%{transform:rotate(20deg)}
+}
+
+/* Clipper */
+.clippers{
+  position:absolute;
+  bottom:10%;right:5%;
+  width:70px;height:70px;
+  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d4af37"><path d="M8 3h8l-1 2H9zM12 5v14l4-2V7z"/></svg>') no-repeat center/contain;
+  animation:buzz 2s infinite ease-in-out;
+}
+@keyframes buzz{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-4px) rotate(2deg)}
+}
+
+/* Responsive tweak */
+@media(max-width:480px){
+  .scissors,.clippers{width:40px;height:40px}
+}
