@@ -10,13 +10,12 @@
 
   <header class="booking-header">
     <div class="logo">Amanfour</div>
-    <a href="index.html" class="back-btn">← Back</a>
   </header>
 
   <main class="booking-main">
-    <!-- 1️⃣ LOGIN GATE -->
+    <!-- LOGIN GATE -->
     <div id="loginCard" class="login-card">
-      <h2>Please log in to book</h2>
+      <h2>Login to Continue</h2>
       <form id="loginForm">
         <input type="email" id="email" placeholder="Email" required>
         <input type="password" id="password" placeholder="Password (≥6)" required>
@@ -25,7 +24,7 @@
       </form>
     </div>
 
-    <!-- 2️⃣ BOOKING FORM (hidden until login) -->
+    <!-- BOOKING FORM (hidden until login) -->
     <form id="bookingForm" class="booking-form" hidden>
       <label>Service</label>
       <select id="service" class="gold-select" required>
@@ -55,7 +54,7 @@
       <button type="submit" class="btn-submit">Book Now</button>
       <p id="bookingMsg"></p>
 
-      <!-- 3️⃣ WhatsApp share (appears after booking) -->
+      <!-- WhatsApp share (appears after booking) -->
       <button type="button" id="btnShare" class="btn-whatsapp" onclick="shareOnWhatsApp()" hidden>
         Share Experience on WhatsApp
       </button>
