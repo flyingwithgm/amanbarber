@@ -34,7 +34,7 @@ onAuthStateChanged(auth, user=>{
   }
 });
 
-// Booking submit
+// Submit booking
 document.getElementById('bookingForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const data = {
@@ -50,7 +50,7 @@ document.getElementById('bookingForm').addEventListener('submit', async e=>{
   document.getElementById('btnShare').hidden = false;
 });
 
-// WhatsApp share
+// WhatsApp share after booking
 function shareOnWhatsApp() {
   const text = `Just got a clean cut at Amanfour Barbers Palace in Tarkwa! 🔥 Highly recommend! https://amanfour.vercel.app`;
   window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
