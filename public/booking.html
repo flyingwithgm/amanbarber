@@ -7,20 +7,23 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+  <!-- User avatar (top-right) -->
+  <div id="userAvatar" class="user-avatar" hidden>
+    <img src="https://i.imgur.com/7z9vUuW.jpg" alt="User">
+  </div>
+
   <header class="booking-header">
     <div class="logo">Amanfour</div>
-    <div id="userAvatar" class="user-avatar" hidden>
-      <img src="https://i.imgur.com/7z9vUuW.jpg" alt="User">
-    </div>
     <a href="index.html" class="back-btn">← Back</a>
   </header>
 
   <main class="booking-main">
     <h1>Book Your Slot</h1>
 
-    <!-- Styled login -->
+    <!-- Sleek login card -->
     <div id="authCard" class="login-card">
-      <h3>Enter email & password</h3>
+      <h3>Continue with Email</h3>
       <form id="authForm">
         <input type="email" id="email" placeholder="Email" required>
         <input type="password" id="password" placeholder="Password (≥6)" required>
@@ -32,19 +35,41 @@
     <!-- Booking form -->
     <form id="bookingForm" class="booking-form" hidden>
       <label>Service</label>
-      <select id="service" class="gold-select" required></select>
+      <select id="service" class="gold-select" required>
+        <option disabled selected>-- Pick a Service --</option>
+        <option>Regular Haircut – GHS 100</option>
+        <option>Beard Trim – GHS 80</option>
+        <option>Cut + Enhancement – GHS 120</option>
+        <option>Haircut with Texturizer – GHS 180</option>
+        <option>Pixie Cut – GHS 250</option>
+        <option>Extensions – GHS 500</option>
+        <option>Complete Colored Hair – GHS 220</option>
+        <option>Part-Colored Haircut – GHS 180</option>
+      </select>
+
       <label>Name</label>
       <input type="text" id="name" placeholder="Your Name" required>
+
       <label>Phone</label>
       <input type="tel" id="phone" placeholder="07XXXXXXXX" required>
+
       <label>Date</label>
       <input type="date" id="date" required>
+
       <label>Time</label>
       <input type="time" id="time" required>
+
       <button type="submit" class="btn-submit">Book Now</button>
       <p id="bookingMsg"></p>
+
+      <!-- WhatsApp share -->
+      <button type="button" class="btn-whatsapp" onclick="shareOnWhatsApp()">Share Experience on WhatsApp</button>
     </form>
   </main>
+
+  <footer>
+    <p>Built by George Nuyekpe | Amanfour Barbers Palace, Tamso New Road, Tarkwa</p>
+  </footer>
 
   <script type="module" src="js/firebase.js"></script>
   <script type="module" src="js/booking-flow.js"></script>
