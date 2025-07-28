@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Book Regular Haircut – Amanfour</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -17,31 +16,16 @@
     <img src="regularhaircut.jpg" alt="Regular Haircut" class="preview-img">
 
     <form id="bookingForm" class="booking-form">
-      <label>Name</label>
-      <input type="text" id="name" placeholder="Your Name" required>
-
-      <label>Phone</label>
-      <input type="tel" id="phone" placeholder="07XXXXXXXX" required>
-
-      <label>Date</label>
-      <input type="date" id="date" required>
-
-      <label>Time</label>
-      <input type="time" id="time" required>
-
+      <input type="hidden" id="service" value="Regular Haircut – GHS 100">
+      <label>Name</label><input type="text" id="name" placeholder="Your Name" required>
+      <label>Phone</label><input type="tel" id="phone" placeholder="07XXXXXXXX" required>
+      <label>Date</label><input type="date" id="date" required>
+      <label>Time</label><input type="time" id="time" required>
       <button type="submit" class="btn-submit">Book Now</button>
       <p id="bookingMsg"></p>
-
-      <button type="button" class="btn-whatsapp" onclick="shareOnWhatsApp('Regular Haircut')" hidden>
-        Share Experience
-      </button>
+      <button type="button" class="btn-whatsapp" onclick="shareOnWhatsApp('Regular Haircut')" hidden>Share Experience</button>
     </form>
   </main>
-
-  <footer>
-    <p>Built by George Nuyekpe | Amanfour Barbers Palace, Tamso New Road, Tarkwa</p>
-  </footer>
-
   <script type="module" src="js/booking-gate.js"></script>
 </body>
 </html>
