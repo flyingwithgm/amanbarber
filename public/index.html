@@ -47,62 +47,57 @@
     <section id="services">
       <h2>Choose Your Service</h2>
       <div class="service-grid">
-
         <div class="service-card">
-          <img src=" https://i.imgur.com/rTqXw0L.jpg " alt="Regular Haircut">
+          <img src="https://i.imgur.com/rTqXw0L.jpg" alt="Regular Haircut">
           <h3>Regular Haircut</h3>
           <p>GHS 100</p>
-          <a href="booking.html?service=Regular%20Haircut%20–%20GHS%20100" class="btn-book">Book</a>
+          <button class="btn-book btn-book-inline" data-value="Regular Haircut – GHS 100">Book</button>
         </div>
 
         <div class="service-card">
-          <img src="https://i.imgur.com/8l0xHMe.jpg " alt="Beard Trim">
+          <img src="https://i.imgur.com/8l0xHMe.jpg" alt="Beard Trim">
           <h3>Beard Trim</h3>
           <p>GHS 80</p>
-          <a href="booking.html?service=Beard%20Trim%20–%20GHS%2080" class="btn-book">Book</a>
+          <button class="btn-book btn-book-inline" data-value="Beard Trim – GHS 80">Book</button>
         </div>
 
         <div class="service-card">
-          <img src="https://i.imgur.com/0wxvY4d.jpg " alt="Cut + Enhancement">
+          <img src="https://i.imgur.com/0wxvY4d.jpg" alt="Cut + Enhancement">
           <h3>Cut + Edit</h3>
           <p>GHS 120</p>
-          <a href="booking.html?service=Cut%20+%20Enhancement%20–%20GHS%20120" class="btn-book">Book</a>
+          <button class="btn-book btn-book-inline" data-value="Cut + Edit – GHS 120">Book</button>
         </div>
 
-        <div class="service-card">
-          <img src="https://i.imgur.com/Y0B9f9o.jpg " alt="Haircut + Texturizer">
-          <h3>Haircut + Texturizer</h3>
-          <p>GHS 180</p>
-          <a href="booking.html?service=Haircut%20with%20Texturizer%20–%20GHS%20180" class="btn-book">Book</a>
-        </div>
+        <!-- Add similar buttons for all other services -->
+      </div>
+    </section>
 
-        <div class="service-card">
-          <img src="https://i.imgur.com/4w3QpXz.jpg " alt="Pixie Cut">
-          <h3>Pixie Cut</h3>
-          <p>GHS 250</p>
-          <a href="booking.html?service=Pixie%20Cut%20–%20GHS%20250" class="btn-book">Book</a>
-        </div>
+    <!-- BOOKING FORM (at the bottom) -->
+    <section id="booking" style="padding: 3rem 2rem; background: rgba(0,0,0,0.8);">
+      <div style="max-width: 500px; margin: 0 auto;">
+        <h2 style="color: var(--gold); text-align: center; margin-bottom: 2rem;">Book Your Appointment</h2>
+        <form id="bookingForm">
+          <label style="display: block; margin-bottom: 0.5rem;">Service</label>
+          <select id="service" name="service" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; background: var(--black); color: var(--white); border: 1px solid var(--gold); border-radius: 5px;">
+            <option value="">Select a service</option>
+            <option value="Regular Haircut – GHS 100">Regular Haircut – GHS 100</option>
+            <option value="Beard Trim – GHS 80">Beard Trim – GHS 80</option>
+            <option value="Cut + Edit – GHS 120">Cut + Edit – GHS 120</option>
+            <!-- Add all services here -->
+          </select>
 
-        <div class="service-card">
-          <img src="https://i.imgur.com/5j8KQ9J.jpg " alt="Extensions">
-          <h3>Extensions</h3>
-          <p>GHS 500</p>
-          <a href="booking.html?service=Extensions%20–%20GHS%20500" class="btn-book">Book</a>
-        </div>
+          <label style="display: block; margin-bottom: 0.5rem;">Date</label>
+          <input type="date" name="date" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; background: var(--black); color: var(--white); border: 1px solid var(--gold); border-radius: 5px;">
 
-        <div class="service-card">
-          <img src="https://i.imgur.com/7z9vUuW.jpg " alt="Complete Color">
-          <h3>Complete Color</h3>
-          <p>GHS 220</p>
-          <a href="booking.html?service=Complete%20Colored%20Hair%20–%20GHS%20220" class="btn-book">Book</a>
-        </div>
+          <label style="display: block; margin-bottom: 0.5rem;">Time</label>
+          <input type="time" name="time" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; background: var(--black); color: var(--white); border: 1px solid var(--gold); border-radius: 5px;">
 
-        <div class="service-card">
-          <img src="https://i.imgur.com/K9W8oQd.jpg " alt="Part Color">
-          <h3>Part Color</h3>
-          <p>GHS 180</p>
-          <a href="booking.html?service=Part-Colored%20Haircut%20–%20GHS%20180" class="btn-book">Book</a>
-        </div>
+          <label style="display: block; margin-bottom: 0.5rem;">Phone</label>
+          <input type="tel" name="phone" placeholder="07XXXXXXXX" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; background: var(--black); color: var(--white); border: 1px solid var(--gold); border-radius: 5px;">
+
+          <button type="submit" class="btn-book-now" style="width: 100%; padding: 1rem;">Book Now</button>
+        </form>
+        <p id="bookingMsg" style="text-align: center; margin-top: 1rem;"></p>
       </div>
     </section>
 
@@ -112,6 +107,7 @@
   </div>
 
   <!-- Firebase SDK -->
-  <script type="module" src="/public/js/auth.js"></script>
+  <script type="module" src="public/js/auth.js"></script>
+  <script type="module" src="public/js/book.js"></script>
 </body>
 </html>
