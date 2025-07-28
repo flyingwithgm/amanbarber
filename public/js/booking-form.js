@@ -4,23 +4,21 @@ import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/fir
 /* Pre-select service from URL */
 const urlParams = new URLSearchParams(location.search);
 const wanted = decodeURIComponent(urlParams.get('service') || '');
-const sel = document.getElementById('service');
-[...sel.options].forEach(opt => {
+[...document.getElementById('service').options].forEach(opt=>{
   if (opt.text === wanted) opt.selected = true;
 });
 
-/* Submit form */
 document.getElementById('bookingForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const data = {
     uid:     auth.currentUser.uid,
     email:   auth.currentUser.email,
-    service: sel.value,
+    service: document.getElementById('service').value,
     date:    document.getElementById('date').value,
     time:    document.getElementById('time').value,
     phone:   document.getElementById('phone').value,
     created: serverTimestamp()
   };
   await addDoc(collection(db, 'bookings'), data);
-  document.getElementById('bookingMsg').textContent = '✅ Booking saved! We’ll see you then.';
+  document.getElementById('bookingMsg').textContent = '✅ Booking saved!';
 });
