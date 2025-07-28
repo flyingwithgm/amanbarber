@@ -2,15 +2,12 @@ import { auth, db } from './firebase.js';
 import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-const tbody     = document.querySelector('#bookingsTable tbody');
-const logoutBtn = document.getElementById('logoutBtn');
-const ADMIN_EMAIL = 'amanbarber2025@gmail.com';
-
-logoutBtn?.addEventListener('click', () => signOut(auth));
+const tbody = document.querySelector('#bookingsTable tbody');
+const ADMIN_EMAIL = 'georgemawutor3@gmail.com';
 
 onAuthStateChanged(auth, user => {
   if (!user || user.email !== ADMIN_EMAIL) {
-    alert('Admin only. Logging out.');
+    alert('Admin only.');
     signOut(auth);
     location.href = 'index.html';
     return;
@@ -21,7 +18,7 @@ onAuthStateChanged(auth, user => {
       const b = doc.data();
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>${b.email}</td>
+        <td>${b.name}</td>
         <td>${b.service}</td>
         <td>${b.date}</td>
         <td>${b.time}</td>
