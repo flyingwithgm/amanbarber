@@ -1,78 +1,25 @@
-/* ---------- PREMIUM BARBERSHOP ---------- */
-:root{
-  --gold:#d4af37;
-  --black:#0e0e0e;
-  --white:#ffffff;
-  --glass:rgba(255,255,255,.06);
-  --shadow:0 0 25px rgba(212,175,55,.4);
-}
+/* ---------- PREMIUM BARBER SHOP ---------- */
+:root{--gold:#d4af37;--black:#0e0e0e;--white:#ffffff;--glass:rgba(255,255,255,.06);--shadow:0 0 25px rgba(212,175,55,.4);}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 html{scroll-behavior:smooth}
 
-/* HERO — cinematic fade */
-.hero-banner{
-  position:relative;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:url('IMG-20250722-WA0027.jpg') center/cover fixed;
-  overflow:hidden;
-}
-.hero-overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.4));
-}
+/* HERO — cinematic fade + animations */
+.hero-banner{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;background:url('IMG-20250722-WA0027.jpg') center/cover fixed;overflow:hidden}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.4))}
+.hero-content{position:relative;z-index:2;text-align:center}
+.hero-content h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;letter-spacing:2px;color:var(--gold);text-shadow:0 0 12px var(--gold)}
+.hero-content h2{font-size:clamp(1rem,2.5vw,1.4rem);font-weight:300;margin:.5rem 0 1.5rem;color:var(--white)}
 
-/* GOLDEN HERO TEXT */
-.hero-content{
-  position:relative;
-  z-index:2;
-  text-align:center;
-}
-.hero-content h1{
-  font-size:clamp(2.4rem,6vw,4rem);
-  font-weight:800;
-  letter-spacing:2px;
-  color:var(--gold);
-  text-shadow:0 0 12px var(--gold);
-  position:relative;
-}
-.hero-content h1::after{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;bottom:0;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  background-size:200%;
-  animation:shimmer 3s infinite linear;
-  -webkit-background-clip:text;
-  color:transparent;
-}
-@keyframes shimmer{0%{background-position:-200%}100%{background-position:200%}}
+/* BUTTONS */
+.hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary,.btn-directions{background:linear-gradient(135deg,var(--gold),#c5a029);color:var(--black);padding:1rem 2.4rem;border:none;border-radius:50px;font-size:1rem;font-weight:700;text-decoration:none;transition:.3s;box-shadow:var(--shadow)}
+.btn-primary:hover,.btn-directions:hover{transform:scale(1.05)}
 
-/* ANIMATED SCISSORS */
-.scissors{
-  position:absolute;
-  top:50%;left:5%;
-  width:60px;height:60px;
-  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23d4af37" stroke-width="2"><path d="M9 14l5-5m0 0l5 5m-5-5v12"/></svg>') no-repeat center/contain;
-  animation:snip 4s infinite ease-in-out;
-}
+/* ANIMATED SCISSORS & CLIPPERS */
+.scissors{position:absolute;top:50%;left:5%;width:60px;height:60px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23d4af37" stroke-width="2"><path d="M9 14l5-5m0 0l5 5m-5-5v12"/></svg>') no-repeat center/contain;animation:snip 4s infinite ease-in-out}
 @keyframes snip{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(20deg)}}
-
-/* ANIMATED CLIPPERS */
-.clippers{
-  position:absolute;
-  bottom:10%;right:5%;
-  width:70px;height:70px;
-  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d4af37"><path d="M8 3h8l-1 2H9zM12 5v14l4-2V7z"/></svg>') no-repeat center/contain;
-  animation:buzz 2s infinite ease-in-out;
-}
+.clippers{position:absolute;bottom:10%;right:5%;width:70px;height:70px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23d4af37"><path d="M8 3h8l-1 2H9zM12 5v14l4-2V7z"/></svg>') no-repeat center/contain;animation:buzz 2s infinite ease-in-out}
 @keyframes buzz{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(2deg)}}
-
-/* RESPONSIVE */
-@media(max-width:480px){.scissors,.clippers{width:40px;height:40px}}
 
 /* SERVICE GRID — glass cards */
 .service-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem;padding:5rem 2rem;max-width:1200px;margin:auto}
