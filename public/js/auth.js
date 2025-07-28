@@ -14,39 +14,56 @@ console.log("Auth script loaded");
 
 const authForm  = document.getElementById("authForm");
 const authMsg   = document.getElementById("authMsg");
-const authCard  = document.getElementById("authCard");
-const mainContent = document.getElementById("mainContent");
-const logoutBtn = document.getElementById("logoutBtn");
 
-console.log("Elements found:", {
-  authForm: !!authForm,
-  authMsg: !!authMsg,
-  authCard: !!authCard,
-  mainContent: !!mainContent,
-  logoutBtn: !!logoutBtn
-});
+// Create the auth section dynamically or use existing elements
+const heroContent = document.querySelector(".hero-content");
+
+// Add auth form to hero content if it doesn't exist
+if (heroContent && !authForm) {
+  const authFormHTML = `
+    <div id="authSection" style="background: rgba(0,0,0,0.8); padding: 2rem; border-radius: 15px; margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto;">
+      <h3 style="color: var(--gold); margin-bottom: 1rem;">Login or Register</h3>
+      <form id="authForm">
+        <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid var(--gold); background: var(--black); color: var(--white);">
+        <input type="password" name="password" placeholder="Password" required style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid var(--gold); background: var(--black); color: var(--white);">
+        <button type="submit" class="btn-book-now" style="width: 100%; padding: 12px; margin: 10px 0;">Login / Register</button>
+      </form>
+      <p id="authMsg" style="color: #fff; text-align: center; margin-top: 1rem;"></p>
+    </div>
+  `;
+  heroContent.insertAdjacentHTML('beforeend', authFormHTML);
+}
+
+// Get the form and message elements again after creating them
+const updatedAuthForm = document.getElementById("authForm");
+const updatedAuthMsg = document.getElementById("authMsg");
 
 // Handle form submission
-if (authForm) {
-  authForm.addEventListener("submit", async e => {
+if (updatedAuthForm) {
+  updatedAuthForm.addEventListener("submit", async e => {
     e.preventDefault();
     console.log("Form submitted");
     
-    const email = authForm.email.value.trim();
-    const pass  = authForm.password.value;
+    const email = updatedAuthForm.email.value.trim();
+    const pass  = updatedAuthForm.password.value;
     
-    if (authMsg) {
-      authMsg.textContent = "Processing...";
-      authMsg.style.color = "#fff";
+    if (updatedAuthMsg) {
+      updatedAuthMsg.textContent = "Processing...";
+      updatedAuthMsg.style.color = "#fff";
     }
 
     try {
       console.log("Attempting login for:", email);
       const userCredential = await signInWithEmailAndPassword(auth, email, pass);
       console.log("Login successful:", userCredential.user.email);
-      if (authMsg) {
-        authMsg.textContent = "Login successful! Redirecting...";
-        authMsg.style.color = "lightgreen";
+      if (updatedAuthMsg) {
+        updatedAuthMsg.textContent = "Login successful!";
+        updatedAuthMsg.style.color = "lightgreen";
+      }
+      // Hide auth form after successful login
+      const authSection = document.getElementById("authSection");
+      if (authSection) {
+        authSection.style.display = "none";
       }
     } catch (error) {
       console.log("Login error:", error.code, error.message);
@@ -62,47 +79,66 @@ if (authForm) {
             createdAt: new Date()
           });
           
-          if (authMsg) {
-            authMsg.textContent = "Account created and logged in!";
-            authMsg.style.color = "lightgreen";
+          if (updatedAuthMsg) {
+            updatedAuthMsg.textContent = "Account created and logged in!";
+            updatedAuthMsg.style.color = "lightgreen";
+          }
+          // Hide auth form after successful signup
+          const authSection = document.getElementById("authSection");
+          if (authSection) {
+            authSection.style.display = "none";
           }
         } catch (signupError) {
           console.error("Signup error:", signupError);
-          if (authMsg) {
-            authMsg.textContent = "Error: " + signupError.message;
-            authMsg.style.color = "red";
+          if (updatedAuthMsg) {
+            updatedAuthMsg.textContent = "Error: " + signupError.message;
+            updatedAuthMsg.style.color = "red";
           }
         }
       } else {
         console.error("Auth error:", error);
-        if (authMsg) {
-          authMsg.textContent = "Error: " + error.message;
-          authMsg.style.color = "red";
+        if (updatedAuthMsg) {
+          updatedAuthMsg.textContent = "Error: " + error.message;
+          updatedAuthMsg.style.color = "red";
         }
       }
     }
   });
 }
 
-// Handle logout
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => {
-    console.log("Logout clicked");
-    signOut(auth);
-  });
-}
-
-// Handle auth state changes
+// Handle auth state changes - show/hide services based on auth state
 onAuthStateChanged(auth, user => {
   console.log("Auth state changed. User:", user ? user.email : "null");
   
+  const servicesSection = document.getElementById("services");
+  const bookNowButton = document.querySelector(".btn-book-now[href='#services']");
+  
   if (user) {
-    console.log("User logged in, showing main content");
-    if (authCard) authCard.hidden = true;
-    if (mainContent) mainContent.hidden = false;
+    // User is logged in - show services, hide auth form
+    console.log("User logged in, showing services");
+    if (servicesSection) servicesSection.style.display = "block";
+    const authSection = document.getElementById("authSection");
+    if (authSection) authSection.style.display = "none";
+    
+    // Show a logout button
+    if (!document.getElementById("logoutBtn")) {
+      const logoutBtn = document.createElement("button");
+      logoutBtn.id = "logoutBtn";
+      logoutBtn.textContent = "Logout";
+      logoutBtn.className = "btn-book-now";
+      logoutBtn.style.marginTop = "1rem";
+      logoutBtn.addEventListener("click", () => signOut(auth));
+      document.querySelector(".hero-content").appendChild(logoutBtn);
+    }
   } else {
+    // No user - show auth form, hide services
     console.log("No user, showing auth form");
-    if (authCard) authCard.hidden = false;
-    if (mainContent) mainContent.hidden = true;
+    if (servicesSection) servicesSection.style.display = "none";
+    const authSection = document.getElementById("authSection");
+    if (authSection) authSection.style.display = "block";
+    
+    // Remove logout button if it exists
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) logoutBtn.remove();
   }
 });
