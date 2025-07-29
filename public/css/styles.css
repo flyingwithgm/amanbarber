@@ -1,624 +1,429 @@
-/* ----------------------------------------------------
-   AMANFOUR BARBERS – ULTRA-PREMIUM 2025
-   cinematic • glass • liquid-gold • 3-D lifts
-   -------------------------------------------------- */
+/* =========================================================
+   AMANFOUR BARBERS – COMPLETE 2025 MASTER
+   ========================================================= */
 
-/* ---------- 0.  ROOT TOKENS ------------------------- */
-:root{
-  --gold:#d4af37;
-  --gold-glow:#ffd700;
-  --black:#0e0e0e;
-  --white:#ffffff;
-  --glass:rgba(255,255,255,.07);
-  --shadow-soft:0 8px 32px rgba(0,0,0,.35);
-  --shadow-glow:0 0 25px var(--gold-glow);
-  --radius:18px;
-  --ff:'Poppins',sans-serif;
+/* 0.  ROOT & RESET */
+:root {
+  --gold: #d4af37;
+  --gold-glow: #ffd700;
+  --black: #0e0e0e;
+  --white: #ffffff;
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(212, 175, 55, 0.25);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 25px var(--gold-glow);
+  --radius: 18px;
+  --ff: 'Poppins', sans-serif;
 }
-
-/* ---------- 1.  GLOBAL RESET ------------------------ */
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:var(--ff);
-  background:var(--black);
-  color:var(--white);
-  line-height:1.6;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-/* ---------- 2.  HERO – CINEMATIC PARALLAX ----------- */
-.hero-banner{
-  position:relative;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:url('IMG-20250722-WA0027.jpg') center/cover fixed;
-  overflow:hidden;
+html {
+  scroll-behavior: smooth;
 }
-.hero-overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,.7),rgba(0,0,0,.3));
-}
-.hero-content{
-  position:relative;
-  z-index:2;
-  text-align:center;
-  animation:fadeUp 1.2s ease-out;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(30px);}
-  to{opacity:1;transform:translateY(0);}
-}
-.hero-content h1{
-  font-size:clamp(2.6rem,7vw,4.5rem);
-  font-weight:800;
-  letter-spacing:2px;
-  background:linear-gradient(90deg,var(--gold),var(--gold-glow));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 10px var(--gold-glow));
-}
-.hero-content h2{
-  font-size:clamp(1rem,2.5vw,1.5rem);
-  font-weight:300;
-  margin:.5rem 0 2rem;
-  color:var(--white);
+body {
+  font-family: var(--ff);
+  background: var(--black);
+  color: var(--white);
+  line-height: 1.6;
 }
 
-/* ---------- 3.  HERO BUTTONS – LIQUID GOLD ---------- */
-.hero-ctas{
-  display:flex;
-  gap:1rem;
-  justify-content:center;
-  flex-wrap:wrap;
+/* 1.  HERO – FULL-SCREEN CINEMATIC */
+.hero-banner {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('IMG-20250722-WA0027.jpg') center/cover fixed;
+  overflow: hidden;
 }
-.btn-primary,.btn-directions{
-  padding:1rem 2.6rem;
-  border:none;
-  border-radius:50px;
-  font-weight:700;
-  font-size:1rem;
-  text-decoration:none;
-  cursor:pointer;
-  transition:.4s cubic-bezier(.25,.8,.25,1);
-  box-shadow:0 0 0 0 rgba(212,175,55,.4);
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
 }
-.btn-primary{
-  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
-  color:var(--black);
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  animation: fadeUp 1.2s ease-out;
 }
-.btn-primary:hover{
-  transform:translateY(-4px) scale(1.03);
-  box-shadow:0 8px 30px var(--gold-glow);
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.btn-directions{
-  background:transparent;
-  color:var(--gold);
-  border:2px solid var(--gold);
+.hero-content h1 {
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px var(--gold-glow));
 }
-.btn-directions:hover{
-  background:var(--gold);
-  color:var(--black);
-  transform:translateY(-4px) scale(1.03);
-}
-
-/* ---------- 4.  FLOATING ICONS ---------------------- */
-.scissors,.clippers{
-  position:absolute;
-  width:60px;
-  height:60px;
-  fill:var(--gold);
-  opacity:.6;
-  animation:float 6s ease-in-out infinite alternate;
-}
-.scissors{top:20%;left:5%;animation-delay:-2s;}
-.clippers{bottom:15%;right:5%;animation-delay:-4s;}
-@keyframes float{
-  0%{transform:translateY(0) rotate(-5deg);}
-  100%{transform:translateY(-15px) rotate(5deg);}
+.hero-content h2 {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  margin: 0.5rem 0 2rem;
+  color: var(--white);
 }
 
-/* ---------- 5.  SERVICE GRID – GLASS + 3-D LIFT ----- */
-#services{
-  padding:6rem 1.5rem;
-  max-width:1200px;
-  margin:auto;
+/* 2.  HERO BUTTONS */
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-#services h2{
-  font-size:clamp(2rem,5vw,3rem);
-  text-align:center;
-  margin-bottom:3.5rem;
-  background:linear-gradient(90deg,var(--gold),var(--gold-glow));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+.btn-primary,
+.btn-directions {
+  padding: 1rem 2.6rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-.service-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:2.4rem;
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
 }
-
-/* ---------- 6.  SERVICE CARD ------------------------ */
-.service-card{
-  position:relative;
-  background:var(--glass);
-  border:1px solid rgba(212,175,55,.25);
-  border-radius:var(--radius);
-  padding:1.4rem 1.2rem 2rem;
-  backdrop-filter:blur(12px);
-  box-shadow:var(--shadow-soft);
-  transition:transform .45s,box-shadow .45s;
+.btn-primary:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 30px var(--gold-glow);
 }
-.service-card:hover{
-  transform:translateY(-12px) rotateX(4deg) rotateY(4deg);
-  box-shadow:0 16px 40px rgba(212,175,55,.25);
+.btn-directions {
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
 }
-
-/* ---------- 7.  SERVICE IMAGE – CINEMATIC CROP ------ */
-.service-card img{
-  width:100%;
-  height:180px;                 /* 🔥 perfect size */
-  object-fit:cover;
-  border-radius:var(--radius);
-  transition:transform .5s ease;
-}
-.service-card:hover img{
-  transform:scale(1.1);
+.btn-directions:hover {
+  background: var(--gold);
+  color: var(--black);
+  transform: translateY(-4px) scale(1.03);
 }
 
-.service-card h3{
-  margin:.8rem 0 .3rem;
-  font-size:1.3rem;
-  font-weight:600;
-  color:var(--gold);
+/* 3.  FLOATING ICONS */
+.scissors,
+.clippers {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  fill: var(--gold);
+  opacity: 0.6;
+  animation: float 6s ease-in-out infinite alternate;
 }
-.service-card p{
-  font-size:1.15rem;
-  font-weight:700;
-  margin-bottom:.8rem;
+.scissors {
+  top: 20%;
+  left: 5%;
+  animation-delay: -2s;
 }
-
-/* ---------- 8.  BOOK BUTTON – TOP-RIGHT GLOW -------- */
-.btn-book{
-  position:absolute;
-  top:.7rem;
-  right:.7rem;
-  padding:.45em 1em;
-  font-size:.85rem;
-  font-weight:700;
-  border-radius:999px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
-  color:var(--black);
-  text-decoration:none;
-  transition:.3s;
-  z-index:3;
+.clippers {
+  bottom: 15%;
+  right: 5%;
+  animation-delay: -4s;
 }
-.btn-book:hover{
-  transform:scale(1.12);
-  box-shadow:0 0 15px var(--gold-glow);
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(-15px) rotate(5deg);
+  }
 }
 
-/* ---------- 9.  LOGIN / BOOKING FORMS --------------- */
-.login-card,.booking-form{
-  max-width:420px;
-  margin:5rem auto;
-  padding:2.4rem;
-  background:var(--glass);
-  border:1px solid var(--gold);
-  border-radius:var(--radius);
-  backdrop-filter:blur(12px);
+/* 4.  SERVICES SECTION */
+#services {
+  padding: 6rem 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+}
+#services h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 3.5rem;
+  background: linear-gradient(90deg, var(--gold), var(--gold-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.4rem;
+}
+.service-card {
+  position: relative;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.2rem 2rem;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.45s, box-shadow 0.45s;
+}
+.service-card:hover {
+  transform: translateY(-12px) rotateX(4deg) rotateY(4deg);
+  box-shadow: 0 16px 40px rgba(212, 175, 55, 0.25);
+}
+.service-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  transition: transform 0.5s ease;
+}
+.service-card:hover img {
+  transform: scale(1.1);
+}
+.service-card h3 {
+  margin: 0.8rem 0 0.3rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+.service-card p {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+.btn-book {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  padding: 0.45em 1em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
+  text-decoration: none;
+  transition: 0.3s;
+  z-index: 3;
+}
+.btn-book:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 15px var(--gold-glow);
+}
+
+/* 5.  BOOKING PAGES – FRAMED IMAGES  */
+.booking-main img {
+  width: 100%;
+  max-width: 320px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 3px solid var(--gold);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+  display: block;
+  margin: 1.5rem auto;
+}
+
+/* 6.  LOGIN / BOOKING FORMS */
+.login-card,
+.booking-form {
+  max-width: 420px;
+  margin: 5rem auto;
+  padding: 2.4rem;
+  background: var(--glass);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
 }
 .login-card h2,
-.booking-form label{
-  font-weight:700;
-  color:var(--gold);
+.booking-form label {
+  font-weight: 700;
+  color: var(--gold);
 }
 .login-card input,
 .booking-form input,
-.booking-form select{
-  width:100%;
-  padding:.9rem;
-  margin:.6rem 0;
-  border:1px solid var(--gold);
-  border-radius:8px;
-  background:var(--black);
-  color:var(--white);
-  font-size:1rem;
+.booking-form select {
+  width: 100%;
+  padding: 0.9rem;
+  margin: 0.6rem 0;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  background: var(--black);
+  color: var(--white);
+  font-size: 1rem;
 }
-.btn-login,.btn-submit{
-  width:100%;
-  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
-  color:var(--black);
-  padding:.9rem;
-  border:none;
-  border-radius:8px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.3s;
+.btn-login,
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
 }
-.btn-login:hover,.btn-submit:hover{
-  transform:scale(1.03);
-  box-shadow:0 0 15px var(--gold-glow);
+.btn-login:hover,
+.btn-submit:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px var(--gold-glow);
 }
 
-/* ---------- 10.  ADMIN TABLE ------------------------ */
-.admin-wrapper{
-  max-width:1000px;
-  margin:5rem auto;
-  padding:2.4rem;
-  background:var(--glass);
-  border:1px solid var(--gold);
-  border-radius:var(--radius);
-  backdrop-filter:blur(12px);
+/* 7.  ADMIN TABLE */
+.admin-wrapper {
+  max-width: 1000px;
+  margin: 5rem auto;
+  padding: 2.4rem;
+  background: var(--glass);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
 }
-.admin-wrapper h2{
-  text-align:center;
-  font-size:2.2rem;
-  color:var(--gold);
-  margin-bottom:2rem;
+.admin-wrapper h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--gold);
+  margin-bottom: 2rem;
 }
-.admin-table{
-  width:100%;
-  border-collapse:collapse;
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 .admin-table th,
-.admin-table td{
-  padding:.8rem;
-  border-bottom:1px solid var(--gold);
-  text-align:left;
-  font-size:.9rem;
+.admin-table td {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--gold);
+  text-align: left;
+  font-size: 0.9rem;
 }
-.admin-table th{
-  background:var(--glass);
-  color:var(--gold);
+.admin-table th {
+  background: var(--glass);
+  color: var(--gold);
 }
-.admin-logout-btn{
-  display:block;
-  width:160px;
-  margin:2rem auto;
-  background:var(--gold);
-  color:var(--black);
-  border:none;
-  padding:.8rem;
-  border-radius:24px;
-  font-weight:700;
-  cursor:pointer;
-/* ----------------------------------------------------
-   AMANFOUR BARBERS – ULTRA-PREMIUM 2025
-   cinematic • glass • liquid-gold • 3-D lifts
-   -------------------------------------------------- */
-
-/* ---------- 0.  ROOT TOKENS ------------------------- */
-:root{
-  --gold:#d4af37;
-  --gold-glow:#ffd700;
-  --black:#0e0e0e;
-  --white:#ffffff;
-  --glass:rgba(255,255,255,.07);
-  --shadow-soft:0 8px 32px rgba(0,0,0,.35);
-  --shadow-glow:0 0 25px var(--gold-glow);
-  --radius:18px;
-  --ff:'Poppins',sans-serif;
+.admin-logout-btn {
+  display: block;
+  width: 160px;
+  margin: 2rem auto;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 24px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-/* ---------- 1.  GLOBAL RESET ------------------------ */
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:var(--ff);
-  background:var(--black);
-  color:var(--white);
-  line-height:1.6;
+/* 8.  FOOTER */
+footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--gold);
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
 }
 
-/* ---------- 2.  HERO – CINEMATIC PARALLAX ----------- */
-.hero-banner{
-  position:relative;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:url('IMG-20250722-WA0027.jpg') center/cover fixed;
-  overflow:hidden;
-}
-.hero-overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,.7),rgba(0,0,0,.3));
-}
-.hero-content{
-  position:relative;
-  z-index:2;
-  text-align:center;
-  animation:fadeUp 1.2s ease-out;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(30px);}
-  to{opacity:1;transform:translateY(0);}
-}
-.hero-content h1{
-  font-size:clamp(2.6rem,7vw,4.5rem);
-  font-weight:800;
-  letter-spacing:2px;
-  background:linear-gradient(90deg,var(--gold),var(--gold-glow));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 10px var(--gold-glow));
-}
-.hero-content h2{
-  font-size:clamp(1rem,2.5vw,1.5rem);
-  font-weight:300;
-  margin:.5rem 0 2rem;
-  color:var(--white);
+/* 9.  RESPONSIVE */
+@media (max-width: 600px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-ctas {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
-/* ---------- 3.  HERO BUTTONS – LIQUID GOLD ---------- */
-.hero-ctas{
-  display:flex;
-  gap:1rem;
-  justify-content:center;
-  flex-wrap:wrap;
+/* 10.  SUCCESS-STORM MODAL (embedded in booking pages) */
+#successStorm {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
-.btn-primary,.btn-directions{
-  padding:1rem 2.6rem;
-  border:none;
-  border-radius:50px;
-  font-weight:700;
-  font-size:1rem;
-  text-decoration:none;
-  cursor:pointer;
-  transition:.4s cubic-bezier(.25,.8,.25,1);
-  box-shadow:0 0 0 0 rgba(212,175,55,.4);
+#successStorm.show {
+  display: flex;
 }
-.btn-primary{
-  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
-  color:var(--black);
+.success-modal {
+  width: 90%;
+  max-width: 380px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
+  padding: 3rem 2rem 2rem;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: 0 0 40px var(--gold-glow);
 }
-.btn-primary:hover{
-  transform:translateY(-4px) scale(1.03);
-  box-shadow:0 8px 30px var(--gold-glow);
+.success-modal h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
-.btn-directions{
-  background:transparent;
-  color:var(--gold);
-  border:2px solid var(--gold);
+.success-modal p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
 }
-.btn-directions:hover{
-  background:var(--gold);
-  color:var(--black);
-  transform:translateY(-4px) scale(1.03);
+.btn-storm {
+  background: var(--black);
+  color: var(--gold);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
 }
-
-/* ---------- 4.  FLOATING ICONS ---------------------- */
-.scissors,.clippers{
-  position:absolute;
-  width:60px;
-  height:60px;
-  fill:var(--gold);
-  opacity:.6;
-  animation:float 6s ease-in-out infinite alternate;
+.btn-storm:hover {
+  background: var(--white);
+  color: var(--black);
 }
-.scissors{top:20%;left:5%;animation-delay:-2s;}
-.clippers{bottom:15%;right:5%;animation-delay:-4s;}
-@keyframes float{
-  0%{transform:translateY(0) rotate(-5deg);}
-  100%{transform:translateY(-15px) rotate(5deg);}
-}
-
-/* ---------- 5.  SERVICE GRID – GLASS + 3-D LIFT ----- */
-#services{
-  padding:6rem 1.5rem;
-  max-width:1200px;
-  margin:auto;
-}
-#services h2{
-  font-size:clamp(2rem,5vw,3rem);
-  text-align:center;
-  margin-bottom:3.5rem;
-  background:linear-gradient(90deg,var(--gold),var(--gold-glow));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.service-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:2.4rem;
+/* -------------------------------------------------
+   HERO VIDEO – FULL-SCREEN
+------------------------------------------------- */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 100vh;            /* full viewport height */
+  overflow: hidden;
 }
 
-/* ---------- 6.  SERVICE CARD ------------------------ */
-.service-card{
-  position:relative;
-  background:var(--glass);
-  border:1px solid rgba(212,175,55,.25);
-  border-radius:var(--radius);
-  padding:1.4rem 1.2rem 2rem;
-  backdrop-filter:blur(12px);
-  box-shadow:var(--shadow-soft);
-  transition:transform .45s,box-shadow .45s;
-}
-.service-card:hover{
-  transform:translateY(-12px) rotateX(4deg) rotateY(4deg);
-  box-shadow:0 16px 40px rgba(212,175,55,.25);
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 1;               /* behind overlay & content */
+  object-fit: cover;        /* crop edges, fill screen */
 }
 
-/* ---------- 7.  SERVICE IMAGE – CINEMATIC CROP ------ */
-.service-card img{
-  width:100%;
-  height:180px;                 /* 🔥 perfect size */
-  object-fit:cover;
-  border-radius:var(--radius);
-  transition:transform .5s ease;
-}
-.service-card:hover img{
-  transform:scale(1.1);
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); /* subtle dim */
+  z-index: 2;
 }
 
-.service-card h3{
-  margin:.8rem 0 .3rem;
-  font-size:1.3rem;
-  font-weight:600;
-  color:var(--gold);
+.hero-content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
 }
-.service-card p{
-  font-size:1.15rem;
-  font-weight:700;
-  margin-bottom:.8rem;
-}
-
-/* ---------- 8.  BOOK BUTTON – TOP-RIGHT GLOW -------- */
-.btn-book{
-  position:absolute;
-  top:.7rem;
-  right:.7rem;
-  padding:.45em 1em;
-  font-size:.85rem;
-  font-weight:700;
-  border-radius:999px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
-  color:var(--black);
-  text-decoration:none;
-  transition:.3s;
-  z-index:3;
-}
-.btn-book:hover{
-  transform:scale(1.12);
-  box-shadow:0 0 15px var(--gold-glow);
-}
-
-/* ---------- 9.  LOGIN / BOOKING FORMS --------------- */
-.login-card,.booking-form{
-  max-width:420px;
-  margin:5rem auto;
-  padding:2.4rem;
-  background:var(--glass);
-  border:1px solid var(--gold);
-  border-radius:var(--radius);
-  backdrop-filter:blur(12px);
-}
-.login-card h2,
-.booking-form label{
-  font-weight:700;
-  color:var(--gold);
-}
-.login-card input,
-.booking-form input,
-.booking-form select{
-  width:100%;
-x  padding:.9rem;
-  margin:.6rem 0;
-  border:1px solid var(--gold);
-  border-radius:8px;
-  background:var(--black);
-  color:var(--white);
-  font-size:1rem;
-}
-.btn-login,.btn-submit{
-  width:100%;
-  background:linear-gradient(135deg,var(--gold),var(--gold-glow));
-  color:var(--black);
-  padding:.9rem;
-  border:none;
-  border-radius:8px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.3s;
-}
-.btn-login:hover,.btn-submit:hover{
-  transform:scale(1.03);
-  box-shadow:0 0 15px var(--gold-glow);
-}
-
-/* ---------- 10.  ADMIN TABLE ------------------------ */
-.admin-wrapper{
-  max-width:1000px;
-  margin:5rem auto;
-  padding:2.4rem;
-  background:var(--glass);
-  border:1px solid var(--gold);
-  border-radius:var(--radius);
-  backdrop-filter:blur(12px);
-}
-.admin-wrapper h2{
-  text-align:center;
-  font-size:2.2rem;
-  color:var(--gold);
-  margin-bottom:2rem;
-}
-.admin-table{
-  width:100%;
-  border-collapse:collapse;
-}
-.admin-table th,
-.admin-table td{
-  padding:.8rem;
-  border-bottom:1px solid var(--gold);
-  text-align:left;
-  font-size:.9rem;
-}
-.admin-table th{
-  background:var(--glass);
-  color:var(--gold);
-}
-.admin-logout-btn{
-  display:block;
-  width:160px;
-  margin:2rem auto;
-  background:var(--gold);
-  color:var(--black);
-  border:none;
-  padding:.8rem;
-  border-radius:24px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-/* ---------- 11.  FOOTER ----------------------------- */
-footer{
-  text-align:center;
-  padding:2.5rem 1rem;
-  color:var(--gold);
-  font-size:.9rem;
-  background:rgba(0,0,0,.35);
-  backdrop-filter:blur(10px);
-}
-
-/* ---------- 12.  RESPONSIVE ------------------------- */
-@media (max-width:600px){
-  .service-grid{grid-template-columns:1fr;}
-  .hero-ctas{flex-direction:column;align-items:center;}
-}
-
-/* =============== ADVANCED SUCCESS MODAL =============== */
-.modal-overlay{
-  position:fixed; inset:0;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(8px);
-  display:flex; align-items:center; justify-content:center;
-  z-index:9999;
-  opacity:0; pointer-events:none;
-  transition:opacity .4s;
-}
-.modal-overlay.show{opacity:1; pointer-events:auto;}
-.success-modal{
-  width:90%; max-width:380px;
-  background:linear-gradient(135deg,var(--gold-glow),var(--gold));
-  color:var(--black);
-  border-radius:var(--radius);
-  text-align:center;
-  padding:2.4rem 1.5rem;
-  transform:scale(.8) translateY(-20px);
-  transition:transform .4s cubic-bezier(.175,.885,.32,1.275);
-}
-.modal-overlay.show .success-modal{transform:scale(1) translateY(0);}
-.success-modal h3{font-size:1.5rem; margin-bottom:.5rem;}
-.success-modal p{font-size:1rem; margin-bottom:1.2rem;}
-.btn-close{
-  background:var(--black);
-  color:var(--gold);
-  border:none; padding:.6rem 1.4rem;
-  border-radius:50px; font-weight:700; cursor:pointer;
-  transition:.3s;
-}
-.btn-close:hover{background:var(--white); color:var(--black);}
