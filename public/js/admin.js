@@ -5,10 +5,15 @@ import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 
 const tbody = document.querySelector('#bookingsTable tbody');
 const logoutBtn = document.getElementById('logoutBtn');
-const ADMIN_EMAIL = 'Amanfourbarber72@gmail.com';
+
+// ----- MULTI-ADMIN LIST -----
+const ADMINS = [
+  'georgemawutor3@gmail.com',
+  'Amanfourbarber72@gmail.com'
+].map(e => e.toLowerCase());
 
 onAuthStateChanged(auth, user => {
-  if (!user || user.email?.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+  if (!user || !ADMINS.includes(user.email?.toLowerCase())) {
     alert('Admin only.');
     signOut(auth);
     location.href = 'index.html';
