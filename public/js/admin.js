@@ -3,7 +3,7 @@ import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import { collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 const tbody = document.querySelector('#bookingsTable tbody');
-const ADMIN_EMAIL = 'georgemawutor3@gmail.com';
+const ADMIN_EMAIL = 'Amanfourbarber72@gmail.com';
 
 onAuthStateChanged(auth, user => {
   if (!user || user.email !== ADMIN_EMAIL) {
