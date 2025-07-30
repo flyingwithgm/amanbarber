@@ -1,56 +1,56 @@
-// js/admin.js
 import { auth, db } from './firebase.js';
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-import { collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import {
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js';
+import {
+  collection,
+  onSnapshot,
+  query,
+  orderBy
+} from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js';
 
-const tbody = document.querySelector('#bookingsTable tbody');
-const logoutBtn = document.getElementById('logoutBtn');
-const loginForm = document.getElementById('adminLogin');
-const loginMsg = document.getElementById('loginMsg');
-const dashboard = document.getElementById('dashboard');
 const loginCard = document.getElementById('loginCard');
+const loginForm = document.getElementById('loginForm');
+const adminSection = document.getElementById('adminSection');
+const logoutBtn = document.getElementById('logoutBtn');
+const tbody = document.querySelector('#bookingsTable tbody');
 
-// Admin emails (lowercased)
+// ----- MULTI-ADMIN LIST -----
 const ADMINS = [
   'georgemawutor3@gmail.com',
-  'amanfourbarber72@gmail.com'
+  'Amanfourbarber72@gmail.com'
 ].map(e => e.toLowerCase());
 
-// Handle login
-loginForm.onsubmit = async e => {
+// LOGIN LOGIC
+loginForm.addEventListener('submit', async e => {
   e.preventDefault();
-  const email = document.getElementById('adminEmail').value.trim();
-  const pass  = document.getElementById('adminPass').value;
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
 
   try {
-    const userCred = await signInWithEmailAndPassword(auth, email, pass);
-    const userEmail = userCred.user.email.toLowerCase();
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCred.user;
 
-    if (!ADMINS.includes(userEmail)) {
-      loginMsg.textContent = '❌ Not an authorized admin.';
+    if (!ADMINS.includes(user.email?.toLowerCase())) {
+      alert("Access denied: not an admin.");
       await signOut(auth);
-      return;
     }
-
-    loginCard.hidden = true;
-    dashboard.hidden = false;
-    logoutBtn.hidden = false;
-    loginMsg.textContent = '';
-
   } catch (err) {
-    loginMsg.textContent = '❌ Login failed: ' + err.message;
+    alert("Login failed: " + err.message);
   }
-};
+});
 
-// Watch for auth and load bookings
+// MONITOR AUTH STATE
 onAuthStateChanged(auth, user => {
-  if (!user || !ADMINS.includes(user.email?.toLowerCase())) return;
+  if (user && ADMINS.includes(user.email?.toLowerCase())) {
+    loginCard.hidden = true;
+    adminSection.hidden = false;
+    logoutBtn.hidden = false;
 
-  const q = query(collection(db, 'bookings'), orderBy('created', 'desc'));
-
-  onSnapshot(
-    q,
-    snap => {
+    const q = query(collection(db, 'bookings'), orderBy('created', 'desc'));
+    onSnapshot(q, snap => {
       tbody.innerHTML = '';
       if (snap.empty) {
         const tr = document.createElement('tr');
@@ -67,20 +67,26 @@ onAuthStateChanged(auth, user => {
           <td>${b.service || ''}</td>
           <td>${b.date || ''}</td>
           <td>${b.time || ''}</td>
-          <td>${b.phone || ''}</td>`;
+          <td>${b.phone || ''}</td>
+        `;
         tbody.appendChild(tr);
       });
-    },
-    err => {
-      console.error('Admin bookings error:', err);
-      alert('❌ Could not load bookings. Check console.');
-    }
-  );
+    }, err => {
+      console.error('Error loading bookings:', err);
+      alert('Could not load bookings. See console.');
+    });
+
+  } else {
+    adminSection.hidden = true;
+    logoutBtn.hidden = true;
+  }
 });
 
-// Logout
+// LOGOUT
 logoutBtn.onclick = () => {
   signOut(auth).then(() => {
-    location.reload();
+    loginCard.hidden = false;
+    adminSection.hidden = true;
+    logoutBtn.hidden = true;
   });
 };
