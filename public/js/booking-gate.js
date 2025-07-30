@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "http
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 // Unlock form after login
-document.getElementById('loginForm').addEventListener('submit', async e=>{
+document.getElementById('loginForm').addEventListener('submit', async e => {
   e.preventDefault();
   const email = document.getElementById('email').value.trim();
   const pass  = document.getElementById('password').value;
@@ -12,22 +12,27 @@ document.getElementById('loginForm').addEventListener('submit', async e=>{
   } catch {
     await createUserWithEmailAndPassword(auth, email, pass);
   }
-  // show booking
   document.getElementById('loginCard').hidden = true;
   document.getElementById('bookingForm').hidden = false;
 });
 
-// submit booking
-document.getElementById('bookingForm').addEventListener('submit', async e=>{
+// Submit booking
+document.getElementById('bookingForm').addEventListener('submit', async e => {
   e.preventDefault();
   const data = {
     name:    document.getElementById('name').value,
     phone:   document.getElementById('phone').value,
-    service: document.title.split('–')[1].trim(),
+    service: document.title.replace('Book', '').split('–')[0].trim(),
     date:    document.getElementById('date').value,
     time:    document.getElementById('time').value,
     created: serverTimestamp()
   };
-  await addDoc(collection(db, 'bookings'), data);
-  document.getElementById('bookingMsg').textContent = '✅ Booking saved!';
+
+  try {
+    await addDoc(collection(db, 'bookings'), data);
+    document.getElementById('bookingMsg').textContent = '✅ Booking saved!';
+    document.getElementById('bookingForm').reset();
+  } catch (err) {
+    document.getElementById('bookingMsg').textContent = '❌ Booking failed: ' + err.message;
+  }
 });
