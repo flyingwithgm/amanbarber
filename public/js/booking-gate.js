@@ -92,8 +92,8 @@ onAuthStateChanged(auth, user => {
       }
     });
 
-    console.log("🟢 Launching Paystack iframe now...");
-alert("🟢 Launching Paystack iframe now...");
-handler.openIframe();
+    console.log("🟢 Redirecting to Paystack...");
+alert("🟢 Redirecting to Paystack...");
+handler.openUrl(); // Works even if iframe doesn’t
   });
 });
