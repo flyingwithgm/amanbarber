@@ -1,9 +1,9 @@
-// booking-gate.js
+// js/booking-gate.js
 import { auth, db } from './firebase.js';
 import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-// 👇 Service prices (in GHS)
+// 🧠 Match exactly what's in the HTML
 const servicePrices = {
   "Regular Haircut": 100,
   "Beard Trim": 80,
@@ -15,63 +15,61 @@ const servicePrices = {
   "Part Color": 180
 };
 
-// ✅ Your test public key from Paystack
-const paystackPublicKey = "pk_test_9ebb74585748de848bd231ad79836e8d7b829acb";
+const paystackPublicKey = "pk_test_9ebb74585748de848bd231ad79836e8d7b829acb"; // 👈 your test key
 
 signInAnonymously(auth)
-  .then(() => console.log("🔐 Signed in anonymously"))
-  .catch((error) => console.error("❌ Sign-in error:", error));
+  .then(() => console.log('✅ Firebase signed in anonymously'))
+  .catch((error) => console.error("❌ Firebase anonymous login failed:", error));
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, user => {
   if (!user) return;
 
   const form = document.getElementById('bookingForm');
   const msg = document.getElementById('bookingMsg');
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    msg.textContent = "⏳ Processing payment...";
 
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
     const date = document.getElementById('date').value;
     const time = document.getElementById('time').value;
     const service = document.getElementById('service').value;
 
-    const price = servicePrices[service];
-    if (!price) {
-      msg.textContent = "❌ Unknown service price.";
+    const amountGHS = servicePrices[service];
+
+    if (!amountGHS) {
+      msg.textContent = '❌ Could not find price for selected service.';
+      console.error("Service mismatch:", service);
       return;
     }
 
-    const amountInPesewas = price * 100;
+    const amountPesewas = amountGHS * 100;
+
+    msg.textContent = '⏳ Processing payment...';
+    console.log({ name, phone, date, time, service, amountGHS });
 
     const handler = PaystackPop.setup({
       key: paystackPublicKey,
-      email: "georgemawutor3@gmail.com", // ✅ Real email
-      amount: amountInPesewas,
+      email: `${phone}@amanfour.com`,
+      amount: amountPesewas,
       currency: "GHS",
-      callback: async (response) => {
+      callback: async function(response) {
         try {
           await addDoc(collection(db, 'bookings'), {
-            name,
-            phone,
-            date,
-            time,
-            service,
-            price,
-            payRef: response.reference,
-            created: serverTimestamp()
+            name, phone, date, time, service,
+            created: serverTimestamp(),
+            payRef: response.reference
           });
-          msg.textContent = "✅ Payment successful & booking saved!";
+          msg.textContent = '✅ Booking successful & payment confirmed!';
           form.reset();
         } catch (err) {
-          console.error("❌ Firestore error:", err);
-          msg.textContent = "❌ Booking failed. Try again.";
+          msg.textContent = '❌ Booking failed to save: ' + err.message;
+          console.error(err);
         }
       },
-      onClose: () => {
-        msg.textContent = "❌ Payment was cancelled.";
+      onClose: function() {
+        msg.textContent = '❌ Payment was cancelled.';
       }
     });
 
