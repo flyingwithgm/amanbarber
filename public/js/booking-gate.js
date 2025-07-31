@@ -1,15 +1,8 @@
 import { auth, db } from './firebase.js';
-import {
-  signInAnonymously,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-import {
-  collection,
-  addDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-// 🎯 Service prices (exact names must match HTML)
+// Service prices in GHS
 const servicePrices = {
   "Regular Haircut": 100,
   "Beard Trim": 80,
@@ -21,21 +14,22 @@ const servicePrices = {
   "Part Color": 180
 };
 
-const paystackPublicKey = "pk_test_9ebb74585748de848bd231ad79836e8d7b829acb"; // test key
+// Paystack Hosted Link
+const paystackBaseUrl = "https://paystack.shop/pay/g8knxaxr4s";
 
-// 🔐 Sign in anonymously
+// Sign in anonymously to Firebase
 signInAnonymously(auth)
   .then(() => console.log('✅ Firebase signed in anonymously'))
-  .catch(err => console.error("❌ Firebase sign-in failed:", err));
+  .catch((error) => console.error("❌ Firebase anonymous login failed:", error));
 
-// ⚡ After auth, attach form handler
+// Set up form submission
 onAuthStateChanged(auth, user => {
   if (!user) return;
 
   const form = document.getElementById('bookingForm');
   const msg = document.getElementById('bookingMsg');
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
 
     const name = document.getElementById('name').value.trim();
@@ -45,67 +39,37 @@ onAuthStateChanged(auth, user => {
     const service = document.getElementById('service').value.trim();
 
     const amountGHS = servicePrices[service];
+
     if (!amountGHS) {
       msg.textContent = '❌ Invalid service selected.';
+      console.error("🚫 Service not found:", service);
       return;
     }
 
     const amountPesewas = amountGHS * 100;
-    const ref = 'AMAN-' + Date.now();
+    const ref = `AMAN-${Date.now()}`;
     const email = `${phone}@amanfour.com`;
 
-    msg.textContent = '⏳ Launching payment modal...';
+    // Show status message
+    msg.textContent = '⏳ Redirecting to Paystack...';
 
-    if (typeof PaystackPop === 'undefined') {
-      msg.textContent = '❌ Paystack script not loaded.';
-      return;
-    }
-
-    const handler = PaystackPop.setup({
-      key: paystackPublicKey,
-      email,
-      amount: amountPesewas,
-      currency: "GHS",
-      ref,
-      onClose: () => {
-        msg.textContent = '❌ Payment was cancelled.';
-        console.warn("🚪 Paystack modal closed.");
-      },
-      callback: function (response) {
-        msg.textContent = '✅ Payment successful! Saving booking...';
-
-        addDoc(collection(db, 'bookings'), {
-          name,
-          phone,
-          date,
-          time,
-          service,
-          created: serverTimestamp(),
-          payRef: response.reference
-        })
-        .then(() => {
-          msg.textContent = '✅ Booking saved!';
-          form.reset();
-        })
-        .catch(err => {
-          msg.textContent = '❌ Booking save failed.';
-          console.error(err);
-        });
-      }
-    });
-
+    // Optional: Save pending booking in Firestore
     try {
-      handler.openIframe();
-
-      // 🚨 Fallback redirect after 5 seconds (for Tecno/Itel browsers)
-      setTimeout(() => {
-        msg.textContent = '↪ Redirecting to Paystack...';
-        window.location.href = `https://checkout.paystack.com/${ref}`;
-      }, 5000);
-
+      await addDoc(collection(db, 'pendingBookings'), {
+        name, phone, date, time, service,
+        created: serverTimestamp(),
+        status: 'pending',
+        payRef: ref
+      });
+      console.log('✅ Pending booking saved');
     } catch (err) {
-      console.error("❌ openIframe() error:", err);
-      window.location.href = `https://checkout.paystack.com/${ref}`;
+      console.error("❌ Failed to save pending booking:", err);
     }
+
+    // Build the redirect URL
+    const redirectUrl = `${paystackBaseUrl}?email=${encodeURIComponent(email)}&amount=${amountPesewas}&reference=${ref}`;
+
+    // Redirect to hosted Paystack page
+    window.location.href = redirectUrl;
   });
 });
