@@ -6,7 +6,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyCybqVlasAj69x6EljSlJJXavFJorN-csU",
   authDomain: "aman-barber.firebaseapp.com",
   projectId: "aman-barber",
-  storageBucket: "aman-barber.firebasestorage.app",
+  storageBucket: "aman-barber.appspot.com", // ✅ FIXED
   messagingSenderId: "146331198998",
   appId: "1:146331198998:web:9d2fe984b2d6033127f737"
 };
