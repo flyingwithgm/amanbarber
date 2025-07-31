@@ -1,4 +1,3 @@
-// js/booking-gate.js
 import { auth, db } from './firebase.js';
 import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
@@ -14,7 +13,7 @@ const servicePrices = {
   "Part Color": 180
 };
 
-const paystackPublicKey = "pk_test_e55447211d14449117dd9fa6662dd0a7fa8317a0";
+const paystackPublicKey = "pk_test_9ebb74585748de848bd231ad79836e8d7b829acb";
 
 signInAnonymously(auth)
   .then(() => console.log('Signed in anonymously'))
@@ -29,30 +28,33 @@ onAuthStateChanged(auth, user => {
   bookingForm.addEventListener('submit', async e => {
     e.preventDefault();
 
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
     const date = document.getElementById('date').value;
     const time = document.getElementById('time').value;
-    const service = document.getElementById('service').value;
+    const service = document.getElementById('service').value.trim();
 
     const amountGHS = servicePrices[service];
-
     if (!amountGHS) {
       bookingMsg.textContent = '❌ Unknown service price.';
       return;
     }
 
-    const amountPES = amountGHS * 100;
+    bookingMsg.textContent = '⏳ Processing payment...';
 
     const handler = PaystackPop.setup({
       key: paystackPublicKey,
-      email: `${phone}@amanfour.com`,
-      amount: amountPES,
+      email: `${phone}@demo.com`,
+      amount: amountGHS * 100,
       currency: 'GHS',
       callback: async function(response) {
         try {
           await addDoc(collection(db, 'bookings'), {
-            name, phone, service, date, time,
+            name,
+            phone,
+            service,
+            date,
+            time,
             created: serverTimestamp(),
             payRef: response.reference
           });
