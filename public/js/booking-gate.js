@@ -1,9 +1,8 @@
-// js/booking-gate.js
+// booking-gate.js
 import { auth, db } from './firebase.js';
 import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-// 🧠 Match exactly what's in the HTML (no extra spaces!)
 const servicePrices = {
   "Regular Haircut": 100,
   "Beard Trim": 80,
@@ -15,15 +14,16 @@ const servicePrices = {
   "Part Color": 180
 };
 
-const paystackPublicKey = "pk_test_9ebb74585748de848bd231ad79836e8d7b829acb"; // ✅ test key
-alert("PaystackPop is: " + typeof PaystackPop);
+const paystackPublicKey = "pk_test_9ebb74585748de848bd231ad79836e8d7b829acb"; // test key
 
-// 🔐 Sign in anonymously to Firebase
 signInAnonymously(auth)
-  .then(() => console.log('✅ Firebase signed in anonymously'))
-  .catch((error) => console.error("❌ Firebase anonymous login failed:", error));
+  .then(() => {
+    document.getElementById('bookingMsg').textContent = '✅ Signed in to Firebase';
+  })
+  .catch((error) => {
+    document.getElementById('bookingMsg').textContent = '❌ Firebase sign-in failed: ' + error.message;
+  });
 
-// ⏳ Wait for auth before setting up form
 onAuthStateChanged(auth, user => {
   if (!user) return;
 
@@ -39,35 +39,37 @@ onAuthStateChanged(auth, user => {
     const time = document.getElementById('time').value;
     const service = document.getElementById('service').value.trim();
 
-    console.log("📥 Form Data:", { name, phone, date, time, service });
+    msg.textContent = '📥 Processing...';
+
+    if (!name || !phone || !date || !time || !service) {
+      msg.textContent = '❌ Missing required field.';
+      return;
+    }
 
     const amountGHS = servicePrices[service];
 
     if (!amountGHS) {
-      msg.textContent = '❌ Could not find price for selected service.';
-      console.error("🚫 Service mismatch or typo:", service);
+      msg.textContent = '❌ Unknown service: ' + service;
       return;
     }
 
     const amountPesewas = amountGHS * 100;
-    msg.textContent = '⏳ Processing payment...';
-    console.log("💵 Launching Paystack with:", { amountGHS, amountPesewas });
 
     if (typeof PaystackPop === 'undefined') {
-      msg.textContent = '❌ Paystack failed to load.';
-      console.error("🚫 PaystackPop is not defined. Make sure the Paystack script loads before this JS.");
+      msg.textContent = '❌ PaystackPop not loaded!';
       return;
     }
 
+    msg.textContent = '💵 Launching payment modal...';
+
     const handler = PaystackPop.setup({
       key: paystackPublicKey,
-      email: `${phone}@amanfour.com`, // used for tracking only
+      email: `${phone}@amanfour.com`,
       amount: amountPesewas,
       currency: "GHS",
-      ref: `AMAN-${Date.now()}`, // unique ref
+      ref: `AMAN-${Date.now()}`,
       callback: async function(response) {
-        console.log("✅ Payment successful! Ref:", response.reference);
-
+        msg.textContent = '✅ Payment done. Saving booking...';
         try {
           await addDoc(collection(db, 'bookings'), {
             name,
@@ -78,22 +80,18 @@ onAuthStateChanged(auth, user => {
             created: serverTimestamp(),
             payRef: response.reference
           });
-
-          msg.textContent = '✅ Booking successful & payment confirmed!';
+          msg.textContent = '✅ Booking confirmed!';
           form.reset();
         } catch (err) {
-          msg.textContent = '❌ Booking failed to save: ' + err.message;
-          console.error("🚫 Firestore error:", err);
+          msg.textContent = '❌ Failed to save booking: ' + err.message;
         }
       },
       onClose: function() {
         msg.textContent = '❌ Payment was cancelled.';
-        console.warn("🚪 User closed the Paystack modal.");
       }
     });
 
-    console.log("🟢 Redirecting to Paystack...");
-alert("🟢 Redirecting to Paystack...");
-handler.openUrl(); // Works even if iframe doesn’t
+    msg.textContent = '🟢 Opening Paystack...';
+    handler.openIframe();
   });
 });
