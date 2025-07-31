@@ -14,37 +14,33 @@ const servicePrices = {
   "Part Color": 180
 };
 
-// Paystack hosted link
-const paystackBaseUrl = "https://paystack.shop/pay/g8knxaxr4s";
+// Paystack hosted links for each service
+const paystackLinks = {
+  "Regular Haircut": "https://paystack.shop/pay/g8knxaxr4s",
+  // Add more hosted links here if you make them
+};
 
-// Sign in anonymously to Firebase
 signInAnonymously(auth)
   .then(() => console.log('✅ Firebase signed in anonymously'))
-  .catch((error) => console.error("❌ Firebase anonymous login failed:", error));
+  .catch((error) => console.error("❌ Firebase anonymous login failed:", error.message));
 
-// Wait until user is authenticated
 onAuthStateChanged(auth, user => {
   if (!user) return;
 
   const form = document.getElementById('bookingForm');
   const msg = document.getElementById('bookingMsg');
 
-  form.addEventListener('submit', async e => {
+  form?.addEventListener('submit', async e => {
     e.preventDefault();
 
     const name = document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const date = document.getElementById('date').value;
     const time = document.getElementById('time').value;
-    const service = document.getElementById('service').value.trim();
+    const service = document.getElementById('service').value;
+    const payUrl = paystackLinks[service];
 
-    const amount = servicePrices[service];
-    if (!amount) {
-      msg.textContent = '❌ Invalid service selected.';
-      return;
-    }
-
-    msg.textContent = '⏳ Saving booking...';
+    msg.textContent = '⏳ Saving your booking...';
 
     try {
       await addDoc(collection(db, 'bookings'), {
@@ -58,10 +54,15 @@ onAuthStateChanged(auth, user => {
 
       msg.textContent = '✅ Booking saved! Redirecting to payment...';
 
-      // 🔁 Redirect to Paystack hosted payment link
+      // 🔁 Redirect to Paystack hosted page after 2s
       setTimeout(() => {
-        window.location.href = paystackBaseUrl;
-      }, 2000); // 2 second wait before redirect
+        if (payUrl) {
+          window.location.href = payUrl;
+        } else {
+          msg.textContent = '⚠️ No payment link found for this service.';
+        }
+      }, 2000);
+
     } catch (err) {
       msg.textContent = '❌ Failed to save booking: ' + err.message;
       console.error(err);
