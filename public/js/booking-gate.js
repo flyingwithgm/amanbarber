@@ -16,6 +16,7 @@ const servicePrices = {
 };
 
 const paystackPublicKey = "pk_test_9ebb74585748de848bd231ad79836e8d7b829acb"; // ✅ test key
+alert("PaystackPop is: " + typeof PaystackPop);
 
 // 🔐 Sign in anonymously to Firebase
 signInAnonymously(auth)
