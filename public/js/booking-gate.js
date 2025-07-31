@@ -93,6 +93,7 @@ onAuthStateChanged(auth, user => {
     });
 
     console.log("🟢 Launching Paystack iframe now...");
-    handler.openIframe();
+alert("🟢 Launching Paystack iframe now...");
+handler.openIframe();
   });
 });
