@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Book Regular Haircut – Amanfour</title>
   <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- ✅ Load Paystack early -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
 </head>
 <body>
   <header class="booking-header">
@@ -36,8 +39,7 @@
     </form>
   </main>
 
-  <!-- ✅ Make sure this loads BEFORE your booking-gate.js -->
-  <script src="https://js.paystack.co/v1/inline.js"></script>
-  <script type="module" src="js/booking-gate.js"></script>
+  <!-- ✅ Load your logic after everything is ready -->
+  <script type="module" src="js/booking-gate.js?v=3"></script>
 </body>
 </html>
