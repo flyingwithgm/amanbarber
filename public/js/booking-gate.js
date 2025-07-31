@@ -92,6 +92,11 @@ onAuthStateChanged(auth, user => {
     });
 
     msg.textContent = '🟢 Opening Paystack...';
-    handler.openIframe();
+    console.log("🟢 About to open Paystack modal...");
+alert("✅ Step 1: Setup complete. Launching payment...");
+
+handler.openIframe();
+
+alert("❌ Step 2: If you see this, Paystack modal did NOT open.");
   });
 });
