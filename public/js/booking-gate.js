@@ -1,8 +1,9 @@
-// booking-gate.js
+// js/booking-gate.js
 import { auth, db } from './firebase.js';
 import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
+// 🧠 Prices for each service
 const servicePrices = {
   "Regular Haircut": 100,
   "Beard Trim": 80,
@@ -14,16 +15,14 @@ const servicePrices = {
   "Part Color": 180
 };
 
-const paystackPublicKey = "pk_test_9ebb74585748de848bd231ad79836e8d7b829acb"; // test key
+const paystackPublicKey = "pk_test_9ebb74585748de848bd231ad79836e8d7b829acb"; // ✅ Your test key
 
+// 🔐 Sign in anonymously
 signInAnonymously(auth)
-  .then(() => {
-    document.getElementById('bookingMsg').textContent = '✅ Signed in to Firebase';
-  })
-  .catch((error) => {
-    document.getElementById('bookingMsg').textContent = '❌ Firebase sign-in failed: ' + error.message;
-  });
+  .then(() => console.log('✅ Firebase signed in anonymously'))
+  .catch((error) => console.error("❌ Firebase anonymous login failed:", error));
 
+// 🧠 Wait for auth to be ready before listening for form submit
 onAuthStateChanged(auth, user => {
   if (!user) return;
 
@@ -39,28 +38,24 @@ onAuthStateChanged(auth, user => {
     const time = document.getElementById('time').value;
     const service = document.getElementById('service').value.trim();
 
-    msg.textContent = '📥 Processing...';
-
-    if (!name || !phone || !date || !time || !service) {
-      msg.textContent = '❌ Missing required field.';
-      return;
-    }
+    console.log("📥 Booking data:", { name, phone, date, time, service });
 
     const amountGHS = servicePrices[service];
-
     if (!amountGHS) {
-      msg.textContent = '❌ Unknown service: ' + service;
+      msg.textContent = '❌ Could not find price for selected service.';
+      console.error("🚫 Invalid service name:", service);
       return;
     }
 
     const amountPesewas = amountGHS * 100;
+    msg.textContent = '⏳ Launching payment page...';
 
+    // ✅ Make sure Paystack is loaded
     if (typeof PaystackPop === 'undefined') {
-      msg.textContent = '❌ PaystackPop not loaded!';
+      msg.textContent = '❌ Paystack failed to load.';
+      console.error("🚫 PaystackPop not defined. Check if Paystack script is loading.");
       return;
     }
-
-    msg.textContent = '💵 Launching payment modal...';
 
     const handler = PaystackPop.setup({
       key: paystackPublicKey,
@@ -69,7 +64,7 @@ onAuthStateChanged(auth, user => {
       currency: "GHS",
       ref: `AMAN-${Date.now()}`,
       callback: async function(response) {
-        msg.textContent = '✅ Payment done. Saving booking...';
+        console.log("✅ Payment complete. Ref:", response.reference);
         try {
           await addDoc(collection(db, 'bookings'), {
             name,
@@ -80,23 +75,20 @@ onAuthStateChanged(auth, user => {
             created: serverTimestamp(),
             payRef: response.reference
           });
-          msg.textContent = '✅ Booking confirmed!';
+          msg.textContent = '✅ Booking successful & payment confirmed!';
           form.reset();
         } catch (err) {
-          msg.textContent = '❌ Failed to save booking: ' + err.message;
+          msg.textContent = '❌ Booking failed: ' + err.message;
+          console.error("🚫 Firestore error:", err);
         }
       },
       onClose: function() {
         msg.textContent = '❌ Payment was cancelled.';
+        console.warn("🚪 User closed Paystack.");
       }
     });
 
-    msg.textContent = '🟢 Opening Paystack...';
-    console.log("🟢 About to open Paystack modal...");
-alert("✅ Step 1: Setup complete. Launching payment...");
-
-handler.openPopup(); // opens in a new tab instead of iframe
-
-alert("❌ Step 2: If you see this, Paystack modal did NOT open.");
+    console.log("🔁 Redirecting to Paystack...");
+    handler.openRedirect(); // ✅ THIS FIXES PHONE ISSUES
   });
 });
