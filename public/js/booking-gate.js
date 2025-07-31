@@ -95,7 +95,7 @@ onAuthStateChanged(auth, user => {
     console.log("🟢 About to open Paystack modal...");
 alert("✅ Step 1: Setup complete. Launching payment...");
 
-handler.openIframe();
+handler.openPopup(); // opens in a new tab instead of iframe
 
 alert("❌ Step 2: If you see this, Paystack modal did NOT open.");
   });
