@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Book Complete Color – Amanfour</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css" />
   <script src="https://js.paystack.co/v1/inline.js"></script>
 </head>
 <body>
@@ -14,19 +15,28 @@
 
   <main class="booking-main">
     <h1>Book Complete Color – GHS 220</h1>
-    <img src="completecolor.jpg" alt="Complete Color" class="preview-img">
+    <img src="completecolor.jpg" alt="Complete Color" class="preview-img" />
 
     <form id="bookingForm" class="booking-form">
-      <input type="hidden" id="service" value="Complete Colored Hair – GHS 220">
-      <label>Name</label><input type="text" id="name" placeholder="Your Name" required>
-      <label>Phone</label><input type="tel" id="phone" placeholder="07XXXXXXXX" required>
-      <label>Date</label><input type="date" id="date" required>
-      <label>Time</label><input type="time" id="time" required>
-      <button type="submit" class="btn-submit">Book Now</button>
+      <input type="hidden" id="service" value="Complete Color" />
+
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Your Name" required />
+
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" placeholder="07XXXXXXXX" required />
+
+      <label for="date">Date</label>
+      <input type="date" id="date" required />
+
+      <label for="time">Time</label>
+      <input type="time" id="time" required />
+
+      <button type="submit" class="btn-submit">Book & Pay</button>
       <p id="bookingMsg"></p>
-      <button type="button" class="btn-whatsapp" onclick="shareOnWhatsApp('Complete Color')" hidden>Share Experience</button>
     </form>
   </main>
+
   <script type="module" src="js/booking-gate.js"></script>
 </body>
 </html>
