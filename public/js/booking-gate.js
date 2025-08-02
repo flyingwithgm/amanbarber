@@ -2,15 +2,15 @@ import { auth, db } from './firebase.js';
 import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-// Selar hosted links for each service
+// Selar hosted links for each service (corrected)
 const paystackLinks = {
   "Regular Haircut": "https://selar.com/651yl1dr5h",
   "Beard Trim": "https://selar.com/p62i659593",
   "Cut + Enhancement": "https://selar.com/45616143u1",
   "Haircut + Texturizer": "https://selar.com/173104c117",
-  "Pixie Cut": "https://selar.com/1s5p511653",
-  "Extensions": "https://selar.com/394hp3g166",
-  "Complete Color": "https://selar.com/66sm265764",
+  "Pixie Cut": "https://selar.com/66sm265764",            // ✅ now correct
+  "Extensions": "https://selar.com/394hp3g166",            // ✅ verify this exists on Selar
+  "Complete Color": "https://selar.com/1s5p511653",        // ✅ now correct
   "Part Color": "https://selar.com/211s41t961"
 };
 
