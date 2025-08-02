@@ -1,8 +1,8 @@
 /* =========================================================
-AMANFOUR BARBERS – COMPLETE 2025 MASTER (ULTRA EDITION)
+AMANFOUR BARBERS – COMPLETE 2025 MASTER (Enhanced Edition)
 ========================================================= */
 
-/* 0.  ROOT & RESET */
+/* 0. ROOT & RESET */
 :root {
   --gold: #d4af37;
   --gold-glow: #ffd700;
@@ -14,19 +14,9 @@ AMANFOUR BARBERS – COMPLETE 2025 MASTER (ULTRA EDITION)
   --shadow-glow: 0 0 25px var(--gold-glow);
   --radius: 18px;
   --ff: 'Poppins', sans-serif;
+  --transition-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
 
-  /* automatic light / dark */
-  color-scheme: dark;
-}
-@media (prefers-color-scheme: light) {
-  :root {
-    --black: #f5f5f5;
-    --white: #0e0e0e;
-    --glass: rgba(0, 0, 0, 0.06);
-    --glass-border: rgba(212, 175, 55, 0.4);
-    color-scheme: light;
-  }
-}
 *,
 *::before,
 *::after {
@@ -34,10 +24,11 @@ AMANFOUR BARBERS – COMPLETE 2025 MASTER (ULTRA EDITION)
   padding: 0;
   box-sizing: border-box;
 }
+
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
+
 body {
   font-family: var(--ff);
   background: var(--black);
@@ -46,41 +37,33 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------- 1. HERO – CINEMATIC VIDEO ---------- */
+/* 1. HERO – FULL-SCREEN CINEMATIC */
 .hero-banner {
   position: relative;
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('IMG-20250722-WA0027.jpg') center/cover fixed;
   overflow: hidden;
+  isolation: isolate;
 }
-.hero-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  object-fit: cover;
-}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
-  z-index: 2;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
+  z-index: 1;
 }
+
 .hero-content {
   position: relative;
-  z-index: 3;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  z-index: 2;
   text-align: center;
   animation: fadeUp 1.2s ease-out;
+  padding: 0 1rem;
 }
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -91,6 +74,7 @@ body {
     transform: translateY(0);
   }
 }
+
 .hero-content h1 {
   font-size: clamp(2.6rem, 7vw, 4.5rem);
   font-weight: 800;
@@ -99,32 +83,24 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 10px var(--gold-glow));
+  margin-bottom: 0.5rem;
 }
+
 .hero-content h2 {
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   font-weight: 300;
   margin: 0.5rem 0 2rem;
   color: var(--white);
 }
-/* parallax on large screens */
-@media (min-width: 900px) {
-  body {
-    --scroll: 0;
-  }
-  .hero-content h1,
-  .hero-content h2 {
-    transform: translateY(calc(var(--scroll) * 0.15px));
-    transition: none;
-  }
-}
 
-/* ---------- 2. HERO BUTTONS (neon spin) ---------- */
+/* 2. HERO BUTTONS */
 .hero-ctas {
   display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .btn-primary,
 .btn-directions {
   padding: 1rem 2.6rem;
@@ -134,44 +110,51 @@ body {
   font-size: 1rem;
   text-decoration: none;
   cursor: pointer;
-  transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.4s var(--transition-ease);
   position: relative;
   overflow: hidden;
 }
+
 .btn-primary {
   background: linear-gradient(135deg, var(--gold), var(--gold-glow));
   color: var(--black);
+  z-index: 1;
 }
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: 0.6s;
+  z-index: -1;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
 .btn-primary:hover {
   transform: translateY(-4px) scale(1.03);
   box-shadow: 0 8px 30px var(--gold-glow);
 }
+
 .btn-directions {
   background: transparent;
   color: var(--gold);
   border: 2px solid var(--gold);
 }
+
 .btn-directions:hover {
   background: var(--gold);
   color: var(--black);
   transform: translateY(-4px) scale(1.03);
 }
-/* neon pulse ring */
-.btn-primary::before,
-.btn-directions::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  background: conic-gradient(from 0deg, var(--gold-glow), transparent, var(--gold-glow));
-  animation: neonSpin 2.5s linear infinite;
-  border-radius: inherit;
-  z-index: -1;
-}
-@keyframes neonSpin {
-  to { transform: rotate(360deg); }
-}
 
-/* ---------- 3. FLOATING ICONS ---------- */
+/* 3. FLOATING ICONS */
 .scissors,
 .clippers {
   position: absolute;
@@ -180,30 +163,36 @@ body {
   fill: var(--gold);
   opacity: 0.6;
   animation: float 6s ease-in-out infinite alternate;
-  z-index: 2;
 }
+
 .scissors {
   top: 20%;
   left: 5%;
   animation-delay: -2s;
 }
+
 .clippers {
   bottom: 15%;
   right: 5%;
   animation-delay: -4s;
 }
+
 @keyframes float {
-  0% { transform: translateY(0) rotate(-5deg); }
-  100% { transform: translateY(-15px) rotate(5deg); }
+  0% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(-15px) rotate(5deg);
+  }
 }
 
-/* ---------- 4. SERVICES (3D cards) ---------- */
+/* 4. SERVICES SECTION */
 #services {
   padding: 6rem 1.5rem;
   max-width: 1200px;
   margin: auto;
-  scroll-snap-align: start;
 }
+
 #services h2 {
   font-size: clamp(2rem, 5vw, 3rem);
   text-align: center;
@@ -211,19 +200,14 @@ body {
   background: linear-gradient(90deg, var(--gold), var(--gold-glow));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* reveal animation */
-  clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
-  animation: reveal 1.2s cubic-bezier(0.77,0,0.18,1) forwards;
-  animation-timeline: view(block 70% 10%);
 }
-@keyframes reveal {
-  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-}
+
 .service-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2.4rem;
 }
+
 .service-card {
   position: relative;
   background: var(--glass);
@@ -232,15 +216,31 @@ body {
   padding: 1.4rem 1.2rem 2rem;
   backdrop-filter: blur(12px);
   box-shadow: var(--shadow-soft);
-  transform-style: preserve-3d;
-  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-              box-shadow 0.45s;
+  transition: all 0.45s var(--transition-ease);
+  overflow: hidden;
 }
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: 0.6s;
+  z-index: -1;
+}
+
+.service-card:hover::before {
+  left: 100%;
+}
+
 .service-card:hover {
-  transform: translateY(-12px) rotateX(6deg) rotateY(6deg)
-             scale3d(1.03, 1.03, 1.03);
-  box-shadow: 0 16px 40px rgba(212, 175, 55, 0.25);
+  transform: translateY(-12px) rotateX(4deg) rotateY(4deg);
+  box-shadow: 0 16px 40px rgba(212, 175, 55, 0.35);
 }
+
 .service-card img {
   width: 100%;
   height: 180px;
@@ -248,20 +248,24 @@ body {
   border-radius: var(--radius);
   transition: transform 0.5s ease;
 }
+
 .service-card:hover img {
   transform: scale(1.1);
 }
+
 .service-card h3 {
   margin: 0.8rem 0 0.3rem;
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--gold);
 }
+
 .service-card p {
   font-size: 1.15rem;
   font-weight: 700;
   margin-bottom: 0.8rem;
 }
+
 .btn-book {
   position: absolute;
   top: 0.7rem;
@@ -273,17 +277,18 @@ body {
   background: linear-gradient(135deg, var(--gold), var(--gold-glow));
   color: var(--black);
   text-decoration: none;
-  transition: 0.3s;
+  transition: all 0.3s;
   z-index: 3;
+  box-shadow: 0 0 8px var(--gold-glow);
 }
+
 .btn-book:hover {
   transform: scale(1.12);
   box-shadow: 0 0 15px var(--gold-glow);
 }
 
-/* ---------- 5. BOOKING / LOGIN FORMS ---------- */
-.booking-main img,
-.login-card img {
+/* 5. BOOKING PAGES – FRAMED IMAGES */
+.booking-main img {
   width: 100%;
   max-width: 320px;
   height: 180px;
@@ -293,7 +298,14 @@ body {
   box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
   display: block;
   margin: 1.5rem auto;
+  transition: transform 0.4s ease;
 }
+
+.booking-main img:hover {
+  transform: scale(1.05);
+}
+
+/* 6. LOGIN / BOOKING FORMS */
 .login-card,
 .booking-form {
   max-width: 420px;
@@ -303,12 +315,16 @@ body {
   border: 1px solid var(--gold);
   border-radius: var(--radius);
   backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
 }
+
 .login-card h2,
 .booking-form label {
   font-weight: 700;
   color: var(--gold);
+  margin-bottom: 0.5rem;
 }
+
 .login-card input,
 .booking-form input,
 .booking-form select {
@@ -320,7 +336,17 @@ body {
   background: var(--black);
   color: var(--white);
   font-size: 1rem;
+  transition: all 0.3s ease;
 }
+
+.login-card input:focus,
+.booking-form input:focus,
+.booking-form select:focus {
+  outline: none;
+  border-color: var(--gold-glow);
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
 .btn-login,
 .btn-submit {
   width: 100%;
@@ -331,15 +357,17 @@ body {
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
+
 .btn-login:hover,
 .btn-submit:hover {
   transform: scale(1.03);
   box-shadow: 0 0 15px var(--gold-glow);
 }
 
-/* ---------- 6. ADMIN TABLE ---------- */
+/* 7. ADMIN TABLE */
 .admin-wrapper {
   max-width: 1000px;
   margin: 5rem auto;
@@ -348,17 +376,21 @@ body {
   border: 1px solid var(--gold);
   border-radius: var(--radius);
   backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
 }
+
 .admin-wrapper h2 {
   text-align: center;
   font-size: 2.2rem;
   color: var(--gold);
   margin-bottom: 2rem;
 }
+
 .admin-table {
   width: 100%;
   border-collapse: collapse;
 }
+
 .admin-table th,
 .admin-table td {
   padding: 0.8rem;
@@ -366,10 +398,12 @@ body {
   text-align: left;
   font-size: 0.9rem;
 }
+
 .admin-table th {
   background: var(--glass);
   color: var(--gold);
 }
+
 .admin-logout-btn {
   display: block;
   width: 160px;
@@ -381,9 +415,15 @@ body {
   border-radius: 24px;
   font-weight: 700;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
-/* ---------- 7. FOOTER ---------- */
+.admin-logout-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--gold-glow);
+}
+
+/* 8. FOOTER */
 footer {
   text-align: center;
   padding: 2.5rem 1rem;
@@ -393,18 +433,19 @@ footer {
   backdrop-filter: blur(10px);
 }
 
-/* ---------- 8. RESPONSIVE ---------- */
+/* 9. RESPONSIVE */
 @media (max-width: 600px) {
   .service-grid {
     grid-template-columns: 1fr;
   }
+
   .hero-ctas {
     flex-direction: column;
     align-items: center;
   }
 }
 
-/* ---------- 9. SUCCESS-STORM MODAL ---------- */
+/* 10. SUCCESS-STORM MODAL */
 #successStorm {
   position: fixed;
   inset: 0;
@@ -412,10 +453,13 @@ footer {
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
 }
+
 #successStorm.show {
   display: flex;
 }
+
 .success-modal {
   width: 90%;
   max-width: 380px;
@@ -425,15 +469,30 @@ footer {
   border-radius: var(--radius);
   text-align: center;
   box-shadow: 0 0 40px var(--gold-glow);
+  animation: popIn 0.5s ease forwards;
 }
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .success-modal h2 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
+
 .success-modal p {
   font-size: 1rem;
   margin-bottom: 2rem;
 }
+
 .btn-storm {
   background: var(--black);
   color: var(--gold);
@@ -444,42 +503,8 @@ footer {
   cursor: pointer;
   transition: 0.3s;
 }
+
 .btn-storm:hover {
   background: var(--white);
   color: var(--black);
-}
-
-/* ---------- 10. PARTICLE BACKGROUND ---------- */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(circle at 20% 80%, var(--gold-glow) 0.5px, transparent 0.5px),
-    radial-gradient(circle at 80% 20%, var(--gold-glow) 0.5px, transparent 0.5px),
-    radial-gradient(circle at 40% 40%, var(--gold-glow) 0.5px, transparent 0.5px);
-  background-size: 120px 120px;
-  animation: drift 60s linear infinite;
-}
-@keyframes drift {
-  to { transform: translateY(-120px); }
-}
-
-/* ---------- 11. MICRO SCROLLBAR ---------- */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--black);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--gold);
-  border-radius: 3px;
-}
-
-/* ---------- 12. FALLBACKS ---------- */
-@supports not (animation-timeline: view()) {
-  section h2 { animation: none; }
 }
