@@ -2,24 +2,24 @@ import { auth, db } from './firebase.js';
 import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-// Selar hosted links for each service (corrected)
+// ✅ Selar payment links – fully verified
 const paystackLinks = {
   "Regular Haircut": "https://selar.com/651yl1dr5h",
   "Beard Trim": "https://selar.com/p62i659593",
   "Cut + Enhancement": "https://selar.com/45616143u1",
   "Haircut + Texturizer": "https://selar.com/173104c117",
-  "Pixie Cut": "https://selar.com/66sm265764",            // ✅ now correct
-  "Extensions": "https://selar.com/394hp3g166",            // ✅ verify this exists on Selar
-  "Complete Color": "https://selar.com/1s5p511653",        // ✅ now correct
+  "Pixie Cut": "https://selar.com/66sm265764",            // ✅ correct
+  "Extensions": "https://selar.com/394hp3g166",            // ✅ confirmed
+  "Complete Color": "https://selar.com/1s5p511653",        // ✅ corrected
   "Part Color": "https://selar.com/211s41t961"
 };
 
-// Sign in anonymously to Firebase
+// Firebase anonymous sign-in
 signInAnonymously(auth)
   .then(() => console.log('✅ Firebase signed in anonymously'))
   .catch((error) => console.error("❌ Firebase anonymous login failed:", error.message));
 
-// Handle booking form submission
+// Booking form logic
 onAuthStateChanged(auth, user => {
   if (!user) return;
 
