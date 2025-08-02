@@ -2,28 +2,24 @@ import { auth, db } from './firebase.js';
 import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-// Service prices in GHS
-const servicePrices = {
-  "Regular Haircut": 100,
-  "Beard Trim": 80,
-  "Cut + Enhancement": 120,
-  "Haircut + Texturizer": 180,
-  "Pixie Cut": 250,
-  "Extensions": 500,
-  "Complete Color": 220,
-  "Part Color": 180
-};
-
-// Paystack hosted links for each service
+// Selar hosted links for each service
 const paystackLinks = {
-  "Regular Haircut": "https://paystack.shop/pay/g8knxaxr4s",
-  // Add more hosted links here if you make them
+  "Regular Haircut": "https://selar.com/651yl1dr5h",
+  "Beard Trim": "https://selar.com/p62i659593",
+  "Cut + Enhancement": "https://selar.com/45616143u1",
+  "Haircut + Texturizer": "https://selar.com/173104c117",
+  "Pixie Cut": "https://selar.com/1s5p511653",
+  "Extensions": "https://selar.com/394hp3g166",
+  "Complete Color": "https://selar.com/66sm265764",
+  "Part Color": "https://selar.com/211s41t961"
 };
 
+// Sign in anonymously to Firebase
 signInAnonymously(auth)
   .then(() => console.log('✅ Firebase signed in anonymously'))
   .catch((error) => console.error("❌ Firebase anonymous login failed:", error.message));
 
+// Handle booking form submission
 onAuthStateChanged(auth, user => {
   if (!user) return;
 
@@ -54,7 +50,6 @@ onAuthStateChanged(auth, user => {
 
       msg.textContent = '✅ Booking saved! Redirecting to payment...';
 
-      // 🔁 Redirect to Paystack hosted page after 2s
       setTimeout(() => {
         if (payUrl) {
           window.location.href = payUrl;
