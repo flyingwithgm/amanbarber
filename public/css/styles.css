@@ -1,430 +1,523 @@
 /* =========================================================
-AMANFOUR BARBERS – COMPLETE 2025 MASTER
+AMANFOUR BARBERS – COMPLETE 2025 MASTER (ULTRA EDITION)
 ========================================================= */
 
-/* 0.  ROOT & RESET */
+/* 0. ROOT & RESET */
 :root {
---gold: #d4af37;
---gold-glow: #ffd700;
---black: #0e0e0e;
---white: #ffffff;
---glass: rgba(255, 255, 255, 0.08);
---glass-border: rgba(212, 175, 55, 0.25);
---shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
---shadow-glow: 0 0 25px var(--gold-glow);
---radius: 18px;
---ff: 'Poppins', sans-serif;
+  --gold: #d4af37;
+  --gold-glow: #ffd700;
+  --black: #0e0e0e;
+  --white: #ffffff;
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(212, 175, 55, 0.25);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 25px var(--gold-glow);
+  --radius: 18px;
+  --ff: 'Poppins', sans-serif;
+
+  /* automatic light / dark */
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --black: #f5f5f5;
+    --white: #0e0e0e;
+    --glass: rgba(0, 0, 0, 0.06);
+    --glass-border: rgba(212, 175, 55, 0.4);
+    color-scheme: light;
+  }
 }
 *,
 *::before,
 *::after {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 html {
-scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 body {
-font-family: var(--ff);
-background: var(--black);
-color: var(--white);
-line-height: 1.6;
+  font-family: var(--ff);
+  background: var(--black);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* 1.  HERO – FULL-SCREEN CINEMATIC */
+/* ---------- 1. HERO – CINEMATIC VIDEO ---------- */
 .hero-banner {
-position: relative;
-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-background: url('IMG-20250722-WA0027.jpg') center/cover fixed;
-overflow: hidden;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  object-fit: cover;
 }
 .hero-overlay {
-position: absolute;
-inset: 0;
-background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+  z-index: 2;
 }
 .hero-content {
-position: relative;
-z-index: 2;
-text-align: center;
-animation: fadeUp 1.2s ease-out;
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fadeUp 1.2s ease-out;
 }
 @keyframes fadeUp {
-from {
-opacity: 0;
-transform: translateY(30px);
-}
-to {
-opacity: 1;
-transform: translateY(0);
-}
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .hero-content h1 {
-font-size: clamp(2.6rem, 7vw, 4.5rem);
-font-weight: 800;
-letter-spacing: 2px;
-background: linear-gradient(90deg, var(--gold), var(--gold-glow));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-filter: drop-shadow(0 0 10px var(--gold-glow));
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px var(--gold-glow));
 }
 .hero-content h2 {
-font-size: clamp(1rem, 2.5vw, 1.5rem);
-font-weight: 300;
-margin: 0.5rem 0 2rem;
-color: var(--white);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  margin: 0.5rem 0 2rem;
+  color: var(--white);
+}
+/* parallax on large screens */
+@media (min-width: 900px) {
+  body {
+    --scroll: 0;
+  }
+  .hero-content h1,
+  .hero-content h2 {
+    transform: translateY(calc(var(--scroll) * 0.15px));
+    transition: none;
+  }
 }
 
-/* 2.  HERO BUTTONS */
+/* ---------- 2. HERO BUTTONS (neon spin) ---------- */
 .hero-ctas {
-display: flex;
-gap: 1rem;
-justify-content: center;
-flex-wrap: wrap;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .btn-primary,
 .btn-directions {
-padding: 1rem 2.6rem;
-border: none;
-border-radius: 50px;
-font-weight: 700;
-font-size: 1rem;
-text-decoration: none;
-cursor: pointer;
-transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: 1rem 2.6rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
 }
 .btn-primary {
-background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-color: var(--black);
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
 }
 .btn-primary:hover {
-transform: translateY(-4px) scale(1.03);
-box-shadow: 0 8px 30px var(--gold-glow);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 30px var(--gold-glow);
 }
 .btn-directions {
-background: transparent;
-color: var(--gold);
-border: 2px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
 }
 .btn-directions:hover {
-background: var(--gold);
-color: var(--black);
-transform: translateY(-4px) scale(1.03);
+  background: var(--gold);
+  color: var(--black);
+  transform: translateY(-4px) scale(1.03);
+}
+/* neon pulse ring */
+.btn-primary::before,
+.btn-directions::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  background: conic-gradient(from 0deg, var(--gold-glow), transparent, var(--gold-glow));
+  animation: neonSpin 2.5s linear infinite;
+  border-radius: inherit;
+  z-index: -1;
+}
+@keyframes neonSpin {
+  to { transform: rotate(360deg); }
 }
 
-/* 3.  FLOATING ICONS */
+/* ---------- 3. FLOATING ICONS ---------- */
 .scissors,
 .clippers {
-position: absolute;
-width: 60px;
-height: 60px;
-fill: var(--gold);
-opacity: 0.6;
-animation: float 6s ease-in-out infinite alternate;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  fill: var(--gold);
+  opacity: 0.6;
+  animation: float 6s ease-in-out infinite alternate;
+  z-index: 2;
 }
 .scissors {
-top: 20%;
-left: 5%;
-animation-delay: -2s;
+  top: 20%;
+  left: 5%;
+  animation-delay: -2s;
 }
 .clippers {
-bottom: 15%;
-right: 5%;
-animation-delay: -4s;
+  bottom: 15%;
+  right: 5%;
+  animation-delay: -4s;
 }
 @keyframes float {
-0% {
-transform: translateY(0) rotate(-5deg);
-}
-100% {
-transform: translateY(-15px) rotate(5deg);
-}
+  0% { transform: translateY(0) rotate(-5deg); }
+  100% { transform: translateY(-15px) rotate(5deg); }
 }
 
-/* 4.  SERVICES SECTION */
+/* ---------- 4. SERVICES (3D cards) ---------- */
 #services {
-padding: 6rem 1.5rem;
-max-width: 1200px;
-margin: auto;
+  padding: 6rem 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+  scroll-snap-align: start;
 }
 #services h2 {
-font-size: clamp(2rem, 5vw, 3rem);
-text-align: center;
-margin-bottom: 3.5rem;
-background: linear-gradient(90deg, var(--gold), var(--gold-glow));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 3.5rem;
+  background: linear-gradient(90deg, var(--gold), var(--gold-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* reveal animation */
+  clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+  animation: reveal 1.2s cubic-bezier(0.77,0,0.18,1) forwards;
+  animation-timeline: view(block 70% 10%);
+}
+@keyframes reveal {
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 }
 .service-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-gap: 2.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.4rem;
 }
 .service-card {
-position: relative;
-background: var(--glass);
-border: 1px solid var(--glass-border);
-border-radius: var(--radius);
-padding: 1.4rem 1.2rem 2rem;
-backdrop-filter: blur(12px);
-box-shadow: var(--shadow-soft);
-transition: transform 0.45s, box-shadow 0.45s;
+  position: relative;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.2rem 2rem;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.45s;
 }
 .service-card:hover {
-transform: translateY(-12px) rotateX(4deg) rotateY(4deg);
-box-shadow: 0 16px 40px rgba(212, 175, 55, 0.25);
+  transform: translateY(-12px) rotateX(6deg) rotateY(6deg)
+             scale3d(1.03, 1.03, 1.03);
+  box-shadow: 0 16px 40px rgba(212, 175, 55, 0.25);
 }
 .service-card img {
-width: 100%;
-height: 180px;
-object-fit: cover;
-border-radius: var(--radius);
-transition: transform 0.5s ease;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  transition: transform 0.5s ease;
 }
 .service-card:hover img {
-transform: scale(1.1);
+  transform: scale(1.1);
 }
 .service-card h3 {
-margin: 0.8rem 0 0.3rem;
-font-size: 1.3rem;
-font-weight: 600;
-color: var(--gold);
+  margin: 0.8rem 0 0.3rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--gold);
 }
 .service-card p {
-font-size: 1.15rem;
-font-weight: 700;
-margin-bottom: 0.8rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
 }
 .btn-book {
-position: absolute;
-top: 0.7rem;
-right: 0.7rem;
-padding: 0.45em 1em;
-font-size: 0.85rem;
-font-weight: 700;
-border-radius: 999px;
-background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-color: var(--black);
-text-decoration: none;
-transition: 0.3s;
-z-index: 3;
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  padding: 0.45em 1em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
+  text-decoration: none;
+  transition: 0.3s;
+  z-index: 3;
 }
 .btn-book:hover {
-transform: scale(1.12);
-box-shadow: 0 0 15px var(--gold-glow);
+  transform: scale(1.12);
+  box-shadow: 0 0 15px var(--gold-glow);
 }
 
-/* 5.  BOOKING PAGES – FRAMED IMAGES  */
-.booking-main img {
-width: 100%;
-max-width: 320px;
-height: 180px;
-object-fit: cover;
-border-radius: var(--radius);
-border: 3px solid var(--gold);
-box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
-display: block;
-margin: 1.5rem auto;
-}
-
-/* 6.  LOGIN / BOOKING FORMS */
+/* ---------- 5. BOOKING / LOGIN PAGES – MINIMAL GOLD ---------- */
 .login-card,
 .booking-form {
-max-width: 420px;
-margin: 5rem auto;
-padding: 2.4rem;
-background: var(--glass);
-border: 1px solid var(--gold);
-border-radius: var(--radius);
-backdrop-filter: blur(12px);
+  width: 100%;
+  max-width: 420px;
+  margin: 5rem auto;
+  padding: 2.4rem 2rem 3rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+  color: var(--white);
 }
+
 .login-card h2,
-.booking-form label {
-font-weight: 700;
-color: var(--gold);
+.booking-form h2 {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
 }
+
+.login-card label,
+.booking-form label {
+  display: block;
+  margin: 1.2rem 0 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
 .login-card input,
 .booking-form input,
 .booking-form select {
-width: 100%;
-padding: 0.9rem;
-margin: 0.6rem 0;
-border: 1px solid var(--gold);
-border-radius: 8px;
-background: var(--black);
-color: var(--white);
-font-size: 1rem;
-}
-.btn-login,
-.btn-submit {
-width: 100%;
-background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-color: var(--black);
-padding: 0.9rem;
-border: none;
-border-radius: 8px;
-font-weight: 700;
-cursor: pointer;
-transition: 0.3s;
-}
-.btn-login:hover,
-.btn-submit:hover {
-transform: scale(1.03);
-box-shadow: 0 0 15px var(--gold-glow);
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  color: var(--white);
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* 7.  ADMIN TABLE */
+.login-card input:focus,
+.booking-form input:focus,
+.booking-form select:focus {
+  outline: none;
+  border-color: var(--gold-glow);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.35);
+}
+
+.btn-login,
+.btn-submit {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.9rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--black);
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-login:hover,
+.btn-submit:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px var(--gold-glow);
+}
+
+/* hide the oversized framed photos on booking pages */
+.booking-main img,
+.login-card img {
+  display: none;
+}
+
+/* tiny helper for “forgot password / sign-up” links */
+.login-card a,
+.booking-form a {
+  color: var(--gold-glow);
+  font-size: 0.85rem;
+  text-decoration: none;
+  margin-top: 0.75rem;
+  display: inline-block;
+}
+
+.login-card a:hover,
+.booking-form a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- 6. ADMIN TABLE ---------- */
 .admin-wrapper {
-max-width: 1000px;
-margin: 5rem auto;
-padding: 2.4rem;
-background: var(--glass);
-border: 1px solid var(--gold);
-border-radius: var(--radius);
-backdrop-filter: blur(12px);
+  max-width: 1000px;
+  margin: 5rem auto;
+  padding: 2.4rem;
+  background: var(--glass);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
 }
 .admin-wrapper h2 {
-text-align: center;
-font-size: 2.2rem;
-color: var(--gold);
-margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--gold);
+  margin-bottom: 2rem;
 }
 .admin-table {
-width: 100%;
-border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 .admin-table th,
 .admin-table td {
-padding: 0.8rem;
-border-bottom: 1px solid var(--gold);
-text-align: left;
-font-size: 0.9rem;
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--gold);
+  text-align: left;
+  font-size: 0.9rem;
 }
 .admin-table th {
-background: var(--glass);
-color: var(--gold);
+  background: var(--glass);
+  color: var(--gold);
 }
 .admin-logout-btn {
-display: block;
-width: 160px;
-margin: 2rem auto;
-background: var(--gold);
-color: var(--black);
-border: none;
-padding: 0.8rem;
-border-radius: 24px;
-font-weight: 700;
-cursor: pointer;
+  display: block;
+  width: 160px;
+  margin: 2rem auto;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 24px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-/* 8.  FOOTER */
+/* ---------- 7. FOOTER ---------- */
 footer {
-text-align: center;
-padding: 2.5rem 1rem;
-color: var(--gold);
-font-size: 0.9rem;
-background: rgba(0, 0, 0, 0.35);
-backdrop-filter: blur(10px);
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--gold);
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
 }
 
-/* 9.  RESPONSIVE */
+/* ---------- 8. RESPONSIVE ---------- */
 @media (max-width: 600px) {
-.service-grid {
-grid-template-columns: 1fr;
-}
-.hero-ctas {
-flex-direction: column;
-align-items: center;
-}
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-ctas {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
-/* 10.  SUCCESS-STORM MODAL (embedded in booking pages) /
+/* ---------- 9. SUCCESS-STORM MODAL ---------- */
 #successStorm {
-position: fixed;
-inset: 0;
-display: none;
-align-items: center;
-justify-content: center;
-z-index: 9999;
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 #successStorm.show {
-display: flex;
+  display: flex;
 }
 .success-modal {
-width: 90%;
-max-width: 380px;
-background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-color: var(--black);
-padding: 3rem 2rem 2rem;
-border-radius: var(--radius);
-text-align: center;
-box-shadow: 0 0 40px var(--gold-glow);
+  width: 90%;
+  max-width: 380px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
+  padding: 3rem 2rem 2rem;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: 0 0 40px var(--gold-glow);
 }
 .success-modal h2 {
-font-size: 2rem;
-margin-bottom: 0.5rem;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 .success-modal p {
-font-size: 1rem;
-margin-bottom: 2rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
 }
 .btn-storm {
-background: var(--black);
-color: var(--gold);
-border: none;
-padding: 0.8rem 2rem;
-border-radius: 50px;
-font-weight: 700;
-cursor: pointer;
-transition: 0.3s;
+  background: var(--black);
+  color: var(--gold);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
 }
 .btn-storm:hover {
-background: var(--white);
-color: var(--black);
-}
-/ -------------------------------------------------
-HERO VIDEO – FULL-SCREEN
-------------------------------------------------- /
-.hero-banner {
-position: relative;
-width: 100%;
-height: 100vh;            / full viewport height */
-overflow: hidden;
+  background: var(--white);
+  color: var(--black);
 }
 
-.hero-video {
-position: absolute;
-top: 50%;
-left: 50%;
-min-width: 100%;
-min-height: 100%;
-width: auto;
-height: auto;
-transform: translate(-50%, -50%);
-z-index: 1;               /* behind overlay & content /
-object-fit: cover;        / crop edges, fill screen */
+/* ---------- 10. PARTICLE BACKGROUND ---------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 80%, var(--gold-glow) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 80% 20%, var(--gold-glow) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 40% 40%, var(--gold-glow) 0.5px, transparent 0.5px);
+  background-size: 120px 120px;
+  animation: drift 60s linear infinite;
+}
+@keyframes drift {
+  to { transform: translateY(-120px); }
 }
 
-.hero-overlay {
-position: absolute;
-inset: 0;
-background: rgba(0, 0, 0, 0.45); /* subtle dim */
-z-index: 2;
+/* ---------- 11. MICRO SCROLLBAR ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 3px;
 }
 
-.hero-content {
-position: relative;
-z-index: 3;
-height: 100%;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-color: #fff;
+/* ---------- 12. FALLBACKS ---------- */
+@supports not (animation-timeline: view()) {
+  section h2 { animation: none; }
 }
-
