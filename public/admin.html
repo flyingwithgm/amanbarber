@@ -12,7 +12,7 @@
     <button id="logoutBtn" class="admin-logout-btn" hidden>Logout</button>
   </nav>
 
-  <!-- Login Section -->
+  <!-- 🔐 Login Section -->
   <div id="loginCard">
     <h2>Admin Login</h2>
     <form id="loginForm">
@@ -22,7 +22,7 @@
     </form>
   </div>
 
-  <!-- Dashboard Section -->
+  <!-- 📋 Dashboard Section -->
   <div id="adminDashboard" hidden>
     <h2>All Bookings</h2>
     <table id="bookingsTable" class="admin-table">
@@ -37,9 +37,31 @@
       </thead>
       <tbody></tbody>
     </table>
+
+    <!-- 🔧 MoMo Number Editor -->
+    <h3>MoMo Number Settings</h3>
+    <input id="momoInput" placeholder="0598374336" />
+    <button id="saveMomoBtn">Save MoMo Number</button>
+    <p id="momoStatus"></p>
+
+    <!-- 🔁 Pending Bookings Table -->
+    <h2>Pending Bookings</h2>
+    <table id="pendingBookingsTable" class="admin-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Service</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Phone</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </div>
 
-  <!-- ✅ Only load admin.js (it already imports firebase.js) -->
+  <!-- ✅ Load admin logic (auto-loads firebase.js) -->
   <script type="module" src="js/admin.js"></script>
 </body>
 </html>
