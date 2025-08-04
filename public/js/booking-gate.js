@@ -1,17 +1,23 @@
 import { auth, db } from './firebase.js';
 import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-// ✅ Selar payment links – fully verified
-const paystackLinks = {
-  "Regular Haircut": "https://selar.com/651yl1dr5h",
-  "Beard Trim": "https://selar.com/p62i659593",
-  "Cut + Enhancement": "https://selar.com/45616143u1",
-  "Haircut + Texturizer": "https://selar.com/173104c117",
-  "Pixie Cut": "https://selar.com/66sm265764",            // ✅ correct
-  "Extensions": "https://selar.com/394hp3g166",            // ✅ confirmed
-  "Complete Color": "https://selar.com/1s5p511653",        // ✅ corrected
-  "Part Color": "https://selar.com/211s41t961"
+// 💰 Hardcoded service prices
+const servicePrices = {
+  "Regular Haircut": 100,
+  "Beard Trim": 80,
+  "Cut + Enhancement": 120,
+  "Haircut + Texturizer": 180,
+  "Pixie Cut": 250,
+  "Extensions": 500,
+  "Complete Color": 220,
+  "Part Color": 180
 };
 
 // Firebase anonymous sign-in
@@ -25,6 +31,18 @@ onAuthStateChanged(auth, user => {
 
   const form = document.getElementById('bookingForm');
   const msg = document.getElementById('bookingMsg');
+  const serviceSelect = document.getElementById('service');
+
+  // Live price preview when service is selected
+  serviceSelect?.addEventListener('change', () => {
+    const selectedService = serviceSelect.value;
+    const price = servicePrices[selectedService];
+    if (price) {
+      msg.innerHTML = `💸 Selected service: <strong>${selectedService}</strong> – GHS ${price}`;
+    } else {
+      msg.textContent = '';
+    }
+  });
 
   form?.addEventListener('submit', async e => {
     e.preventDefault();
@@ -34,33 +52,48 @@ onAuthStateChanged(auth, user => {
     const date = document.getElementById('date').value;
     const time = document.getElementById('time').value;
     const service = document.getElementById('service').value;
-    const payUrl = paystackLinks[service];
+    const amount = servicePrices[service] || 0;
 
-    msg.textContent = '⏳ Saving your booking...';
+    // Get MoMo number from Firestore
+    const momoSnap = await getDoc(doc(db, "settings", "momo"));
+    const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336';
 
-    try {
-      await addDoc(collection(db, 'bookings'), {
-        name,
-        phone,
-        date,
-        time,
-        service,
-        created: serverTimestamp()
-      });
+    msg.innerHTML = `
+      ✅ Please send <strong>GHS ${amount}</strong> to MTN MoMo number:
+      <strong>${momoNumber}</strong><br>
+      Then tap the “I’ve Paid” button below to confirm.
+      <br><br>
+      <button id="confirmPaid" class="confirm-button">I’ve Paid</button>
+    `;
 
-      msg.textContent = '✅ Booking saved! Redirecting to payment...';
+    // Wait for "I’ve Paid" button
+    setTimeout(() => {
+      const confirmBtn = document.getElementById('confirmPaid');
 
-      setTimeout(() => {
-        if (payUrl) {
-          window.location.href = payUrl;
-        } else {
-          msg.textContent = '⚠️ No payment link found for this service.';
+      confirmBtn?.addEventListener('click', async () => {
+        msg.textContent = '⏳ Verifying and saving your booking...';
+
+        try {
+          await addDoc(collection(db, 'pending_bookings'), {
+            name,
+            phone,
+            date,
+            time,
+            service,
+            amount,
+            momoNumber,
+            status: 'pending',
+            created: serverTimestamp()
+          });
+
+          msg.textContent = '✅ Booking request received! We’ll confirm once payment is verified.';
+          form.reset();
+
+        } catch (err) {
+          msg.textContent = '❌ Failed to save booking: ' + err.message;
+          console.error(err);
         }
-      }, 2000);
-
-    } catch (err) {
-      msg.textContent = '❌ Failed to save booking: ' + err.message;
-      console.error(err);
-    }
+      });
+    }, 100);
   });
 });
