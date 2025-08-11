@@ -6,6 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .footer-social-icons {
+      display: inline-flex;
+      gap: 0.7em;
+      vertical-align: middle;
+      margin-left: 1em;
+    }
+    .footer-social-icons a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      opacity: 0.85;
+    }
+    .footer-social-icons a:hover {
+      opacity: 1;
+    }
+    .footer-social-icons svg {
+      width: 26px;
+      height: 26px;
+      fill: #FFD700; /* Golden color */
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
@@ -100,7 +124,19 @@
   </section>
 
   <footer>
-    <p>Built by George Nuyekpe | Amanfour Barbers Palace, Tamso New Road, Tarkwa</p>
+    <p>
+      Built by George Nuyekpe | Amanfour Barbers Palace, Tamso New Road, Tarkwa
+      <span class="footer-social-icons">
+        <!-- Instagram Icon -->
+        <a href="https://www.instagram.com/amanfour_barbers_palace?igsh=MWNodzhnaHZxbnFoMA==" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 448 512"><path d="M224 128a96 96 0 1 0 96 96 96 96 0 0 0-96-96zm124.71-41a48 48 0 0 1 48 48v210a48 48 0 0 1-48 48h-210a48 48 0 0 1-48-48V135a48 48 0 0 1 48-48h210m0-33h-210a81 81 0 0 0-81 81v210a81 81 0 0 0 81 81h210a81 81 0 0 0 81-81v-210a81 81 0 0 0-81-81zm-106 77a77 77 0 1 1-77 77 77 77 0 0 1 77-77zm159.1 27a19.6 19.6 0 1 1-19.6-19.6 19.6 19.6 0 0 1 19.6 19.6z"/></svg>
+        </a>
+        <!-- TikTok Icon -->
+        <a href="https://vm.tiktok.com/ZMAJPjpqu/" target="_blank" aria-label="TikTok">
+          <svg viewBox="0 0 448 512"><path d="M448 209.6v125.5c0 57.4-46.6 104-104 104-57.4 0-104-46.6-104-104V192h57.5a104 104 0 0 0 104 104v-47.7a56.3 56.3 0 0 1-56.3-56.3h-47.7V96h47.7A56.3 56.3 0 0 1 448 152.3v57.3zM184 192v143.1c0 57.4 46.6 104 104 104s104-46.6 104-104V192h-57.5a104 104 0 0 1-104-104V96h-47.7A56.3 56.3 0 0 0 184 152.3v39.7z"/></svg>
+        </a>
+      </span>
+    </p>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
