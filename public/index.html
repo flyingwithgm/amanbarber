@@ -442,17 +442,4 @@
   </script>
 </body>
 </html>
-```
 
-**Key Changes Made:**
-
-1.  **Added Service Image to Modal:** A new `div` with class `service-image-container` and an `img` element with ID `modalServiceImage` was added inside the modal content, next to the service info.
-2.  **Updated `openBookingModal` Function:** The function now accepts a third argument, `serviceImage`. It sets the `src` and `alt` attributes of the `modalServiceImage` element to display the correct image.
-3.  **Modified Service Card Buttons:** Each booking button now calls `openBookingModal` with the image path as the third parameter (e.g., `onclick="openBookingModal('Regular Haircut', 'GHS 100', 'regularhaircut.jpg')"`).
-4.  **Improved Modal Layout:** The modal content now uses flexbox (`display: flex; flex-direction: column;`) to arrange the header, service details (image + info), and form. The `.service-details-container` also uses flexbox (`display: flex; gap: 20px;`) to place the image and service info side-by-side on larger screens (using a media query) and stack them on smaller screens.
-5.  **Added Animations:**
-    *   The `.modal-content` now has initial styles `transform: translateY(-50px);` and `opacity: 0;` to position it off-screen and make it invisible.
-    *   A CSS transition (`transition: transform 0.4s ease-out, opacity 0.4s ease-out;`) is added for smooth animation.
-    *   A new class `.modal.show .modal-content` defines the final state: `transform: translateY(0);` and `opacity: 1;`.
-    *   The JavaScript now adds the `show` class when opening the modal and removes it when closing, triggering the CSS animation.
-    *   The `closeBookingModal` function now uses `setTimeout` to wait for the animation (0.4s) before fully hiding the modal and resetting the form.
