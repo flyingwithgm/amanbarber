@@ -429,15 +429,16 @@
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
     import { getFirestore, collection, addDoc, serverTimestamp, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY", // Replace with your actual API Key
-      authDomain: "YOUR_AUTH_DOMAIN", // Replace with your actual Auth Domain
-      projectId: "YOUR_PROJECT_ID", // Replace with your actual Project ID
-      storageBucket: "YOUR_STORAGE_BUCKET", // Replace with your actual Storage Bucket
-      messagingSenderId: "YOUR_SENDER_ID", // Replace with your actual Sender ID
-      appId: "YOUR_APP_ID" // Replace with your actual App ID
-    };
+    
+const firebaseConfig = {
+  apiKey: "AIzaSyCybqVlasAj69x6EljSlJJXavFJorN-csU",
+  authDomain: "aman-barber.firebaseapp.com",
+  projectId: "aman-barber",
+  storageBucket: "aman-barber.appspot.com", // ✅ FIXED
+  messagingSenderId: "146331198998",
+  appId: "1:146331198998:web:9d2fe984b2d6033127f737"
+};
+
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
