@@ -1270,6 +1270,22 @@
           document.getElementById("selectedServicePrice").textContent = `GHS ${price}`;
           document.getElementById("servicePriceInput").value = `GHS ${price}`;
           msg.innerHTML = `💸 Selected service: <strong>${selectedService}</strong> – GHS ${price}`;
+          // Update service image based on selection
+          const serviceImages = {
+            "Regular Haircut": "regularhaircut.jpg",
+            "Beard Trim": "beardtrim2.jpg",
+            "Cut + Enhancement": "cut+enhancements2.jpg",
+            "Haircut + Texturizer": "Haircut+texturizer2.jpg",
+            "Pixie Cut": "pixiecut2.jpg",
+            "Extensions": "extension.jpg",
+            "Complete Color": "complete-color.jpg",
+            "Part Color": "part-color.jpg",
+            "lowcut+texturizer": "lowcut-texturizer.jpg"
+          };
+          const serviceImage = serviceImages[selectedService] || "IMG-20250722-WA0027.jpg";
+          document.getElementById("modalServiceImage").src = serviceImage;
+          document.getElementById("modalServiceImage").alt = selectedService;
+          document.getElementById("selectedServiceName").textContent = selectedService;
         } else {
           const originalPriceElement = document.getElementById("selectedServiceName");
           const originalPrice = originalPriceElement.getAttribute("data-original-price") || "Service Price";
