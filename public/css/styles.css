@@ -1,166 +1,225 @@
-/* =========================================================
-AMANFOUR BARBERS – COMPLETE 2025 MASTER
-========================================================= */
-
-/* 0.  ROOT & RESET */
+/* CSS Reset and Variables - Adapted from new CSS, integrated with gold/black theme */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 :root {
-  --gold: #d4af37;
-  --gold-glow: #ffd700;
-  --black: #0e0e0e;
-  --white: #ffffff;
-  --glass: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(212, 175, 55, 0.25);
-  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
-  --shadow-glow: 0 0 25px var(--gold-glow);
-  --radius: 18px;
-  --radius-sm: 12px; /* Added for smaller radius */
-  --ff: 'Poppins', sans-serif;
-  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  --transition-hover: transform 0.4s ease, box-shadow 0.4s ease;
+    --white: #ffffff;
+    --ash-light: #f2f2f2;
+    --ash-medium: #cccccc;
+    --ash-dark: #333333;
+    --black: #0e0e0e; /* Changed to match previous theme */
+    --gold: #d4af37; /* Primary gold color */
+    --gold-glow: #ffd700; /* Secondary gold highlight */
+    --glass: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(212, 175, 55, 0.25);
+    --transition: all 0.3s ease;
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.15);
+    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
+    --shadow-glow: 0 0 25px var(--gold-glow);
+    --radius: 10px; /* More consistent radius */
+    --radius-lg: 30px; /* For buttons */
+    --ff: 'Poppins', 'Montserrat', 'Segoe UI', Arial, sans-serif; /* Combined font stack */
 }
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html {
-  scroll-behavior: smooth;
-}
+/* Base Styles */
 body {
-  font-family: var(--ff);
-  /* This is the correct background for the rest of the site */
-  background: var(--black);
-  color: var(--white);
-  line-height: 1.6;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+    font-family: var(--ff);
+    color: var(--ash-light); /* Changed default text color for dark background */
+    background-color: var(--black); /* Kept black background */
+    line-height: 1.6;
+    overflow-x: hidden;
 }
-
-/* 1.  HERO – FULL-SCREEN CINEMATIC */
-.hero-banner {
-  position: relative; /* Changed: relative for proper absolute positioning of video inside */
-  width: 100%;
-  height: 100vh; /* Full viewport height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; /* Crucial: clips the video to the banner boundaries */
-  z-index: 1; /* Ensure it's behind other content if needed */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--gold); /* Default heading color to gold */
 }
-
-/* Hero Video - Positioned absolutely within the hero banner */
+p {
+    margin-bottom: 1rem;
+    color: var(--ash-light); /* Ensure paragraphs are readable on dark */
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+/* Container and Utility Classes */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: var(--gold); /* Changed to gold */
+    color: var(--black); /* Changed text to black */
+    border: none;
+    border-radius: var(--radius-lg); /* Consistent button radius */
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    box-shadow: var(--shadow); /* Added shadow */
+}
+.btn:hover {
+    background-color: var(--gold-glow); /* Changed hover color */
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+/* Removed .btn-primary as primary is now default */
+.btn:hover {
+    background-color: #c19d2f; /* Darker gold on hover */
+}
+.section {
+    padding: 80px 0;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    position: relative;
+    color: var(--gold); /* Ensure title is gold */
+}
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold); /* Changed to gold */
+}
+/* Header and Navigation - Adapted from new CSS */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(14, 14, 14, 0.95); /* Darker background with transparency */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: var(--transition);
+    backdrop-filter: blur(10px); /* Glass effect */
+}
+header.scrolled {
+    padding: 10px 0;
+    background-color: rgba(14, 14, 14, 0.98); /* Slightly more opaque when scrolled */
+}
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0; /* Reduced padding */
+}
+.logo {
+    display: flex;
+    align-items: center;
+}
+.logo img {
+    height: 40px; /* Smaller logo */
+    margin-right: 10px;
+}
+.logo h1 {
+    font-size: 1.5rem; /* Smaller font */
+    color: var(--gold);
+}
+.logo span {
+    color: var(--gold-glow); /* Highlight accent */
+}
+nav ul {
+    display: flex;
+    list-style: none;
+}
+nav ul li {
+    margin-left: 25px; /* Reduced margin */
+}
+nav ul li a {
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    color: var(--ash-light); /* Light text for nav */
+}
+nav ul li a:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--gold); /* Gold underline */
+    transition: var(--transition);
+}
+nav ul li a:hover:after {
+    width: 100%;
+}
+.mobile-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--gold);
+}
+/* Hero Section - Adapted to use video with new CSS structure */
+.hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+/* Hero Video - Kept from previous site, refined */
 .hero-video {
-  /* Changed: position from 'fixed' to 'absolute' */
-  position: absolute;
-  top: 0; /* Align to top of .hero-banner */
-  left: 0; /* Align to left of .hero-banner */
-  /* Remove width/height auto, rely on object-fit */
-  width: 100%;
-  height: 100%;
-  /* Remove transform, object-fit handles centering/cropping */
-  object-fit: cover; /* Cover the area of .hero-banner, cropping edges if necessary */
-  z-index: 0; /* Behind overlay and content within .hero-banner */
-  /* Optional: ensure it doesn't interfere with other elements outside the banner */
-  pointer-events: none; /* Video won't capture clicks */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
 }
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
-  z-index: 1; /* Above video, below content */
-}
-
 .hero-content {
-  position: relative;
-  z-index: 2; /* Above overlay */
-  text-align: center;
-  animation: fadeUp 1.2s ease-out;
-  max-width: 90%; /* Add max-width for better centering */
-  padding: 0 1rem; /* Add padding */
+    position: relative;
+    z-index: 2; /* Above video */
+    color: white; /* Default text color */
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-top: 80px; /* Account for fixed header */
 }
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.hero-content h1 { /* Changed selector to match HTML */
+    font-size: clamp(2.2rem, 7vw, 4.5rem); /* Refined clamp */
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px var(--gold-glow));
+    margin-bottom: 0.5rem;
 }
-
-.hero-content h1 {
-  font-size: clamp(2.2rem, 7vw, 4.5rem); /* Refined clamp for better scaling */
-  font-weight: 800;
-  letter-spacing: 2px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-glow));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px var(--gold-glow));
-  margin-bottom: 0.5rem; /* Add space below h1 */
+.hero-content h2 { /* Changed selector to match HTML */
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    margin: 0.5rem 0 2rem;
+    color: var(--white);
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-.hero-content h2 {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  font-weight: 300;
-  margin: 0.5rem 0 2rem;
-  color: var(--white);
-  max-width: 80%; /* Constrain width on larger screens */
-  margin-left: auto;
-  margin-right: auto;
+.hero-ctas { /* Adapted button container */
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
 }
-
-/* 2.  HERO BUTTONS */
-.hero-ctas {
-  display: flex;
-  gap: 1.2rem; /* Slightly increased gap */
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 2rem; /* Add space below buttons */
-}
-
-.btn-primary,
-.btn-directions {
-  padding: 1rem 2.6rem;
-  border: none;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  cursor: pointer;
-  transition: var(--transition-hover);
-  display: inline-flex; /* Ensure proper alignment */
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-  color: var(--black);
-}
-
-.btn-primary:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 8px 30px var(--gold-glow);
-}
-
-.btn-directions {
-  background: transparent;
-  color: var(--gold);
-  border: 2px solid var(--gold);
-}
-
-.btn-directions:hover {
-  background: var(--gold);
-  color: var(--black);
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 8px 30px var(--gold-glow);
-}
-
-/* 3.  FLOATING ICONS */
+/* Scissors and Clippers - Kept from previous site */
 .scissors,
 .clippers {
   position: absolute;
@@ -192,617 +251,400 @@ body {
     transform: translateY(-15px) rotate(5deg);
   }
 }
-
-/* 4.  SERVICES SECTION */
+/* Services Section - Adapted from new CSS structure */
 #services {
-  padding: 6rem 1.5rem;
-  max-width: 1400px; /* Increased max-width for larger screens */
-  margin: auto;
+    padding: 100px 0 80px; /* Adjusted for fixed header */
+    background-color: var(--black); /* Maintain dark background */
+    margin-top: 80px; /* Add space below fixed header */
 }
-
-#services h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  text-align: center;
-  margin-bottom: 3.5rem;
-  background: linear-gradient(90deg, var(--gold), var(--gold-glow));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+#services h2 { /* Adapted to use new CSS structure */
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    position: relative;
+    color: var(--gold);
 }
-
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); /* More flexible grid */
-  gap: 2.8rem; /* Increased gap */
-  justify-items: center; /* Center items within grid cells */
+#services h2:after { /* Added underline */
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--gold);
 }
-
-.service-card {
-  position: relative;
-  width: 100%; /* Ensure full width within grid cell */
-  max-width: 350px; /* Optional: cap card width */
-  border-radius: var(--radius-sm); /* Slightly smaller radius for card */
-  overflow: hidden; /* Clip content to card shape */
-  transition: var(--transition-smooth);
-  box-shadow: var(--shadow-soft);
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  transform-style: preserve-3d; /* For smoother 3D transforms */
+.services-grid { /* Adapted grid from new CSS */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
 }
-
+.service-card { /* Adapted card from new CSS, integrated with previous site's image focus */
+    background-color: var(--glass); /* Glass effect */
+    border: 1px solid var(--glass-border); /* Glass border */
+    border-radius: var(--radius); /* Consistent radius */
+    overflow: hidden;
+    box-shadow: var(--shadow-soft); /* Soft shadow */
+    transition: var(--transition);
+    text-align: center;
+    padding: 20px; /* Adjusted padding */
+    cursor: pointer;
+    position: relative;
+    transform: translateY(0);
+    backdrop-filter: blur(10px); /* Glass effect */
+}
 .service-card:hover {
-  transform: translateY(-12px) scale(1.02); /* Slightly scale up on hover */
-  box-shadow: 0 16px 40px rgba(212, 175, 55, 0.35), 0 0 20px var(--gold-glow); /* Enhanced glow */
+    transform: translateY(-10px); /* Lift effect */
+    box-shadow: var(--shadow-hover), 0 0 20px var(--gold-glow); /* Enhanced shadow with glow */
 }
-
-/* Service Card Image - Now the dominant element */
+/* Service Card Image - Adapted from previous site */
 .service-card .service-image {
-  width: 100%;
-  height: 220px; /* Set a fixed height for consistent card sizes */
-  object-fit: cover; /* Ensure image fills and crops proportionally */
-  display: block; /* Remove inline spacing */
-  transition: var(--transition-smooth);
+    width: 100%;
+    height: 200px; /* Consistent height */
+    object-fit: cover;
+    border-radius: var(--radius); /* Match card radius */
+    margin-bottom: 15px; /* Space below image */
+    transition: var(--transition);
 }
-
 .service-card:hover .service-image {
-  transform: scale(1.05); /* Slight zoom on hover */
+    transform: scale(1.05); /* Slight zoom */
 }
-
-/* Overlay content for text and button */
-.service-card-content {
-  position: relative;
-  padding: 1.5rem 1.2rem 1.8rem; /* Adjusted padding */
-  z-index: 2; /* Above image */
-  background: linear-gradient(to top, rgba(14, 14, 14, 0.95), rgba(14, 14, 14, 0.7)); /* Subtle dark overlay */
-  border-radius: 0 0 var(--radius-sm) var(--radius-sm); /* Match card radius */
-}
-
 .service-card h3 {
-  margin: 0 0 0.4rem;
-  font-size: 1.4rem; /* Slightly larger font */
-  font-weight: 600;
-  color: var(--gold);
-  text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    transition: var(--transition);
+    color: var(--gold); /* Gold heading */
 }
-
+.service-card:hover h3 {
+    color: var(--gold-glow); /* Glow on hover */
+}
 .service-card p {
-  font-size: 1.2rem; /* Slightly larger font */
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: var(--white);
+    color: var(--ash-light); /* Light text */
+    margin-bottom: 15px;
+    opacity: 0.9;
 }
-
-.btn-book {
-  position: relative;
-  width: 100%;
-  padding: 0.8rem 1.2rem;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 50px; /* Pill shape */
-  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-  color: var(--black);
-  text-decoration: none;
-  transition: var(--transition-hover);
-  border: none;
-  cursor: pointer;
-  z-index: 3; /* Above content */
-  text-align: center;
+.price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gold); /* Gold price */
+    margin-bottom: 15px;
 }
-
+.btn-book { /* Adapted button from new CSS */
+    background-color: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    width: 100%; /* Full width */
+    max-width: 200px; /* Limit width */
+    margin: 0 auto; /* Center */
+}
 .btn-book:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px var(--gold-glow);
+    background-color: var(--gold-glow);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--gold-glow);
 }
-
-/* 5.  BOOKING PAGES – FRAMED IMAGES  */
-.booking-main img {
-  width: 100%;
-  max-width: 320px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: var(--radius);
-  border: 3px solid var(--gold);
-  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
-  display: block;
-  margin: 1.5rem auto;
-}
-
-/* 6.  LOGIN / BOOKING FORMS */
-.login-card,
-.booking-form {
-  max-width: 460px; /* Slightly wider */
-  margin: 5rem auto;
-  padding: 2.6rem; /* Slightly more padding */
-  background: var(--glass);
-  border: 1px solid var(--gold);
-  border-radius: var(--radius);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-soft);
-}
-
-.login-card h2,
-.booking-form h2 { /* Added h2 styling for booking form header */
-  font-weight: 700;
-  color: var(--gold);
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.login-card input,
-.booking-form input,
-.booking-form select,
-.booking-form textarea {
-  width: 100%;
-  padding: 1rem; /* Slightly more padding */
-  margin: 0.8rem 0; /* Slightly more margin */
-  border: 1px solid var(--gold);
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.5); /* Slightly more opaque background */
-  color: var(--white);
-  font-size: 1rem;
-  transition: var(--transition-smooth);
-}
-
-.login-card input:focus,
-.booking-form input:focus,
-.booking-form select:focus,
-.booking-form textarea:focus {
-  outline: none;
-  border-color: var(--gold-glow);
-  box-shadow: 0 0 10px var(--gold-glow);
-}
-
-.btn-login,
-.btn-submit {
-  width: 100%;
-  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-  color: var(--black);
-  padding: 1rem; /* Slightly more padding */
-  border: none;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition-hover);
-  margin-top: 1rem; /* Add top margin */
-}
-
-.btn-login:hover,
-.btn-submit:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px var(--gold-glow);
-}
-
-/* 7.  ADMIN TABLE */
-.admin-wrapper {
-  max-width: 1200px; /* Increased max-width */
-  margin: 5rem auto;
-  padding: 2.8rem; /* Slightly more padding */
-  background: var(--glass);
-  border: 1px solid var(--gold);
-  border-radius: var(--radius);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-soft);
-  overflow-x: auto; /* Allow horizontal scroll if table is too wide */
-}
-
-.admin-wrapper h2 {
-  text-align: center;
-  font-size: 2.2rem;
-  color: var(--gold);
-  margin-bottom: 2rem;
-}
-
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px; /* Prevent table from becoming too narrow */
-}
-
-.admin-table th,
-.admin-table td {
-  padding: 1rem; /* Slightly more padding */
-  border-bottom: 1px solid var(--gold);
-  text-align: left;
-  font-size: 0.95rem; /* Slightly larger font */
-}
-
-.admin-table th {
-  background: rgba(0, 0, 0, 0.3); /* Darker header background */
-  color: var(--gold);
-  position: sticky; /* Sticky header */
-  top: 0;
-}
-
-.admin-table tr:hover {
-  background: rgba(212, 175, 55, 0.1); /* Hover row background */
-}
-
-.admin-logout-btn {
-  display: block;
-  width: 180px; /* Slightly wider */
-  margin: 2.5rem auto 0; /* Centered, top margin only */
-  background: linear-gradient(135deg, var(--gold), var(--gold-glow)); /* Gradient */
-  color: var(--black);
-  border: none;
-  padding: 0.9rem;
-  border-radius: 26px; /* Slightly rounder */
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition-hover);
-}
-
-.admin-logout-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px var(--gold-glow);
-}
-
-/* 8.  FOOTER */
-footer {
-  text-align: center;
-  padding: 3rem 1.5rem; /* Slightly more padding */
-  color: var(--gold);
-  font-size: 0.95rem; /* Slightly larger font */
-  background: rgba(0, 0, 0, 0.4); /* Slightly less transparent */
-  backdrop-filter: blur(10px);
-  border-top: 1px solid var(--gold-glow); /* Subtle top border */
-}
-
-/* 9.  RESPONSIVE */
-@media (max-width: 768px) {
-  #services {
-    padding: 4rem 1rem; /* Reduced padding */
-  }
-  .service-grid {
-    gap: 2.2rem; /* Reduced gap */
-  }
-  .service-card h3 {
-    font-size: 1.3rem; /* Slightly smaller font */
-  }
-  .service-card p {
-    font-size: 1.1rem; /* Slightly smaller font */
-  }
-  .btn-book {
-    padding: 0.7rem 1rem; /* Slightly smaller button */
-    font-size: 0.95rem; /* Slightly smaller font */
-  }
-  .hero-content h1 {
-    font-size: clamp(1.8rem, 6vw, 3.5rem); /* Adjusted clamp */
-  }
-  .hero-content h2 {
-    font-size: clamp(0.9rem, 2vw, 1.3rem); /* Adjusted clamp */
-    max-width: 90%; /* Adjust max-width */
-  }
-  .hero-ctas {
-    gap: 1rem; /* Reduced gap */
-    flex-direction: column; /* Stack buttons vertically on smaller screens */
-    align-items: center;
-  }
-  .btn-primary,
-  .btn-directions {
-    width: 100%; /* Full width buttons */
-    max-width: 300px; /* Limit max width */
-  }
-  .scissors,
-  .clippers {
-    width: 45px; /* Smaller icons */
-    height: 45px;
-  }
-  .login-card,
-  .booking-form {
-    margin: 3rem 1rem; /* Reduced margin */
-    padding: 2rem; /* Reduced padding */
-  }
-  .admin-wrapper {
-    margin: 3rem 1rem; /* Reduced margin */
-    padding: 2rem; /* Reduced padding */
-  }
-  .admin-table th,
-  .admin-table td {
-    padding: 0.8rem 0.5rem; /* Reduced padding */
-    font-size: 0.9rem; /* Slightly smaller font */
-  }
-}
-
-@media (max-width: 480px) {
-  .service-grid {
-    grid-template-columns: 1fr; /* Single column on very small screens */
-  }
-  .service-card {
-    max-width: 100%; /* Full width card */
-  }
-  .service-card .service-image {
-    height: 200px; /* Slightly smaller image height */
-  }
-  .hero-content h1 {
-    font-size: clamp(1.6rem, 5.5vw, 2.8rem); /* Further adjusted clamp */
-  }
-  .hero-content h2 {
-    font-size: clamp(0.8rem, 1.8vw, 1.1rem); /* Further adjusted clamp */
-  }
-  .btn-primary,
-  .btn-directions {
-    padding: 0.8rem 1.5rem; /* Adjusted padding */
-    font-size: 0.9rem; /* Slightly smaller font */
-  }
-  footer {
-    padding: 2rem 1rem; /* Reduced padding */
-    font-size: 0.9rem; /* Slightly smaller font */
-  }
-  .admin-wrapper h2 {
-    font-size: 2rem; /* Slightly smaller font */
-  }
-  .admin-logout-btn {
-    width: 100%; /* Full width button */
-    max-width: 200px; /* Limit max width */
-    padding: 0.8rem; /* Adjusted padding */
-  }
-}
-
-/* 10.  SUCCESS-STORM MODAL (embedded in booking pages) */
-#successStorm {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.8); /* Darker background */
-}
-
-#successStorm.show {
-  display: flex;
-}
-
-.success-modal {
-  width: 90%;
-  max-width: 380px;
-  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-  color: var(--black);
-  padding: 3rem 2rem 2.5rem; /* Slightly more padding */
-  border-radius: var(--radius);
-  text-align: center;
-  box-shadow: 0 0 40px var(--gold-glow);
-  animation: modalPop 0.4s ease-out; /* Add animation */
-}
-
-@keyframes modalPop {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.success-modal h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.success-modal p {
-  font-size: 1rem;
-  margin-bottom: 2rem;
-}
-
-.btn-storm {
-  background: var(--black);
-  color: var(--gold);
-  border: none;
-  padding: 0.9rem 2.2rem; /* Slightly more padding */
-  border-radius: 50px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition-hover);
-}
-
-.btn-storm:hover {
-  background: var(--white);
-  color: var(--black);
-  box-shadow: 0 0 20px var(--gold-glow);
-}
-
-/* 11.  MODAL STYLES (from index.html embedded styles) */
-/* These styles override or complement the general styles for the modal */
+/* Booking Modal - Adapted from new CSS structure */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8); /* Darker overlay */
+    display: none;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
-
 .modal-content {
-  background-color: var(--black);
-  margin: 5% auto;
-  padding: 0;
-  border: 1px solid var(--gold-glow);
-  border-radius: var(--radius);
-  width: 90%;
-  max-width: 450px;
-  color: var(--white);
-  box-shadow: var(--shadow-soft), 0 0 30px var(--gold-glow);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  transform: translateY(-50px);
-  opacity: 0;
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    background-color: var(--black); /* Dark background */
+    border-radius: var(--radius); /* Consistent radius */
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-hover), 0 0 30px var(--gold-glow); /* Enhanced shadow */
+    position: relative;
+    border: 1px solid var(--gold-glow); /* Gold border */
+    color: var(--ash-light); /* Light text */
 }
-
-.modal.show .modal-content {
-  transform: translateY(0);
-  opacity: 1;
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--gold);
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--transition);
+    width: 40px; /* Square button */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
-
+.close-modal:hover {
+    color: var(--gold-glow);
+    transform: rotate(90deg);
+    background-color: rgba(212, 175, 55, 0.1); /* Hover background */
+}
 .modal-header {
-  background-color: rgba(42, 42, 42, 0.9); /* Darker header */
-  padding: 15px 20px;
-  border-bottom: 1px solid var(--gold-glow);
-  border-radius: var(--radius) var(--radius) 0 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    padding: 20px;
+    background-color: rgba(42, 42, 42, 0.9); /* Darker header */
+    color: var(--white);
+    border-radius: var(--radius) var(--radius) 0 0; /* Match content radius */
+    position: relative;
+    border-bottom: 1px solid var(--gold-glow); /* Gold separator */
 }
-
 .modal-header h2 {
-  margin: 0;
-  color: var(--gold-glow);
-  font-size: 1.4em;
+    margin: 0;
+    color: var(--gold-glow); /* Gold title */
+    font-size: 1.4em;
 }
-
-.close {
-  color: var(--gold-glow);
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-  line-height: 1;
-  background: none;
-  border: none;
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-
-.close:hover {
-  color: var(--white);
-  background-color: rgba(255, 215, 0, 0.1);
-}
-
 .service-preview {
-  display: flex;
-  padding: 15px;
-  gap: 15px;
-  border-bottom: 1px solid var(--glass-border); /* Match glass border */
+    display: flex;
+    padding: 15px;
+    gap: 15px;
+    border-bottom: 1px solid var(--glass-border); /* Match glass border */
 }
-
 .service-preview img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--gold);
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-sm, 8px); /* Small radius */
+    border: 1px solid var(--gold);
 }
-
 .service-preview-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-
 .service-preview-info h3 {
-  margin: 0 0 5px 0;
-  font-size: 1.2em;
-  color: var(--white);
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    color: var(--white);
 }
-
 .service-preview-info p {
-  margin: 0;
-  font-size: 1.1em;
-  color: var(--gold-glow);
+    margin: 0;
+    font-size: 1.1em;
+    color: var(--gold-glow);
 }
-
 .booking-form {
-  padding: 15px 20px 20px 20px;
-  display: flex;
-  flex-direction: column;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
-
 .form-group {
-  margin-bottom: 12px;
+    margin-bottom: 20px;
 }
-
 .form-group label {
-  display: block;
-  margin-bottom: 4px;
-  color: #ccc; /* Slightly dimmer label */
-  font-size: 0.9em;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--gold); /* Gold label */
 }
-
 .form-group input,
 .form-group select,
 .form-group textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid var(--gold);
-  border-radius: 6px;
-  background-color: rgba(42, 42, 42, 0.9); /* Darker input background */
-  color: var(--white);
-  box-sizing: border-box;
-  font-family: var(--ff);
-  transition: var(--transition-smooth);
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--gold); /* Gold border */
+    border-radius: var(--radius); /* Consistent radius */
+    background-color: rgba(42, 42, 42, 0.9); /* Darker input background */
+    color: var(--ash-light); /* Light text */
+    font-size: 1rem;
+    transition: var(--transition);
 }
-
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  outline: none;
-  border-color: var(--gold-glow);
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    outline: none;
+    border-color: var(--gold-glow); /* Glow on focus */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2); /* Inner glow */
 }
-
-.form-group textarea {
-  height: 70px;
-  resize: vertical;
+.btn-submit { /* Adapted submit button */
+    background-color: var(--gold);
+    color: var(--black);
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: var(--transition);
+    margin-top: 10px;
 }
-
-.btn-submit {
-  background-color: var(--gold-glow);
-  color: var(--black);
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1.1em;
-  font-weight: 600;
-  transition: var(--transition-hover);
-  margin-top: 5px;
-}
-
 .btn-submit:hover {
-  background-color: #e6c200;
-  box-shadow: 0 0 15px var(--gold-glow);
+    background-color: var(--gold-glow);
+    transform: scale(1.03);
+    box-shadow: 0 0 15px var(--gold-glow);
 }
-
-.btn-submit:active {
-  transform: scale(0.98);
-  background-color: #d6b300;
-}
-
 #bookingMsg {
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: rgba(42, 42, 42, 0.9); /* Match form background */
-  border: 1px solid var(--gold);
-  font-size: 0.95em;
-  text-align: center;
-  min-height: 20px;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: var(--radius);
+    background-color: rgba(42, 42, 42, 0.9); /* Match form background */
+    border: 1px solid var(--gold);
+    font-size: 0.95em;
+    text-align: center;
+    min-height: 20px;
 }
-
 .confirm-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9em;
-  margin-top: 10px;
-  transition: var(--transition-smooth);
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: var(--radius-sm, 4px);
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 10px;
+    transition: var(--transition);
 }
-
 .confirm-button:hover {
-  background-color: #45a049;
+    background-color: #45a049;
+}
+/* Footer - Adapted from new CSS */
+footer {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: var(--gold);
+    font-size: 0.95rem;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--gold-glow); /* Subtle top border */
+    margin-top: 50px; /* Space above footer */
+}
+/* Responsive Design - Adapted from new CSS */
+@media (max-width: 992px) {
+    .section {
+        padding: 60px 0;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(14, 14, 14, 0.98);
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+    nav ul.show {
+        display: flex;
+    }
+    nav ul li {
+        margin: 10px 0;
+        text-align: center;
+    }
+    .mobile-toggle {
+        display: block;
+    }
+    .hero-content h1 {
+        font-size: clamp(1.8rem, 6vw, 3.5rem);
+    }
+    #services {
+        padding: 80px 0 60px;
+        margin-top: 60px; /* Reduced space */
+    }
+    #services h2 {
+        font-size: 2rem;
+    }
+    .services-grid {
+        gap: 25px;
+    }
+}
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: clamp(1.6rem, 5.5vw, 2.8rem);
+    }
+    .hero-content h2 {
+        font-size: clamp(0.9rem, 2vw, 1.3rem);
+    }
+    .section-title {
+        font-size: 1.8rem;
+    }
+    .section-title:after {
+        width: 60px;
+    }
+    #services {
+        margin-top: 70px; /* Adjusted for mobile header */
+    }
+    .service-card .service-image {
+        height: 180px; /* Smaller image */
+    }
+    .service-card h3 {
+        font-size: 1.3rem;
+    }
+    .service-card p {
+        font-size: 1rem;
+    }
+    .price {
+        font-size: 1.1rem;
+    }
+    .btn-book {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    .modal-content {
+        margin: 20px;
+        width: calc(100% - 40px); /* Account for padding */
+    }
+    .service-preview {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .service-preview img {
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 576px) {
+    .section {
+        padding: 40px 0;
+    }
+    .container {
+        width: 95%;
+    }
+    .hero {
+        height: 80vh;
+    }
+    .hero-content h1 {
+        font-size: clamp(1.4rem, 5vw, 2.2rem);
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+    #services {
+        margin-top: 60px; /* Further adjusted */
+    }
+    .services-grid {
+        grid-template-columns: 1fr; /* Single column */
+    }
+    .service-card {
+        max-width: 100%; /* Full width card */
+    }
+    .service-card .service-image {
+        height: 200px; /* Maintain aspect ratio */
+    }
+    .footer-social-icons { /* Assuming this exists in HTML */
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
 }
