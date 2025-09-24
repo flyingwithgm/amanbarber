@@ -918,6 +918,36 @@
             <button class="btn" onclick="openBookingModal('Extensions', 'GHS 500', 'extension.jpg')">Book Now</button>
           </div>
         </div>
+        <div class="service-card">
+          <div class="service-image">
+            <img src="completecolor.jpg" alt="Complete Color">
+          </div>
+          <div class="service-info">
+            <h3>Complete Color</h3>
+            <p>GHS 220</p>
+            <button class="btn" onclick="openBookingModal('Complete Color', 'GHS 220', 'completecolor.jpg')">Book Now</button>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-image">
+            <img src="partcolor.jpg" alt="Part Color">
+          </div>
+          <div class="service-info">
+            <h3>Part Color</h3>
+            <p>GHS 180</p>
+            <button class="btn" onclick="openBookingModal('Part Color', 'GHS 180', 'partcolor.jpg')">Book Now</button>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-image">
+            <img src="lowcut+texturizer.jpg" alt="Lowcut + Texturizer">
+          </div>
+          <div class="service-info">
+            <h3>Lowcut + Texturizer</h3>
+            <p>GHS 180</p>
+            <button class="btn" onclick="openBookingModal('Lowcut + Texturizer', 'GHS 180', 'lowcut+texturizer.jpg')">Book Now</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1156,7 +1186,7 @@
             <option value="Extensions">Extensions - GHS 500</option>
             <option value="Complete Color">Complete Color - GHS 220</option>
             <option value="Part Color">Part Color - GHS 180</option>
-            <option value="lowcut+texturizer">lowcut+texturizer - GHS 180</option>
+            <option value="Lowcut + Texturizer">Lowcut + Texturizer - GHS 180</option>
           </select>
         </div>
         <div class="form-group">
@@ -1242,7 +1272,7 @@
       "Extensions": 500,
       "Complete Color": 220,
       "Part Color": 180,
-      "lowcut+texturizer": 180
+      "Lowcut + Texturizer": 180
     };
     // Firebase anonymous sign-in
     signInAnonymously(auth)
@@ -1278,9 +1308,9 @@
             "Haircut + Texturizer": "Haircut+texturizer2.jpg",
             "Pixie Cut": "pixiecut2.jpg",
             "Extensions": "extension.jpg",
-            "Complete Color": "complete-color.jpg",
-            "Part Color": "part-color.jpg",
-            "lowcut+texturizer": "lowcut-texturizer.jpg"
+            "Complete Color": "completecolor.jpg",
+            "Part Color": "partcolor.jpg",
+            "Lowcut + Texturizer": "lowcut+texturizer.jpg"
           };
           const serviceImage = serviceImages[selectedService] || "IMG-20250722-WA0027.jpg";
           document.getElementById("modalServiceImage").src = serviceImage;
@@ -1303,7 +1333,6 @@
         const service = serviceSelect.value;
         const notes = document.getElementById('notes').value.trim();
         const amount = servicePrices[service];
-        
         try {
           const momoSnap = await getDoc(doc(db, "settings", "momo"));
           const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336';
@@ -1356,15 +1385,12 @@
     document.addEventListener('DOMContentLoaded', function() {
       // Get the modal element
       const modal = document.getElementById("bookingModal");
-      
       // Mobile menu toggle
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const navLinks = document.getElementById('navLinks');
-      
       mobileMenuBtn.addEventListener('click', function() {
         navLinks.classList.toggle('active');
       });
-      
       // Function to open the modal and populate service details
       function openBookingModal(serviceName, servicePrice, serviceImage) {
           const nameElement = document.getElementById("selectedServiceName");
