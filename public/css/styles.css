@@ -30,7 +30,7 @@ html {
 }
 body {
   font-family: var(--ff);
-  /* Changed: Removed the background image from body, now only black */
+  /* This is the correct background for the rest of the site */
   background: var(--black);
   color: var(--white);
   line-height: 1.6;
@@ -39,28 +39,30 @@ body {
 
 /* 1.  HERO – FULL-SCREEN CINEMATIC */
 .hero-banner {
-  position: relative;
+  position: relative; /* Changed: relative for proper absolute positioning of video inside */
   width: 100%;
   height: 100vh; /* Full viewport height */
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: hidden; /* Crucial: clips the video to the banner boundaries */
   z-index: 1; /* Ensure it's behind other content if needed */
 }
 
-/* Hero Video */
+/* Hero Video - Positioned absolutely within the hero banner */
 .hero-video {
-  position: fixed; /* Fixed to viewport */
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%); /* Center the video */
-  object-fit: cover; /* Cover the area, cropping edges if necessary */
-  z-index: 0; /* Behind overlay and content */
+  /* Changed: position from 'fixed' to 'absolute' */
+  position: absolute;
+  top: 0; /* Align to top of .hero-banner */
+  left: 0; /* Align to left of .hero-banner */
+  /* Remove width/height auto, rely on object-fit */
+  width: 100%;
+  height: 100%;
+  /* Remove transform, object-fit handles centering/cropping */
+  object-fit: cover; /* Cover the area of .hero-banner, cropping edges if necessary */
+  z-index: 0; /* Behind overlay and content within .hero-banner */
+  /* Optional: ensure it doesn't interfere with other elements outside the banner */
+  pointer-events: none; /* Video won't capture clicks */
 }
 
 .hero-overlay {
