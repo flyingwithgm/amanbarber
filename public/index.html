@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -189,6 +188,32 @@
       transform: scale(0.98);
       background-color: #d6b300; /* Even darker on active */
     }
+
+    /* Added styles for the message area */
+    #bookingMsg {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #2a2a2a; /* Match form background */
+      border: 1px solid #444; /* Subtle border */
+      font-size: 0.95em;
+      text-align: center;
+    }
+
+    .confirm-button {
+      background-color: #4CAF50; /* Green for confirmation */
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
+
+    .confirm-button:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 
@@ -303,8 +328,27 @@
         </div>
       </div>
       <form class="booking-form" id="bookingForm">
+        <!-- Hidden inputs for service details -->
         <input type="hidden" id="serviceNameInput" name="serviceName">
         <input type="hidden" id="servicePriceInput" name="servicePrice">
+
+        <!-- Service Selection Dropdown (Replaces hidden inputs for the script) -->
+        <div class="form-group">
+          <label for="service">Select Service</label>
+          <select id="service" name="service" required>
+            <option value="">-- Choose a Service --</option>
+            <option value="Regular Haircut">Regular Haircut - GHS 100</option>
+            <option value="Beard Trim">Beard Trim - GHS 80</option>
+            <option value="Cut + Enhancement">Cut + Enhancement - GHS 120</option>
+            <option value="Haircut + Texturizer">Haircut + Texturizer - GHS 180</option>
+            <option value="Pixie Cut">Pixie Cut - GHS 250</option>
+            <option value="Extensions">Extensions - GHS 500</option>
+            <option value="Complete Color">Complete Color - GHS 220</option>
+            <option value="Part Color">Part Color - GHS 180</option>
+            <option value="lowcut+texturizer">lowcut+texturizer - GHS 180</option>
+          </select>
+        </div>
+
         <div class="form-group">
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" required>
@@ -355,7 +399,8 @@
           <label for="notes">Notes (Optional)</label>
           <textarea id="notes" name="notes"></textarea>
         </div>
-        <button type="submit" class="btn-submit">Confirm Booking</button>
+        <div id="bookingMsg"></div> <!-- Message area for script feedback -->
+        <button type="submit" class="btn-submit">Book Now</button>
       </form>
     </div>
   </div>
@@ -376,6 +421,142 @@
     </p>
   </footer>
 
+  <!-- 1. Add Firebase SDKs -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY", // Replace with your actual API Key
+      authDomain: "YOUR_AUTH_DOMAIN", // Replace with your actual Auth Domain
+      projectId: "YOUR_PROJECT_ID", // Replace with your actual Project ID
+      storageBucket: "YOUR_STORAGE_BUCKET", // Replace with your actual Storage Bucket
+      messagingSenderId: "YOUR_SENDER_ID", // Replace with your actual Sender ID
+      appId: "YOUR_APP_ID" // Replace with your actual App ID
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // 💰 Hardcoded service prices (Same as before)
+    const servicePrices = {
+      "Regular Haircut": 100,
+      "Beard Trim": 80,
+      "Cut + Enhancement": 120,
+      "Haircut + Texturizer": 180,
+      "Pixie Cut": 250,
+      "Extensions": 500,
+      "Complete Color": 220,
+      "Part Color": 180,
+      "lowcut+texturizer": 180 // Added the new service
+    };
+
+    // Firebase anonymous sign-in (Same as before)
+    import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js ";
+    import {
+      collection,
+      addDoc,
+      serverTimestamp,
+      doc,
+      getDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js ";
+
+    signInAnonymously(auth)
+      .then(() => console.log('✅ Firebase signed in anonymously'))
+      .catch((error) => console.error("❌ Firebase anonymous login failed:", error.message));
+
+    // Booking form logic (Same as before, but adapted to the new form structure)
+    onAuthStateChanged(auth, user => {
+      if (!user) return;
+
+      const form = document.getElementById('bookingForm');
+      const msg = document.getElementById('bookingMsg');
+      const serviceSelect = document.getElementById('service');
+
+      // Live price preview when service is selected (Updated for dropdown)
+      serviceSelect?.addEventListener('change', () => {
+        const selectedService = serviceSelect.value;
+        const price = servicePrices[selectedService];
+        if (price) {
+          // Update the displayed price in the preview section
+          document.getElementById("selectedServicePrice").textContent = `GHS ${price}`;
+          // Update the hidden input if needed by other parts of your script
+          document.getElementById("servicePriceInput").value = `GHS ${price}`;
+          msg.innerHTML = `💸 Selected service: <strong>${selectedService}</strong> – GHS ${price}`;
+        } else {
+          msg.textContent = '';
+          // Reset the displayed price if no service is selected
+          const originalPrice = document.getElementById("selectedServiceName").getAttribute("data-original-price");
+          document.getElementById("selectedServicePrice").textContent = originalPrice;
+          document.getElementById("servicePriceInput").value = originalPrice;
+        }
+      });
+
+      form?.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+        const service = document.getElementById('service').value; // Get from dropdown
+        const amount = servicePrices[service] || 0; // Get price from map
+
+        // Get MoMo number from Firestore
+        const momoSnap = await getDoc(doc(db, "settings", "momo"));
+        const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336'; // Fallback number
+
+        msg.innerHTML = `
+          ✅ Please send <strong>GHS ${amount}</strong> to MTN MoMo number:
+          <strong>${momoNumber}</strong><br>
+          Then tap the “I’ve Paid” button below to confirm.
+          <br><br>
+          <button id="confirmPaid" class="confirm-button">I’ve Paid</button>
+        `;
+
+        // Wait for "I’ve Paid" button
+        setTimeout(() => {
+          const confirmBtn = document.getElementById('confirmPaid');
+
+          confirmBtn?.addEventListener('click', async () => {
+            msg.textContent = '⏳ Verifying and saving your booking...';
+
+            try {
+              await addDoc(collection(db, 'pending_bookings'), {
+                name,
+                phone,
+                date,
+                time,
+                service,
+                amount,
+                momoNumber,
+                status: 'pending',
+                created: serverTimestamp()
+              });
+
+              msg.textContent = '✅ Booking request received! We’ll confirm once payment is verified.';
+              form.reset();
+              // Optionally reset the service selection preview too
+              const originalPrice = document.getElementById("selectedServiceName").getAttribute("data-original-price");
+              document.getElementById("selectedServicePrice").textContent = originalPrice;
+              document.getElementById("servicePriceInput").value = originalPrice;
+              serviceSelect.value = ''; // Reset dropdown
+
+            } catch (err) {
+              msg.textContent = '❌ Failed to save booking: ' + err.message;
+              console.error(err);
+            }
+          });
+        }, 100);
+      });
+    });
+  </script>
+
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js  "></script>
   <script>
     // Initialize AOS
@@ -387,6 +568,8 @@
     // Function to open the modal and populate service details
     function openBookingModal(serviceName, servicePrice, serviceImage) {
         document.getElementById("selectedServiceName").textContent = serviceName;
+        // Store original price for reset later
+        document.getElementById("selectedServiceName").setAttribute("data-original-price", servicePrice);
         document.getElementById("selectedServicePrice").textContent = servicePrice;
         // Set the image source
         document.getElementById("modalServiceImage").src = serviceImage;
@@ -394,6 +577,9 @@
         // Populate hidden inputs in the form
         document.getElementById("serviceNameInput").value = serviceName;
         document.getElementById("servicePriceInput").value = servicePrice;
+        // Pre-select the service in the dropdown
+        const serviceDropdown = document.getElementById('service');
+        serviceDropdown.value = serviceName; // This will trigger the change event handled by the Firebase script
         // Show the modal
         modal.style.display = "block";
         // Add the 'show' class to trigger the animation
@@ -413,6 +599,13 @@
             document.body.style.overflow = '';
             // Reset the form
             document.getElementById("bookingForm").reset();
+            // Reset the message area
+            document.getElementById("bookingMsg").textContent = '';
+            // Reset the displayed price to original
+            const originalPrice = document.getElementById("selectedServiceName").getAttribute("data-original-price");
+            if (originalPrice) {
+               document.getElementById("selectedServicePrice").textContent = originalPrice;
+            }
         }, 300);
     }
 
@@ -423,22 +616,7 @@
         }
     }
 
-    // Handle form submission (example: alert and close)
-    document.getElementById("bookingForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        // In a real application, you would collect the form data and send it to your server here.
-        // For this example, we'll just show an alert.
-        const name = document.getElementById("name").value;
-        const date = document.getElementById("date").value;
-        const time = document.getElementById("time").value;
-        const service = document.getElementById("selectedServiceName").textContent;
-
-        alert(`Booking Confirmed!\n\nService: ${service}\nName: ${name}\nDate: ${date}\nTime: ${time}\n\nWe will contact you shortly.`);
-
-        // Close the modal after confirmation
-        closeBookingModal();
-    });
+    // Note: The form submission is now handled by the Firebase script above, not here
   </script>
 </body>
 </html>
