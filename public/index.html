@@ -16,7 +16,7 @@
     .golden-text{color:#FFD700 !important;text-decoration:none}
     .golden-text:hover{text-decoration:underline}
 
-    /* Updated styles for the booking modal */
+    /* Updated styles for the booking modal - Compact & Refined */
     .modal {
       display: none; /* Hidden by default */
       position: fixed;
@@ -26,25 +26,25 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+      backdrop-filter: blur(5px); /* Slight blur effect on background */
     }
 
     .modal-content {
-      background-color: #2c2f36; /* Dark theme background */
+      background-color: #1e1e1e; /* Darker, more refined background */
       margin: 5% auto; /* Center vertically with top margin */
-      padding: 20px;
-      border: 2px solid #FFD700; /* Golden border */
-      border-radius: 10px;
+      padding: 0; /* Remove default padding */
+      border: 1px solid #FFD700; /* Golden border */
+      border-radius: 12px;
       width: 90%;
-      max-width: 800px; /* Wider for image + form */
+      max-width: 450px; /* Much smaller width */
       color: #f0f0f0; /* Light text color */
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Deeper shadow */
       position: relative;
-      display: flex; /* Use flexbox for image and form side-by-side */
-      flex-direction: column; /* Stack image and form vertically on small screens */
-      align-items: center;
+      display: flex; /* Use flexbox for layout */
+      flex-direction: column;
       transform: translateY(-50px); /* Start slightly above */
       opacity: 0; /* Start transparent */
-      transition: transform 0.4s ease-out, opacity 0.4s ease-out; /* Smooth animation */
+      transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Smooth animation */
     }
 
     /* Animation for when modal is shown */
@@ -53,90 +53,94 @@
       opacity: 1; /* Fade in */
     }
 
-    .close {
-      color: #FFD700;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      line-height: 1;
-      cursor: pointer;
-      transition: color 0.2s;
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      z-index: 10; /* Ensure close button is above other content */
-    }
-
-    .close:hover {
-      color: #ffd700cc;
-    }
-
     .modal-header {
-      padding-bottom: 10px;
+      background-color: #2a2a2a; /* Slightly lighter header background */
+      padding: 15px 20px;
       border-bottom: 1px solid #FFD700;
-      margin-bottom: 15px;
-      width: 100%;
-      text-align: center;
+      border-radius: 12px 12px 0 0; /* Rounded top corners */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .modal-header h2 {
       margin: 0;
       color: #FFD700;
+      font-size: 1.4em;
     }
 
-    .service-details-container {
+    .close {
+      color: #FFD700;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.2s;
+      line-height: 1;
+      background: none;
+      border: none;
+      padding: 0;
+      width: 30px;
+      height: 30px;
       display: flex;
-      gap: 20px; /* Space between image and form */
-      width: 100%;
-      margin-bottom: 15px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
 
-    .service-image-container {
-      flex: 1; /* Take up available space */
-      min-width: 0; /* Allow shrinking */
-      text-align: center;
+    .close:hover {
+      color: #fff;
+      background-color: rgba(255, 215, 0, 0.1);
     }
 
-    .service-image-container img {
-      max-width: 100%;
-      max-height: 250px; /* Limit image height */
-      object-fit: cover; /* Cover the area without stretching */
-      border-radius: 5px;
+    .service-preview {
+      display: flex;
+      padding: 15px;
+      gap: 15px;
+      border-bottom: 1px solid #333; /* Subtle separator */
+    }
+
+    .service-preview img {
+      width: 80px; /* Fixed width for image */
+      height: 80px; /* Fixed height for image */
+      object-fit: cover; /* Cover the area */
+      border-radius: 8px;
       border: 1px solid #444;
     }
 
-    .service-info {
-      flex: 1; /* Take up available space */
-      min-width: 0; /* Allow shrinking */
-      text-align: center;
+    .service-preview-info {
+      flex: 1; /* Take remaining space */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .service-info h3 {
-      margin: 5px 0;
-      font-size: 1.5em;
+    .service-preview-info h3 {
+      margin: 0 0 5px 0;
+      font-size: 1.2em;
       color: #f0f0f0;
     }
 
-    .service-info p {
+    .service-preview-info p {
       margin: 0;
-      font-size: 1.2em;
+      font-size: 1.1em;
       color: #FFD700;
     }
 
     .booking-form {
+      padding: 15px 20px 20px 20px; /* Padding inside the form area */
       display: flex;
       flex-direction: column;
-      width: 100%;
     }
 
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 12px; /* Reduced margin */
     }
 
     .form-group label {
       display: block;
-      margin-bottom: 5px;
-      color: #f0f0f0;
+      margin-bottom: 4px; /* Reduced margin */
+      color: #ccc; /* Slightly dimmer label */
+      font-size: 0.9em;
     }
 
     .form-group input,
@@ -145,14 +149,22 @@
       width: 100%;
       padding: 10px;
       border: 1px solid #444;
-      border-radius: 5px;
-      background-color: #3a3d44;
+      border-radius: 6px;
+      background-color: #2a2a2a; /* Darker input background */
       color: #f0f0f0;
       box-sizing: border-box;
+      font-family: 'Poppins', sans-serif; /* Ensure consistent font */
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #FFD700; /* Highlight on focus */
     }
 
     .form-group textarea {
-      height: 80px;
+      height: 70px; /* Reduced height */
       resize: vertical;
     }
 
@@ -161,12 +173,12 @@
       color: #1a1a1a;
       padding: 12px;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
       font-size: 1.1em;
       font-weight: 600;
-      transition: background-color 0.3s;
-      margin-top: 10px;
+      transition: background-color 0.2s, transform 0.1s;
+      margin-top: 5px; /* Reduced top margin */
     }
 
     .btn-submit:hover {
@@ -175,16 +187,7 @@
 
     .btn-submit:active {
       transform: scale(0.98);
-    }
-
-    /* Responsive adjustments */
-    @media (min-width: 768px) {
-      .service-details-container {
-        flex-direction: row; /* Arrange image and info side-by-side on larger screens */
-      }
-      .service-image-container {
-        max-width: 300px; /* Limit image width on larger screens */
-      }
+      background-color: #d6b300; /* Even darker on active */
     }
   </style>
 </head>
@@ -232,7 +235,6 @@
       <div class="service-card">
         <img src="regularhaircut.jpg" alt="Regular Haircut">
         <h3>Regular Haircut</h3><p>GHS 100</p>
-        <!-- Modified button to trigger modal -->
         <button class="btn-book" onclick="openBookingModal('Regular Haircut', 'GHS 100', 'regularhaircut.jpg')">Book</button>
       </div>
 
@@ -289,15 +291,13 @@
   <!-- Booking Modal -->
   <div id="bookingModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeBookingModal()">&times;</span>
       <div class="modal-header">
         <h2>Book Your Appointment</h2>
+        <button class="close" onclick="closeBookingModal()">&times;</button>
       </div>
-      <div class="service-details-container">
-        <div class="service-image-container">
-          <img id="modalServiceImage" src="" alt="Service Image">
-        </div>
-        <div class="service-info">
+      <div class="service-preview">
+        <img id="modalServiceImage" src="" alt="Service Image">
+        <div class="service-preview-info">
           <h3 id="selectedServiceName">Service Name</h3>
           <p id="selectedServicePrice">Service Price</p>
         </div>
@@ -406,14 +406,14 @@
     function closeBookingModal() {
         // Remove the 'show' class to trigger the reverse animation
         modal.classList.remove('show');
-        // Hide the modal after animation completes (0.4s)
+        // Hide the modal after animation completes (0.3s)
         setTimeout(() => {
             modal.style.display = "none";
             // Re-enable background scrolling
             document.body.style.overflow = '';
             // Reset the form
             document.getElementById("bookingForm").reset();
-        }, 400);
+        }, 300);
     }
 
     // Close the modal if the user clicks outside the content box
@@ -442,4 +442,3 @@
   </script>
 </body>
 </html>
-
