@@ -12,7 +12,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     :root {
       --primary-gold: #FFD700;
       --dark-bg: #1a1a1a;
@@ -24,7 +23,6 @@
       --card-border: #333;
       --shadow: rgba(0, 0, 0, 0.5);
     }
-
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--dark-bg);
@@ -33,7 +31,6 @@
       line-height: 1.6;
       transition: background-color 0.3s ease;
     }
-
     body.light-mode {
       --dark-bg: #f5f5f5;
       --darker-bg: #e0e0e0;
@@ -44,14 +41,12 @@
       --card-border: #eee;
       --shadow: rgba(0, 0, 0, 0.1);
     }
-
     .container {
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
     }
-
     /* Header & Navigation */
     header {
       background-color: rgba(13, 13, 13, 0.95);
@@ -64,33 +59,27 @@
       border-bottom: 1px solid var(--border-color);
       transition: background-color 0.3s ease;
     }
-
     body.light-mode header {
       background-color: rgba(255, 255, 255, 0.95);
     }
-
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-
     .logo {
       font-size: 1.8rem;
       font-weight: 700;
       color: var(--primary-gold);
       text-decoration: none;
     }
-
     .logo span {
       color: var(--light-text);
     }
-
     .nav-links {
       display: flex;
       gap: 30px;
     }
-
     .nav-links a {
       color: var(--light-text);
       text-decoration: none;
@@ -98,11 +87,9 @@
       transition: color 0.3s;
       position: relative;
     }
-
     .nav-links a:hover {
       color: var(--primary-gold);
     }
-
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -113,11 +100,9 @@
       background-color: var(--primary-gold);
       transition: width 0.3s;
     }
-
     .nav-links a:hover::after {
       width: 100%;
     }
-
     .mobile-menu-btn {
       display: none;
       background: none;
@@ -126,7 +111,6 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
-
     .theme-toggle {
       background: none;
       border: none;
@@ -136,11 +120,9 @@
       margin-left: 20px;
       transition: color 0.3s;
     }
-
     .theme-toggle:hover {
       color: var(--primary-gold);
     }
-
     /* Hero Section */
     .hero {
       height: 100vh;
@@ -150,7 +132,6 @@
       justify-content: center;
       overflow: hidden;
     }
-
     .hero-video {
       position: absolute;
       top: 0;
@@ -160,7 +141,6 @@
       object-fit: cover;
       z-index: -1;
     }
-
     .hero-overlay {
       position: absolute;
       top: 0;
@@ -170,27 +150,23 @@
       background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
       z-index: 1;
     }
-
     .hero-content {
       text-align: center;
       z-index: 2;
       max-width: 800px;
       padding: 0 20px;
     }
-
     .hero-content h1 {
       font-size: 3.5rem;
       margin-bottom: 15px;
       color: var(--primary-gold);
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
-
     .hero-content p {
       font-size: 1.2rem;
       margin-bottom: 30px;
       color: var(--medium-text);
     }
-
     .btn {
       display: inline-block;
       padding: 12px 30px;
@@ -203,39 +179,32 @@
       border: 2px solid var(--primary-gold);
       margin: 5px;
     }
-
     body.light-mode .btn {
       color: var(--dark-bg);
       border-color: var(--primary-gold);
     }
-
     .btn:hover {
       background-color: transparent;
       color: var(--primary-gold);
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
     }
-
     .btn-outline {
       background-color: transparent;
       color: var(--primary-gold);
     }
-
     .btn-outline:hover {
       background-color: var(--primary-gold);
       color: var(--dark-bg);
     }
-
     /* About Section */
     .section {
       padding: 100px 0;
     }
-
     .section-title {
       text-align: center;
       margin-bottom: 60px;
     }
-
     .section-title h2 {
       font-size: 2.5rem;
       color: var(--primary-gold);
@@ -243,7 +212,6 @@
       position: relative;
       display: inline-block;
     }
-
     .section-title h2::after {
       content: '';
       position: absolute;
@@ -254,147 +222,123 @@
       height: 3px;
       background-color: var(--primary-gold);
     }
-
     .about-content {
       display: flex;
       align-items: center;
       gap: 50px;
     }
-
     .about-text {
       flex: 1;
     }
-
     .about-text h3 {
       font-size: 1.8rem;
       margin-bottom: 20px;
       color: var(--primary-gold);
     }
-
     .about-text p {
       margin-bottom: 15px;
       color: var(--medium-text);
     }
-
     .about-image {
       flex: 1;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 20px 40px var(--shadow);
     }
-
     .about-image img {
       width: 100%;
       height: auto;
       display: block;
     }
-
     /* Services Section */
     .service-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
     }
-
     .service-card {
       background: var(--card-bg);
-      border-radius: 10px;
+      border-radius: 50px; /* Capsule/pill shape */
       overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s;
       border: 1px solid var(--card-border);
     }
-
     .service-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 15px 30px var(--shadow);
     }
-
     .service-image {
       height: 200px;
       overflow: hidden;
       position: relative;
+      border-radius: 50px 50px 0 0; /* Match capsule shape */
     }
-
     .service-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 50px; /* Capsule/pill shape */
       transition: transform 0.5s;
     }
-
     .service-card:hover .service-image img {
       transform: scale(1.1);
     }
-
     .service-info {
       padding: 20px;
+      border-radius: 0 0 50px 50px; /* Match capsule shape */
     }
-
     .service-info h3 {
       font-size: 1.4rem;
       margin-bottom: 10px;
       color: var(--primary-gold);
     }
-
     .service-info p {
       color: var(--medium-text);
       margin-bottom: 15px;
     }
-
     .service-price {
       font-size: 1.2rem;
       font-weight: 700;
       color: var(--primary-gold);
       margin-bottom: 15px;
     }
-
     /* Side Attractions Section */
     .attractions-section {
       background: rgba(20, 20, 20, 0.7);
       padding: 80px 0;
     }
-
     body.light-mode .attractions-section {
       background: rgba(245, 245, 245, 0.7);
     }
-
     .attractions-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
     }
-
     .attraction-card {
       background: var(--card-bg);
-      border-radius: 0 20px 20px 0; /* Diagonal rounded corners on right side */
+      border-radius: 20px 0 20px 0; /* Diagonal rounded corners */
       overflow: hidden;
       position: relative;
       border: 1px solid var(--card-border);
       transition: transform 0.3s;
     }
-
     .attraction-card:hover {
       transform: translateY(-10px);
     }
-
     .attraction-image {
       height: 250px;
       overflow: hidden;
       position: relative;
     }
-
     .attraction-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.5s;
     }
-
     .attraction-card:hover .attraction-image img {
       transform: scale(1.1);
     }
-
     .attraction-overlay {
       position: absolute;
       top: 0;
@@ -409,52 +353,43 @@
       padding: 20px;
       text-align: center;
     }
-
     .attraction-title {
       font-size: 1.8rem;
       color: var(--primary-gold);
       margin-bottom: 15px;
     }
-
     .attraction-description {
       color: var(--light-text);
       font-size: 1rem;
     }
-
     /* Testimonials */
     .testimonials {
       background: rgba(20, 20, 20, 0.7);
       padding: 80px 0;
     }
-
     body.light-mode .testimonials {
       background: rgba(245, 245, 245, 0.7);
     }
-
     .testimonial-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
     }
-
     .testimonial-card {
       background: var(--card-bg);
       padding: 30px;
       border-radius: 10px;
       border: 1px solid var(--card-border);
     }
-
     .testimonial-text {
       font-style: italic;
       margin-bottom: 20px;
       color: var(--medium-text);
     }
-
     .testimonial-author {
       display: flex;
       align-items: center;
     }
-
     .author-image {
       width: 50px;
       height: 50px;
@@ -462,79 +397,65 @@
       overflow: hidden;
       margin-right: 15px;
     }
-
     .author-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
     .author-info h4 {
       color: var(--primary-gold);
       margin-bottom: 5px;
     }
-
     .author-info p {
       color: var(--medium-text);
       font-size: 0.9rem;
     }
-
     /* Contact Section */
     .contact-content {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 50px;
     }
-
     .contact-info {
       display: flex;
       flex-direction: column;
       gap: 25px;
     }
-
     .contact-item {
       display: flex;
       align-items: flex-start;
       gap: 15px;
     }
-
     .contact-icon {
       font-size: 1.5rem;
       color: var(--primary-gold);
     }
-
     .contact-details h4 {
       margin-bottom: 5px;
       color: var(--primary-gold);
     }
-
     .contact-details p, .contact-details a {
       color: var(--medium-text);
       text-decoration: none;
       transition: color 0.3s;
     }
-
     .contact-details a:hover {
       color: var(--primary-gold);
     }
-
     .contact-form {
       background: var(--card-bg);
       padding: 30px;
       border-radius: 10px;
       border: 1px solid var(--card-border);
     }
-
     .form-group {
       margin-bottom: 20px;
     }
-
     .form-group label {
       display: block;
       margin-bottom: 8px;
       color: var(--medium-text);
     }
-
     .form-control {
       width: 100%;
       padding: 12px 15px;
@@ -544,18 +465,15 @@
       color: var(--light-text);
       font-family: 'Poppins', sans-serif;
     }
-
     body.light-mode .form-control {
       background: rgba(245, 245, 245, 0.8);
       color: var(--light-text);
       border-color: var(--card-border);
     }
-
     .form-control:focus {
       outline: none;
       border-color: var(--primary-gold);
     }
-
     /* Footer */
     footer {
       background: var(--darker-bg);
@@ -563,48 +481,39 @@
       border-top: 1px solid var(--border-color);
       transition: background-color 0.3s ease;
     }
-
     body.light-mode footer {
       background: var(--darker-bg);
     }
-
     .footer-content {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 40px;
       margin-bottom: 40px;
     }
-
     .footer-column h3 {
       color: var(--primary-gold);
       margin-bottom: 20px;
       font-size: 1.3rem;
     }
-
     .footer-links {
       list-style: none;
     }
-
     .footer-links li {
       margin-bottom: 10px;
     }
-
     .footer-links a {
       color: var(--medium-text);
       text-decoration: none;
       transition: color 0.3s;
     }
-
     .footer-links a:hover {
       color: var(--primary-gold);
     }
-
     .social-links {
       display: flex;
       gap: 15px;
       margin-top: 20px;
     }
-
     .social-links a {
       display: flex;
       align-items: center;
@@ -616,13 +525,11 @@
       color: var(--primary-gold);
       transition: all 0.3s;
     }
-
     .social-links a:hover {
       background: var(--primary-gold);
       color: var(--dark-bg);
       transform: translateY(-3px);
     }
-
     .copyright {
       text-align: center;
       padding-top: 30px;
@@ -630,7 +537,6 @@
       color: var(--medium-text);
       font-size: 0.9rem;
     }
-
     /* Booking Modal */
     .modal {
       display: none;
@@ -643,7 +549,6 @@
       background-color: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(5px);
     }
-
     .modal-content {
       background-color: #1e1e1e;
       margin: 10% auto;
@@ -663,18 +568,15 @@
       overflow-y: auto;
       max-height: 80vh;
     }
-
     body.light-mode .modal-content {
       background-color: #fff;
       color: #222;
       border-color: var(--primary-gold);
     }
-
     .modal.show .modal-content {
       transform: translateY(0);
       opacity: 1;
     }
-
     .modal-header {
       background-color: #2a2a2a;
       padding: 15px 20px;
@@ -684,18 +586,15 @@
       justify-content: space-between;
       align-items: center;
     }
-
     body.light-mode .modal-header {
       background-color: #f5f5f5;
       border-bottom-color: var(--primary-gold);
     }
-
     .modal-header h2 {
       margin: 0;
       color: var(--primary-gold);
       font-size: 1.4em;
     }
-
     .close {
       color: var(--primary-gold);
       font-size: 24px;
@@ -713,32 +612,26 @@
       justify-content: center;
       border-radius: 50%;
     }
-
     .close:hover {
       color: #fff;
       background-color: rgba(255, 215, 0, 0.1);
     }
-
     body.light-mode .close {
       color: var(--primary-gold);
     }
-
     body.light-mode .close:hover {
       color: #222;
       background-color: rgba(255, 215, 0, 0.1);
     }
-
     .service-preview {
       display: flex;
       padding: 15px;
       gap: 15px;
       border-bottom: 1px solid #333;
     }
-
     body.light-mode .service-preview {
       border-bottom-color: #ddd;
     }
-
     .service-preview img {
       width: 80px;
       height: 80px;
@@ -746,51 +639,42 @@
       border-radius: 8px;
       border: 1px solid #444;
     }
-
     body.light-mode .service-preview img {
       border-color: #ddd;
     }
-
     .service-preview-info {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-
     .service-preview-info h3 {
       margin: 0 0 5px 0;
       font-size: 1.2em;
       color: var(--light-text);
     }
-
     .service-preview-info p {
       margin: 0;
       font-size: 1.1em;
       color: var(--primary-gold);
     }
-
     .booking-form {
       padding: 15px 20px 20px 20px;
       display: flex;
       flex-direction: column;
     }
-
     .form-group {
       margin-bottom: 12px;
     }
-
     .form-group label {
       display: block;
       margin-bottom: 4px;
       color: #ccc;
       font-size: 0.9em;
     }
-
     body.light-mode .form-group label {
       color: #555;
     }
-
     .form-group input,
     .form-group select,
     .form-group textarea {
@@ -803,7 +687,6 @@
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
-
     body.light-mode .form-group input,
     body.light-mode .form-group select,
     body.light-mode .form-group textarea {
@@ -811,19 +694,16 @@
       border-color: #ddd;
       color: #222;
     }
-
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
       outline: none;
       border-color: var(--primary-gold);
     }
-
     .form-group textarea {
       height: 70px;
       resize: vertical;
     }
-
     .btn-submit {
       background-color: var(--primary-gold);
       color: #1a1a1a;
@@ -836,20 +716,16 @@
       transition: background-color 0.2s, transform 0.1s;
       margin-top: 5px;
     }
-
     body.light-mode .btn-submit {
       color: #1a1a1a;
     }
-
     .btn-submit:hover {
       background-color: #e6c200;
     }
-
     .btn-submit:active {
       transform: scale(0.98);
       background-color: #d6b300;
     }
-
     #bookingMsg {
       margin: 10px 0;
       padding: 10px;
@@ -860,13 +736,11 @@
       text-align: center;
       min-height: 20px;
     }
-
     body.light-mode #bookingMsg {
       background-color: #fff;
       border-color: #ddd;
       color: #222;
     }
-
     .confirm-button {
       background-color: #4CAF50;
       color: white;
@@ -877,33 +751,39 @@
       font-size: 0.9em;
       margin-top: 10px;
     }
-
     .confirm-button:hover {
       background-color: #45a049;
     }
-
     /* Responsive Design */
     @media (max-width: 768px) {
       .nav-links {
         display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--darker-bg);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 15px;
+        border-bottom: 1px solid var(--border-color);
       }
-
+      .nav-links.active {
+        display: flex;
+      }
       .mobile-menu-btn {
         display: block;
       }
-
       .hero-content h1 {
         font-size: 2.5rem;
       }
-
       .about-content {
         flex-direction: column;
       }
-
       .section {
         padding: 60px 0;
       }
-      
       .modal-content {
         margin: 15% auto;
         max-width: 90%;
@@ -911,14 +791,13 @@
     }
   </style>
 </head>
-
 <body>
   <!-- Header -->
   <header>
     <div class="container">
       <nav class="navbar">
         <a href="#" class="logo">Amanfour<span>Barbers</span></a>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
           <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="#services">Services</a>
@@ -929,13 +808,12 @@
         <button class="theme-toggle" id="themeToggle">
           <i class="fas fa-moon"></i>
         </button>
-        <button class="mobile-menu-btn">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
           <i class="fas fa-bars"></i>
         </button>
       </nav>
     </div>
   </header>
-
   <!-- Hero Section -->
   <section id="home" class="hero">
     <video class="hero-video" playsinline muted autoplay loop poster="IMG-20250722-WA0027.jpg">
@@ -953,7 +831,6 @@
       </div>
     </div>
   </section>
-
   <!-- About Section -->
   <section id="about" class="section">
     <div class="container">
@@ -974,7 +851,6 @@
       </div>
     </div>
   </section>
-
   <!-- Services Section -->
   <section id="services" class="section">
     <div class="container">
@@ -992,7 +868,6 @@
             <button class="btn" onclick="openBookingModal('Regular Haircut', 'GHS 100', 'regularhaircut.jpg')">Book Now</button>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-image">
             <img src="beardtrim2.jpg" alt="Beard Trim">
@@ -1003,7 +878,6 @@
             <button class="btn" onclick="openBookingModal('Beard Trim', 'GHS 80', 'beardtrim2.jpg')">Book Now</button>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-image">
             <img src="cut+enhancements2.jpg" alt="Cut + Enhancement">
@@ -1014,7 +888,6 @@
             <button class="btn" onclick="openBookingModal('Cut + Enhancement', 'GHS 120', 'cut+enhancements2.jpg')">Book Now</button>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-image">
             <img src="Haircut+texturizer2.jpg" alt="Haircut + Texturizer">
@@ -1025,7 +898,6 @@
             <button class="btn" onclick="openBookingModal('Haircut + Texturizer', 'GHS 180', 'Haircut+texturizer2.jpg')">Book Now</button>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-image">
             <img src="pixiecut2.jpg" alt="Pixie Cut">
@@ -1036,7 +908,6 @@
             <button class="btn" onclick="openBookingModal('Pixie Cut', 'GHS 250', 'pixiecut2.jpg')">Book Now</button>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-image">
             <img src="extension.jpg" alt="Extensions">
@@ -1050,7 +921,6 @@
       </div>
     </div>
   </section>
-
   <!-- Side Attractions Section -->
   <section id="attractions" class="attractions-section">
     <div class="container">
@@ -1067,7 +937,6 @@
             </div>
           </div>
         </div>
-
         <div class="attraction-card">
           <div class="attraction-image">
             <img src="https://placehold.co/600x400/1a1a1a/FFD700?text=Refreshments" alt="Refreshments">
@@ -1077,7 +946,6 @@
             </div>
           </div>
         </div>
-
         <div class="attraction-card">
           <div class="attraction-image">
             <img src="https://placehold.co/600x400/1a1a1a/FFD700?text=Comfortable+Seating" alt="Comfortable Seating">
@@ -1090,7 +958,6 @@
       </div>
     </div>
   </section>
-
   <!-- Testimonials Section -->
   <section id="testimonials" class="testimonials">
     <div class="container">
@@ -1110,7 +977,6 @@
             </div>
           </div>
         </div>
-
         <div class="testimonial-card">
           <p class="testimonial-text">"I've been coming here for 2 years now. The barber knows exactly what I want and always delivers. The atmosphere is relaxing and the service is top-notch."</p>
           <div class="testimonial-author">
@@ -1123,7 +989,6 @@
             </div>
           </div>
         </div>
-
         <div class="testimonial-card">
           <p class="testimonial-text">"Professional service, clean environment, and the best cuts in town. I always leave feeling confident and well-groomed. Highly recommend!"</p>
           <div class="testimonial-author">
@@ -1139,7 +1004,6 @@
       </div>
     </div>
   </section>
-
   <!-- Contact Section -->
   <section id="contact" class="section">
     <div class="container">
@@ -1154,10 +1018,9 @@
             </div>
             <div class="contact-details">
               <h4>Location</h4>
-              <p>Amanfour Barbers Palace<br>Tamso New Road, Tarkwa</p>
+              <p><a href="https://maps.google.com/?q=Amanfour+Barbers+Palace+Tamso+New+Road+Tarkwa" target="_blank">Amanfour Barbers Palace<br>Tamso New Road, Tarkwa</a></p>
             </div>
           </div>
-
           <div class="contact-item">
             <div class="contact-icon">
               <i class="fas fa-phone"></i>
@@ -1167,7 +1030,6 @@
               <a href="tel:0550770772">055 077 0772</a>
             </div>
           </div>
-
           <div class="contact-item">
             <div class="contact-icon">
               <i class="fab fa-whatsapp"></i>
@@ -1177,7 +1039,6 @@
               <a href="https://wa.me/233550770772" target="_blank">Chat with us</a>
             </div>
           </div>
-
           <div class="contact-item">
             <div class="contact-icon">
               <i class="fas fa-clock"></i>
@@ -1188,7 +1049,6 @@
             </div>
           </div>
         </div>
-
         <div class="contact-form">
           <form id="contactForm">
             <div class="form-group">
@@ -1213,7 +1073,6 @@
       </div>
     </div>
   </section>
-
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -1233,7 +1092,6 @@
             </a>
           </div>
         </div>
-
         <div class="footer-column">
           <h3>Quick Links</h3>
           <ul class="footer-links">
@@ -1244,7 +1102,6 @@
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
-
         <div class="footer-column">
           <h3>Services</h3>
           <ul class="footer-links">
@@ -1255,24 +1112,21 @@
             <li><a href="#">Complete Color</a></li>
           </ul>
         </div>
-
         <div class="footer-column">
           <h3>Contact Info</h3>
           <ul class="footer-links">
-            <li><i class="fas fa-map-marker-alt"></i> Tamso New Road, Tarkwa</li>
+            <li><i class="fas fa-map-marker-alt"></i> <a href="https://maps.google.com/?q=Amanfour+Barbers+Palace+Tamso+New+Road+Tarkwa" target="_blank">Tamso New Road, Tarkwa</a></li>
             <li><i class="fas fa-phone"></i> 055 077 0772</li>
             <li><i class="fab fa-whatsapp"></i> WhatsApp: 055 077 0772</li>
             <li><i class="fas fa-envelope"></i> info@aman-barber.web.app</li>
           </ul>
         </div>
       </div>
-
       <div class="copyright">
         <p>&copy; 2023 Amanfour Barbers Palace. All rights reserved. | Built by George Nuyekpe</p>
       </div>
     </div>
   </footer>
-
   <!-- Booking Modal -->
   <div id="bookingModal" class="modal">
     <div class="modal-content">
@@ -1290,7 +1144,6 @@
       <form class="booking-form" id="bookingForm">
         <input type="hidden" id="serviceNameInput" name="serviceName">
         <input type="hidden" id="servicePriceInput" name="servicePrice">
-
         <div class="form-group">
           <label for="service">Select Service</label>
           <select id="service" name="service" required>
@@ -1306,7 +1159,6 @@
             <option value="lowcut+texturizer">lowcut+texturizer - GHS 180</option>
           </select>
         </div>
-
         <div class="form-group">
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" required>
@@ -1362,14 +1214,12 @@
       </form>
     </div>
   </div>
-
   <!-- Firebase SDKs -->
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
     import { getFirestore, collection, addDoc, serverTimestamp, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-
     const firebaseConfig = {
       apiKey: "AIzaSyCybqVlasAj69x6EljSlJJXavFJorN-csU",
       authDomain: "aman-barber.firebaseapp.com",
@@ -1378,12 +1228,10 @@
       messagingSenderId: "146331198998",
       appId: "1:146331198998:web:9d2fe984b2d6033127f737"
     };
-
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-
     // Service prices map
     const servicePrices = {
       "Regular Haircut": 100,
@@ -1396,30 +1244,24 @@
       "Part Color": 180,
       "lowcut+texturizer": 180
     };
-
     // Firebase anonymous sign-in
     signInAnonymously(auth)
       .then(() => console.log('✅ Firebase signed in anonymously'))
       .catch((error) => console.error("❌ Firebase anonymous login failed:", error.message));
-
     // Booking form logic
     onAuthStateChanged(auth, user => {
       if (!user) {
         console.error("❌ Firebase user not available for booking.");
         return;
       }
-
       console.log("✅ User authenticated, ready for bookings.");
-
       const form = document.getElementById('bookingForm');
       const msg = document.getElementById('bookingMsg');
       const serviceSelect = document.getElementById('service');
-
       if (!form || !msg || !serviceSelect) {
         console.error("❌ Required form elements not found.");
         return;
       }
-
       // Live price preview when service is selected
       serviceSelect.addEventListener('change', () => {
         const selectedService = serviceSelect.value;
@@ -1436,10 +1278,8 @@
           msg.textContent = '';
         }
       });
-
       form.addEventListener('submit', async e => {
         e.preventDefault();
-
         const name = document.getElementById('name').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const date = document.getElementById('date').value;
@@ -1447,16 +1287,13 @@
         const service = serviceSelect.value;
         const notes = document.getElementById('notes').value.trim();
         const amount = servicePrices[service];
-
         if (!name || !phone || !date || !time || !service || amount === undefined) {
              msg.textContent = '❌ Please fill in all required fields and select a valid service.';
              return;
         }
-
         try {
           const momoSnap = await getDoc(doc(db, "settings", "momo"));
           const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336';
-
           msg.innerHTML = `
             ✅ Please send <strong>GHS ${amount}</strong> to MTN MoMo number:
             <strong>${momoNumber}</strong><br>
@@ -1464,13 +1301,11 @@
             <br><br>
             <button id="confirmPaid" class="confirm-button">I've Paid</button>
           `;
-
           setTimeout(() => {
             const confirmBtn = document.getElementById('confirmPaid');
             if (confirmBtn) {
               confirmBtn.addEventListener('click', async () => {
                 msg.textContent = '⏳ Verifying and saving your booking...';
-
                 try {
                   await addDoc(collection(db, 'pending_bookings'), {
                     name,
@@ -1485,9 +1320,7 @@
                     status: 'pending',
                     created: serverTimestamp()
                   });
-
                   msg.innerHTML = '✅ Booking request received! We\'ll confirm once payment is verified.<br><strong>Please close this window.</strong>';
-
                 } catch (err) {
                   console.error("Firestore Error:", err);
                   msg.textContent = '❌ Failed to save booking: ' + err.message;
@@ -1498,7 +1331,6 @@
               msg.textContent = '❌ An error occurred. Please try booking again.';
             }
           }, 100);
-
         } catch (error) {
             console.error("Error fetching MoMo number:", error);
             msg.textContent = '❌ Could not retrieve payment details. Please contact us directly.';
@@ -1506,13 +1338,20 @@
       });
     });
   </script>
-
   <script>
     // Initialize AOS
     document.addEventListener('DOMContentLoaded', function() {
       // Get the modal element
       const modal = document.getElementById("bookingModal");
-
+      
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navLinks = document.getElementById('navLinks');
+      
+      mobileMenuBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+      });
+      
       // Function to open the modal and populate service details
       function openBookingModal(serviceName, servicePrice, serviceImage) {
           const nameElement = document.getElementById("selectedServiceName");
@@ -1521,7 +1360,6 @@
           const nameInput = document.getElementById("serviceNameInput");
           const priceInput = document.getElementById("servicePriceInput");
           const serviceDropdown = document.getElementById('service');
-
           // Populate elements
           nameElement.textContent = serviceName;
           nameElement.setAttribute("data-original-price", servicePrice);
@@ -1530,7 +1368,6 @@
           imageElement.alt = serviceName;
           nameInput.value = serviceName;
           priceInput.value = servicePrice;
-
           // Pre-select the service in the dropdown
           if (serviceDropdown.querySelector(`option[value="${serviceName}"]`)) {
               serviceDropdown.value = serviceName;
@@ -1538,13 +1375,11 @@
               console.warn(`Service "${serviceName}" not found in dropdown options.`);
               serviceDropdown.value = '';
           }
-
           // Show the modal
           modal.style.display = "block";
           modal.classList.add('show');
           document.body.style.overflow = 'hidden';
       }
-
       // Function to close the modal
       function closeBookingModal() {
           modal.classList.remove('show');
@@ -1561,14 +1396,12 @@
               document.getElementById('service').value = '';
           }, 300);
       }
-
       // Close the modal if the user clicks outside the content box
       window.onclick = function(event) {
           if (event.target === modal) {
               closeBookingModal();
           }
       }
-
       // Add smooth scrolling for navigation links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -1578,17 +1411,6 @@
           });
         });
       });
-
-      // Mobile menu toggle
-      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-      const navLinks = document.querySelector('.nav-links');
-      
-      if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
-          navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-      }
-
       // Contact form submission
       const contactForm = document.getElementById('contactForm');
       if(contactForm) {
@@ -1598,15 +1420,12 @@
           contactForm.reset();
         });
       }
-
       // Theme toggle
       const themeToggle = document.getElementById('themeToggle');
       const body = document.body;
-      
       if (themeToggle) {
         themeToggle.addEventListener('click', function() {
           body.classList.toggle('light-mode');
-          
           if (body.classList.contains('light-mode')) {
             themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
           } else {
@@ -1614,7 +1433,6 @@
           }
         });
       }
-
       // Expose functions to global scope for button clicks
       window.openBookingModal = openBookingModal;
       window.closeBookingModal = closeBookingModal;
