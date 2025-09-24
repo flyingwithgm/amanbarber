@@ -20,6 +20,9 @@
       --light-text: #f0f0f0;
       --medium-text: #ccc;
       --border-color: #333;
+      --card-bg: rgba(30, 30, 30, 0.7);
+      --card-border: #333;
+      --shadow: rgba(0, 0, 0, 0.5);
     }
 
     body {
@@ -28,6 +31,18 @@
       color: var(--light-text);
       overflow-x: hidden;
       line-height: 1.6;
+      transition: background-color 0.3s ease;
+    }
+
+    body.light-mode {
+      --dark-bg: #f5f5f5;
+      --darker-bg: #e0e0e0;
+      --light-text: #222;
+      --medium-text: #555;
+      --border-color: #ddd;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: #eee;
+      --shadow: rgba(0, 0, 0, 0.1);
     }
 
     .container {
@@ -47,6 +62,11 @@
       padding: 15px 0;
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.3s ease;
+    }
+
+    body.light-mode header {
+      background-color: rgba(255, 255, 255, 0.95);
     }
 
     .navbar {
@@ -105,6 +125,20 @@
       color: var(--light-text);
       font-size: 1.5rem;
       cursor: pointer;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--light-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-left: 20px;
+      transition: color 0.3s;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary-gold);
     }
 
     /* Hero Section */
@@ -168,6 +202,11 @@
       transition: all 0.3s;
       border: 2px solid var(--primary-gold);
       margin: 5px;
+    }
+
+    body.light-mode .btn {
+      color: var(--dark-bg);
+      border-color: var(--primary-gold);
     }
 
     .btn:hover {
@@ -241,7 +280,7 @@
       flex: 1;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 40px var(--shadow);
     }
 
     .about-image img {
@@ -258,27 +297,29 @@
     }
 
     .service-card {
-      background: rgba(30, 30, 30, 0.7);
+      background: var(--card-bg);
       border-radius: 10px;
       overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--card-border);
     }
 
     .service-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 15px 30px var(--shadow);
     }
 
     .service-image {
       height: 200px;
       overflow: hidden;
+      position: relative;
     }
 
     .service-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 50px; /* Capsule/pill shape */
       transition: transform 0.5s;
     }
 
@@ -314,6 +355,10 @@
       padding: 80px 0;
     }
 
+    body.light-mode .attractions-section {
+      background: rgba(245, 245, 245, 0.7);
+    }
+
     .attractions-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -321,11 +366,11 @@
     }
 
     .attraction-card {
-      background: rgba(30, 30, 30, 0.9);
-      border-radius: 10px;
+      background: var(--card-bg);
+      border-radius: 0 20px 20px 0; /* Diagonal rounded corners on right side */
       overflow: hidden;
       position: relative;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--card-border);
       transition: transform 0.3s;
     }
 
@@ -382,6 +427,10 @@
       padding: 80px 0;
     }
 
+    body.light-mode .testimonials {
+      background: rgba(245, 245, 245, 0.7);
+    }
+
     .testimonial-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -389,10 +438,10 @@
     }
 
     .testimonial-card {
-      background: rgba(30, 30, 30, 0.9);
+      background: var(--card-bg);
       padding: 30px;
       border-radius: 10px;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--card-border);
     }
 
     .testimonial-text {
@@ -470,10 +519,10 @@
     }
 
     .contact-form {
-      background: rgba(30, 30, 30, 0.7);
+      background: var(--card-bg);
       padding: 30px;
       border-radius: 10px;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--card-border);
     }
 
     .form-group {
@@ -490,10 +539,16 @@
       width: 100%;
       padding: 12px 15px;
       background: rgba(20, 20, 20, 0.8);
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--card-border);
       border-radius: 5px;
       color: var(--light-text);
       font-family: 'Poppins', sans-serif;
+    }
+
+    body.light-mode .form-control {
+      background: rgba(245, 245, 245, 0.8);
+      color: var(--light-text);
+      border-color: var(--card-border);
     }
 
     .form-control:focus {
@@ -506,6 +561,11 @@
       background: var(--darker-bg);
       padding: 60px 0 30px;
       border-top: 1px solid var(--border-color);
+      transition: background-color 0.3s ease;
+    }
+
+    body.light-mode footer {
+      background: var(--darker-bg);
     }
 
     .footer-content {
@@ -586,12 +646,12 @@
 
     .modal-content {
       background-color: #1e1e1e;
-      margin: 5% auto;
+      margin: 10% auto;
       padding: 0;
       border: 1px solid var(--primary-gold);
       border-radius: 12px;
       width: 90%;
-      max-width: 450px;
+      max-width: 500px;
       color: var(--light-text);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       position: relative;
@@ -600,6 +660,14 @@
       transform: translateY(-50px);
       opacity: 0;
       transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+
+    body.light-mode .modal-content {
+      background-color: #fff;
+      color: #222;
+      border-color: var(--primary-gold);
     }
 
     .modal.show .modal-content {
@@ -615,6 +683,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    body.light-mode .modal-header {
+      background-color: #f5f5f5;
+      border-bottom-color: var(--primary-gold);
     }
 
     .modal-header h2 {
@@ -646,11 +719,24 @@
       background-color: rgba(255, 215, 0, 0.1);
     }
 
+    body.light-mode .close {
+      color: var(--primary-gold);
+    }
+
+    body.light-mode .close:hover {
+      color: #222;
+      background-color: rgba(255, 215, 0, 0.1);
+    }
+
     .service-preview {
       display: flex;
       padding: 15px;
       gap: 15px;
       border-bottom: 1px solid #333;
+    }
+
+    body.light-mode .service-preview {
+      border-bottom-color: #ddd;
     }
 
     .service-preview img {
@@ -659,6 +745,10 @@
       object-fit: cover;
       border-radius: 8px;
       border: 1px solid #444;
+    }
+
+    body.light-mode .service-preview img {
+      border-color: #ddd;
     }
 
     .service-preview-info {
@@ -697,6 +787,10 @@
       font-size: 0.9em;
     }
 
+    body.light-mode .form-group label {
+      color: #555;
+    }
+
     .form-group input,
     .form-group select,
     .form-group textarea {
@@ -708,6 +802,14 @@
       color: var(--light-text);
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
+    }
+
+    body.light-mode .form-group input,
+    body.light-mode .form-group select,
+    body.light-mode .form-group textarea {
+      background-color: #fff;
+      border-color: #ddd;
+      color: #222;
     }
 
     .form-group input:focus,
@@ -735,6 +837,10 @@
       margin-top: 5px;
     }
 
+    body.light-mode .btn-submit {
+      color: #1a1a1a;
+    }
+
     .btn-submit:hover {
       background-color: #e6c200;
     }
@@ -753,6 +859,12 @@
       font-size: 0.95em;
       text-align: center;
       min-height: 20px;
+    }
+
+    body.light-mode #bookingMsg {
+      background-color: #fff;
+      border-color: #ddd;
+      color: #222;
     }
 
     .confirm-button {
@@ -791,6 +903,11 @@
       .section {
         padding: 60px 0;
       }
+      
+      .modal-content {
+        margin: 15% auto;
+        max-width: 90%;
+      }
     }
   </style>
 </head>
@@ -809,6 +926,9 @@
           <a href="#testimonials">Testimonials</a>
           <a href="#contact">Contact</a>
         </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
         <button class="mobile-menu-btn">
           <i class="fas fa-bars"></i>
         </button>
@@ -849,7 +969,7 @@
           <a href="#services" class="btn">Our Services</a>
         </div>
         <div class="about-image">
-          <img src="https://placehold.co/600x400/1a1a1a/FFD700?text=Barber+Shop+Interior" alt="Barber Shop Interior">
+          <img src="IMG-20250722-WA0027.jpg" alt="Barber Shop Interior">
         </div>
       </div>
     </div>
@@ -864,73 +984,67 @@
       <div class="service-grid">
         <div class="service-card">
           <div class="service-image">
-            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Regular+Haircut" alt="Regular Haircut">
+            <img src="regularhaircut.jpg" alt="Regular Haircut">
           </div>
           <div class="service-info">
             <h3>Regular Haircut</h3>
-            <p>Precision cutting with professional clippers and scissors for a clean, sharp look.</p>
-            <div class="service-price">GHS 100</div>
-            <button class="btn" onclick="openBookingModal('Regular Haircut', 'GHS 100', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Regular+Haircut')">Book Now</button>
+            <p>GHS 100</p>
+            <button class="btn" onclick="openBookingModal('Regular Haircut', 'GHS 100', 'regularhaircut.jpg')">Book Now</button>
           </div>
         </div>
 
         <div class="service-card">
           <div class="service-image">
-            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Beard+Trim" alt="Beard Trim">
+            <img src="beardtrim2.jpg" alt="Beard Trim">
           </div>
           <div class="service-info">
             <h3>Beard Trim</h3>
-            <p>Professional shaping and trimming for a perfectly groomed beard.</p>
-            <div class="service-price">GHS 80</div>
-            <button class="btn" onclick="openBookingModal('Beard Trim', 'GHS 80', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Beard+Trim')">Book Now</button>
+            <p>GHS 80</p>
+            <button class="btn" onclick="openBookingModal('Beard Trim', 'GHS 80', 'beardtrim2.jpg')">Book Now</button>
           </div>
         </div>
 
         <div class="service-card">
           <div class="service-image">
-            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Cut+%2B+Enhancement" alt="Cut + Enhancement">
+            <img src="cut+enhancements2.jpg" alt="Cut + Enhancement">
           </div>
           <div class="service-info">
             <h3>Cut + Enhancement</h3>
-            <p>Haircut with additional styling services for a complete look.</p>
-            <div class="service-price">GHS 120</div>
-            <button class="btn" onclick="openBookingModal('Cut + Enhancement', 'GHS 120', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Cut+%2B+Enhancement')">Book Now</button>
+            <p>GHS 120</p>
+            <button class="btn" onclick="openBookingModal('Cut + Enhancement', 'GHS 120', 'cut+enhancements2.jpg')">Book Now</button>
           </div>
         </div>
 
         <div class="service-card">
           <div class="service-image">
-            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Haircut+%2B+Texturizer" alt="Haircut + Texturizer">
+            <img src="Haircut+texturizer2.jpg" alt="Haircut + Texturizer">
           </div>
           <div class="service-info">
             <h3>Haircut + Texturizer</h3>
-            <p>Professional haircut with texturizing treatment for added dimension.</p>
-            <div class="service-price">GHS 180</div>
-            <button class="btn" onclick="openBookingModal('Haircut + Texturizer', 'GHS 180', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Haircut+%2B+Texturizer')">Book Now</button>
+            <p>GHS 180</p>
+            <button class="btn" onclick="openBookingModal('Haircut + Texturizer', 'GHS 180', 'Haircut+texturizer2.jpg')">Book Now</button>
           </div>
         </div>
 
         <div class="service-card">
           <div class="service-image">
-            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Pixie+Cut" alt="Pixie Cut">
+            <img src="pixiecut2.jpg" alt="Pixie Cut">
           </div>
           <div class="service-info">
             <h3>Pixie Cut</h3>
-            <p>Sharp, precise cutting for a modern, edgy look.</p>
-            <div class="service-price">GHS 250</div>
-            <button class="btn" onclick="openBookingModal('Pixie Cut', 'GHS 250', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Pixie+Cut')">Book Now</button>
+            <p>GHS 250</p>
+            <button class="btn" onclick="openBookingModal('Pixie Cut', 'GHS 250', 'pixiecut2.jpg')">Book Now</button>
           </div>
         </div>
 
         <div class="service-card">
           <div class="service-image">
-            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Extensions" alt="Extensions">
+            <img src="extension.jpg" alt="Extensions">
           </div>
           <div class="service-info">
             <h3>Extensions</h3>
-            <p>Professional hair extensions for added length and volume.</p>
-            <div class="service-price">GHS 500</div>
-            <button class="btn" onclick="openBookingModal('Extensions', 'GHS 500', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Extensions')">Book Now</button>
+            <p>GHS 500</p>
+            <button class="btn" onclick="openBookingModal('Extensions', 'GHS 500', 'extension.jpg')">Book Now</button>
           </div>
         </div>
       </div>
@@ -1465,6 +1579,16 @@
         });
       });
 
+      // Mobile menu toggle
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+          navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+      }
+
       // Contact form submission
       const contactForm = document.getElementById('contactForm');
       if(contactForm) {
@@ -1472,6 +1596,22 @@
           e.preventDefault();
           alert('Thank you for your message! We will get back to you soon.');
           contactForm.reset();
+        });
+      }
+
+      // Theme toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+      
+      if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+          body.classList.toggle('light-mode');
+          
+          if (body.classList.contains('light-mode')) {
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+          } else {
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+          }
         });
       }
 
