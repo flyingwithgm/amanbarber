@@ -5,7 +5,7 @@
   <title>Amanfour Barbers – Premium Booking</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css"> <!-- Make sure this path is correct -->
   <style>
     /* Existing styles remain unchanged */
     .footer-social-icons{display:inline-flex;gap:.7em;vertical-align:middle;margin-left:1em}
@@ -198,6 +198,7 @@
       border: 1px solid #444; /* Subtle border */
       font-size: 0.95em;
       text-align: center;
+      min-height: 20px; /* Ensure space for messages */
     }
 
     .confirm-button {
@@ -220,7 +221,7 @@
 <body>
   <!-- User avatar (top-right when logged-in) -->
   <div id="userAvatar" class="user-avatar" hidden>
-    <img src="  https://i.imgur.com/7z9vUuW.jpg  " alt="User">
+    <img src="https://i.imgur.com/7z9vUuW.jpg" alt="User">
   </div>
 
   <!-- HERO WITH VIDEO -->
@@ -245,7 +246,7 @@
         <em>Closed on Sundays</em><br>
         <strong>Contact:</strong> <a href="tel:0550770772" class="golden-text">055 077 0772</a> (Mobile / WhatsApp)
         <span style="margin-left:.5em;">
-          <a href="  https://wa.me/233550770772  " target="_blank" class="golden-text">WhatsApp Chat</a>
+          <a href="https://wa.me/233550770772" target="_blank" class="golden-text">WhatsApp Chat</a>
         </span>
       </div>
       <div class="scissors"></div>
@@ -328,11 +329,11 @@
         </div>
       </div>
       <form class="booking-form" id="bookingForm">
-        <!-- Hidden inputs for service details -->
+        <!-- Hidden inputs for service details (might be used by other scripts, but form reads dropdown directly) -->
         <input type="hidden" id="serviceNameInput" name="serviceName">
         <input type="hidden" id="servicePriceInput" name="servicePrice">
 
-        <!-- Service Selection Dropdown (Replaces hidden inputs for the script) -->
+        <!-- Service Selection Dropdown (This is what the script reads) -->
         <div class="form-group">
           <label for="service">Select Service</label>
           <select id="service" name="service" required>
@@ -414,19 +415,19 @@
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
         <!-- TikTok -->
-        <a href="  https://vm.tiktok.com/ZMAJPjpqu/  " target="_blank" aria-label="TikTok">
+        <a href="https://vm.tiktok.com/ZMAJPjpqu/" target="_blank" aria-label="TikTok">
           <svg viewBox="0 0 24 24"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
         </a>
       </span>
     </p>
   </footer>
 
-  <!-- 1. Add Firebase SDKs -->
+  <!-- 1. Add Firebase SDKs and Booking Logic -->
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-    import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -443,7 +444,7 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // 💰 Hardcoded service prices (Same as before)
+    // 💰 Hardcoded service prices (Must match the 'value' attribute of options in the dropdown)
     const servicePrices = {
       "Regular Haircut": 100,
       "Beard Trim": 80,
@@ -456,108 +457,133 @@
       "lowcut+texturizer": 180 // Added the new service
     };
 
-    // Firebase anonymous sign-in (Same as before)
-    import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js ";
-    import {
-      collection,
-      addDoc,
-      serverTimestamp,
-      doc,
-      getDoc
-    } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js ";
-
+    // Firebase anonymous sign-in
     signInAnonymously(auth)
       .then(() => console.log('✅ Firebase signed in anonymously'))
       .catch((error) => console.error("❌ Firebase anonymous login failed:", error.message));
 
-    // Booking form logic (Same as before, but adapted to the new form structure)
+    // Booking form logic - Waits for auth state before attaching listeners
     onAuthStateChanged(auth, user => {
-      if (!user) return;
+      if (!user) {
+        console.error("❌ Firebase user not available for booking.");
+        // Potentially disable booking UI if user is not authenticated
+        document.getElementById('bookingForm')?.addEventListener('submit', (e) => {
+          e.preventDefault();
+          document.getElementById('bookingMsg').textContent = '❌ Authentication error. Please refresh the page.';
+        });
+        return;
+      }
+
+      console.log("✅ User authenticated, ready for bookings.");
 
       const form = document.getElementById('bookingForm');
       const msg = document.getElementById('bookingMsg');
       const serviceSelect = document.getElementById('service');
 
-      // Live price preview when service is selected (Updated for dropdown)
-      serviceSelect?.addEventListener('change', () => {
+      if (!form || !msg || !serviceSelect) {
+        console.error("❌ Required form elements not found.");
+        return;
+      }
+
+      // Live price preview when service is selected
+      serviceSelect.addEventListener('change', () => {
         const selectedService = serviceSelect.value;
         const price = servicePrices[selectedService];
-        if (price) {
+        if (price !== undefined) { // Check for undefined explicitly
           // Update the displayed price in the preview section
           document.getElementById("selectedServicePrice").textContent = `GHS ${price}`;
           // Update the hidden input if needed by other parts of your script
           document.getElementById("servicePriceInput").value = `GHS ${price}`;
           msg.innerHTML = `💸 Selected service: <strong>${selectedService}</strong> – GHS ${price}`;
         } else {
-          msg.textContent = '';
-          // Reset the displayed price if no service is selected
-          const originalPrice = document.getElementById("selectedServiceName").getAttribute("data-original-price");
+          // If no valid service is selected, clear the preview and message
+          const originalPriceElement = document.getElementById("selectedServiceName");
+          const originalPrice = originalPriceElement.getAttribute("data-original-price") || "Service Price";
           document.getElementById("selectedServicePrice").textContent = originalPrice;
           document.getElementById("servicePriceInput").value = originalPrice;
+          msg.textContent = '';
         }
       });
 
-      form?.addEventListener('submit', async e => {
-        e.preventDefault();
+      form.addEventListener('submit', async e => {
+        e.preventDefault(); // Prevent default form submission
 
+        // Get form values
         const name = document.getElementById('name').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const date = document.getElementById('date').value;
         const time = document.getElementById('time').value;
-        const service = document.getElementById('service').value; // Get from dropdown
-        const amount = servicePrices[service] || 0; // Get price from map
+        const service = serviceSelect.value; // Get from dropdown
+        const notes = document.getElementById('notes').value.trim(); // Optional notes
+        const amount = servicePrices[service]; // Get price from map
+
+        // Validation
+        if (!name || !phone || !date || !time || !service || amount === undefined) {
+             msg.textContent = '❌ Please fill in all required fields and select a valid service.';
+             return;
+        }
 
         // Get MoMo number from Firestore
-        const momoSnap = await getDoc(doc(db, "settings", "momo"));
-        const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336'; // Fallback number
+        try {
+          const momoSnap = await getDoc(doc(db, "settings", "momo"));
+          const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336'; // Fallback number from TikTok page
 
-        msg.innerHTML = `
-          ✅ Please send <strong>GHS ${amount}</strong> to MTN MoMo number:
-          <strong>${momoNumber}</strong><br>
-          Then tap the “I’ve Paid” button below to confirm.
-          <br><br>
-          <button id="confirmPaid" class="confirm-button">I’ve Paid</button>
-        `;
+          msg.innerHTML = `
+            ✅ Please send <strong>GHS ${amount}</strong> to MTN MoMo number:
+            <strong>${momoNumber}</strong><br>
+            Then tap the “I’ve Paid” button below to confirm.
+            <br><br>
+            <button id="confirmPaid" class="confirm-button">I’ve Paid</button>
+          `;
 
-        // Wait for "I’ve Paid" button
-        setTimeout(() => {
-          const confirmBtn = document.getElementById('confirmPaid');
+          // Wait for "I’ve Paid" button click
+          // Using setTimeout to ensure the button is rendered before attaching listener
+          setTimeout(() => {
+            const confirmBtn = document.getElementById('confirmPaid');
+            if (confirmBtn) {
+              confirmBtn.addEventListener('click', async () => {
+                msg.textContent = '⏳ Verifying and saving your booking...';
 
-          confirmBtn?.addEventListener('click', async () => {
-            msg.textContent = '⏳ Verifying and saving your booking...';
+                try {
+                  // Add the booking to the pending_bookings collection
+                  await addDoc(collection(db, 'pending_bookings'), {
+                    name,
+                    phone,
+                    email: document.getElementById('email').value.trim(), // Optional
+                    date,
+                    time,
+                    service,
+                    amount,
+                    notes, // Include notes
+                    momoNumber, // Store the MoMo number used
+                    status: 'pending', // Default status
+                    created: serverTimestamp() // Timestamp
+                  });
 
-            try {
-              await addDoc(collection(db, 'pending_bookings'), {
-                name,
-                phone,
-                date,
-                time,
-                service,
-                amount,
-                momoNumber,
-                status: 'pending',
-                created: serverTimestamp()
+                  msg.innerHTML = '✅ Booking request received! We’ll confirm once payment is verified.<br><strong>Please close this window.</strong>';
+                  // Optionally disable the form or clear it, but keeping data might be useful if user wants to book again
+                  // form.reset();
+
+                } catch (err) {
+                  console.error("Firestore Error:", err);
+                  msg.textContent = '❌ Failed to save booking: ' + err.message;
+                }
               });
-
-              msg.textContent = '✅ Booking request received! We’ll confirm once payment is verified.';
-              form.reset();
-              // Optionally reset the service selection preview too
-              const originalPrice = document.getElementById("selectedServiceName").getAttribute("data-original-price");
-              document.getElementById("selectedServicePrice").textContent = originalPrice;
-              document.getElementById("servicePriceInput").value = originalPrice;
-              serviceSelect.value = ''; // Reset dropdown
-
-            } catch (err) {
-              msg.textContent = '❌ Failed to save booking: ' + err.message;
-              console.error(err);
+            } else {
+              console.error("Confirm button not found after message update.");
+              msg.textContent = '❌ An error occurred. Please try booking again.';
             }
-          });
-        }, 100);
+          }, 100); // Small delay to ensure DOM update
+
+        } catch (error) {
+            console.error("Error fetching MoMo number:", error);
+            msg.textContent = '❌ Could not retrieve payment details. Please contact us directly.';
+        }
       });
     });
   </script>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js  "></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     // Initialize AOS
     AOS.init({duration:800, once:true});
@@ -567,22 +593,34 @@
 
     // Function to open the modal and populate service details
     function openBookingModal(serviceName, servicePrice, serviceImage) {
-        document.getElementById("selectedServiceName").textContent = serviceName;
-        // Store original price for reset later
-        document.getElementById("selectedServiceName").setAttribute("data-original-price", servicePrice);
-        document.getElementById("selectedServicePrice").textContent = servicePrice;
-        // Set the image source
-        document.getElementById("modalServiceImage").src = serviceImage;
-        document.getElementById("modalServiceImage").alt = serviceName;
-        // Populate hidden inputs in the form
-        document.getElementById("serviceNameInput").value = serviceName;
-        document.getElementById("servicePriceInput").value = servicePrice;
-        // Pre-select the service in the dropdown
+        const nameElement = document.getElementById("selectedServiceName");
+        const priceElement = document.getElementById("selectedServicePrice");
+        const imageElement = document.getElementById("modalServiceImage");
+        const nameInput = document.getElementById("serviceNameInput");
+        const priceInput = document.getElementById("servicePriceInput");
         const serviceDropdown = document.getElementById('service');
-        serviceDropdown.value = serviceName; // This will trigger the change event handled by the Firebase script
+
+        // Populate elements
+        nameElement.textContent = serviceName;
+        // Store original price for reset later using a data attribute
+        nameElement.setAttribute("data-original-price", servicePrice);
+        priceElement.textContent = servicePrice;
+        imageElement.src = serviceImage;
+        imageElement.alt = serviceName;
+        nameInput.value = serviceName;
+        priceInput.value = servicePrice;
+
+        // Pre-select the service in the dropdown *only* if it exists
+        if (serviceDropdown.querySelector(`option[value="${serviceName}"]`)) {
+            serviceDropdown.value = serviceName; // This will trigger the change event handled by the Firebase script
+        } else {
+            console.warn(`Service "${serviceName}" not found in dropdown options.`);
+            // Optionally reset the dropdown if the service doesn't match
+            serviceDropdown.value = '';
+        }
+
         // Show the modal
         modal.style.display = "block";
-        // Add the 'show' class to trigger the animation
         modal.classList.add('show');
         // Prevent background scrolling
         document.body.style.overflow = 'hidden';
@@ -598,14 +636,17 @@
             // Re-enable background scrolling
             document.body.style.overflow = '';
             // Reset the form
-            document.getElementById("bookingForm").reset();
+            document.getElementById("bookingForm")?.reset();
             // Reset the message area
             document.getElementById("bookingMsg").textContent = '';
-            // Reset the displayed price to original
-            const originalPrice = document.getElementById("selectedServiceName").getAttribute("data-original-price");
+            // Reset the displayed price to original (if available)
+            const nameElement = document.getElementById("selectedServiceName");
+            const originalPrice = nameElement.getAttribute("data-original-price");
             if (originalPrice) {
                document.getElementById("selectedServicePrice").textContent = originalPrice;
             }
+            // Reset the service dropdown selection
+            document.getElementById('service').value = '';
         }, 300);
     }
 
@@ -616,7 +657,7 @@
         }
     }
 
-    // Note: The form submission is now handled by the Firebase script above, not here
+    // Note: The form submission is now handled by the Firebase script above
   </script>
 </body>
 </html>
