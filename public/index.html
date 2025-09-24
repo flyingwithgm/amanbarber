@@ -1303,10 +1303,7 @@
         const service = serviceSelect.value;
         const notes = document.getElementById('notes').value.trim();
         const amount = servicePrices[service];
-        if (!name || !phone || !date || !time || !service || amount === undefined) {
-             msg.textContent = '❌ Please fill in all required fields and select a valid service.';
-             return;
-        }
+        
         try {
           const momoSnap = await getDoc(doc(db, "settings", "momo"));
           const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336';
