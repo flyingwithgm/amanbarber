@@ -2,61 +2,594 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Amanfour Barbers – Premium Booking</title>
+  <title>Amanfour Barbers Palace - Premium Grooming Experience</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css"> <!-- Make sure this path is correct -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Existing styles remain unchanged */
-    .footer-social-icons{display:inline-flex;gap:.7em;vertical-align:middle;margin-left:1em}
-    .footer-social-icons a{display:inline-flex;align-items:center;text-decoration:none;transition:opacity .2s;opacity:.85}
-    .footer-social-icons a:hover{opacity:1}
-    .footer-social-icons svg{width:26px;height:26px;fill:#FFD700;display:block}
-    .golden-text{color:#FFD700 !important;text-decoration:none}
-    .golden-text:hover{text-decoration:underline}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    /* Updated styles for the booking modal - Compact & Refined */
+    :root {
+      --primary-gold: #FFD700;
+      --dark-bg: #1a1a1a;
+      --darker-bg: #0d0d0d;
+      --light-text: #f0f0f0;
+      --medium-text: #ccc;
+      --border-color: #333;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--light-text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: rgba(13, 13, 13, 0.95);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 15px 0;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--light-text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-gold);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      text-align: center;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      color: var(--primary-gold);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: var(--medium-text);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: var(--primary-gold);
+      color: var(--dark-bg);
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: 2px solid var(--primary-gold);
+      margin: 5px;
+    }
+
+    .btn:hover {
+      background-color: transparent;
+      color: var(--primary-gold);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-gold);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-gold);
+      color: var(--dark-bg);
+    }
+
+    /* About Section */
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary-gold);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--primary-gold);
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--primary-gold);
+    }
+
+    .about-text p {
+      margin-bottom: 15px;
+      color: var(--medium-text);
+    }
+
+    .about-image {
+      flex: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Services Section */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: rgba(30, 30, 30, 0.7);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid var(--border-color);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+
+    .service-image {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.1);
+    }
+
+    .service-info {
+      padding: 20px;
+    }
+
+    .service-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: var(--primary-gold);
+    }
+
+    .service-info p {
+      color: var(--medium-text);
+      margin-bottom: 15px;
+    }
+
+    .service-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      margin-bottom: 15px;
+    }
+
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .team-member {
+      text-align: center;
+      background: rgba(30, 30, 30, 0.7);
+      border-radius: 10px;
+      padding: 30px 20px;
+      transition: transform 0.3s;
+      border: 1px solid var(--border-color);
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+    }
+
+    .member-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 20px;
+      border: 3px solid var(--primary-gold);
+    }
+
+    .member-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .member-name {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--primary-gold);
+    }
+
+    .member-role {
+      color: var(--medium-text);
+      margin-bottom: 15px;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      background: rgba(20, 20, 20, 0.7);
+      padding: 80px 0;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      background: rgba(30, 30, 30, 0.9);
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 20px;
+      color: var(--medium-text);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+
+    .author-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+    }
+
+    .author-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-info h4 {
+      color: var(--primary-gold);
+      margin-bottom: 5px;
+    }
+
+    .author-info p {
+      color: var(--medium-text);
+      font-size: 0.9rem;
+    }
+
+    /* Contact Section */
+    .contact-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 50px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--primary-gold);
+    }
+
+    .contact-details h4 {
+      margin-bottom: 5px;
+      color: var(--primary-gold);
+    }
+
+    .contact-details p, .contact-details a {
+      color: var(--medium-text);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-details a:hover {
+      color: var(--primary-gold);
+    }
+
+    .contact-form {
+      background: rgba(30, 30, 30, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--medium-text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      color: var(--light-text);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-gold);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--darker-bg);
+      padding: 60px 0 30px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      color: var(--primary-gold);
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: var(--medium-text);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 215, 0, 0.1);
+      border-radius: 50%;
+      color: var(--primary-gold);
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--primary-gold);
+      color: var(--dark-bg);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid var(--border-color);
+      color: var(--medium-text);
+      font-size: 0.9rem;
+    }
+
+    /* Booking Modal */
     .modal {
-      display: none; /* Hidden by default */
+      display: none;
       position: fixed;
       z-index: 1000;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-      backdrop-filter: blur(5px); /* Slight blur effect on background */
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
     }
 
     .modal-content {
-      background-color: #1e1e1e; /* Darker, more refined background */
-      margin: 5% auto; /* Center vertically with top margin */
-      padding: 0; /* Remove default padding */
-      border: 1px solid #FFD700; /* Golden border */
+      background-color: #1e1e1e;
+      margin: 5% auto;
+      padding: 0;
+      border: 1px solid var(--primary-gold);
       border-radius: 12px;
       width: 90%;
-      max-width: 450px; /* Much smaller width */
-      color: #f0f0f0; /* Light text color */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Deeper shadow */
+      max-width: 450px;
+      color: var(--light-text);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       position: relative;
-      display: flex; /* Use flexbox for layout */
+      display: flex;
       flex-direction: column;
-      transform: translateY(-50px); /* Start slightly above */
-      opacity: 0; /* Start transparent */
-      transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Smooth animation */
+      transform: translateY(-50px);
+      opacity: 0;
+      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     }
 
-    /* Animation for when modal is shown */
     .modal.show .modal-content {
-      transform: translateY(0); /* Move to original position */
-      opacity: 1; /* Fade in */
+      transform: translateY(0);
+      opacity: 1;
     }
 
     .modal-header {
-      background-color: #2a2a2a; /* Slightly lighter header background */
+      background-color: #2a2a2a;
       padding: 15px 20px;
-      border-bottom: 1px solid #FFD700;
-      border-radius: 12px 12px 0 0; /* Rounded top corners */
+      border-bottom: 1px solid var(--primary-gold);
+      border-radius: 12px 12px 0 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -64,12 +597,12 @@
 
     .modal-header h2 {
       margin: 0;
-      color: #FFD700;
+      color: var(--primary-gold);
       font-size: 1.4em;
     }
 
     .close {
-      color: #FFD700;
+      color: var(--primary-gold);
       font-size: 24px;
       font-weight: bold;
       cursor: pointer;
@@ -95,19 +628,19 @@
       display: flex;
       padding: 15px;
       gap: 15px;
-      border-bottom: 1px solid #333; /* Subtle separator */
+      border-bottom: 1px solid #333;
     }
 
     .service-preview img {
-      width: 80px; /* Fixed width for image */
-      height: 80px; /* Fixed height for image */
-      object-fit: cover; /* Cover the area */
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
       border-radius: 8px;
       border: 1px solid #444;
     }
 
     .service-preview-info {
-      flex: 1; /* Take remaining space */
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -116,29 +649,29 @@
     .service-preview-info h3 {
       margin: 0 0 5px 0;
       font-size: 1.2em;
-      color: #f0f0f0;
+      color: var(--light-text);
     }
 
     .service-preview-info p {
       margin: 0;
       font-size: 1.1em;
-      color: #FFD700;
+      color: var(--primary-gold);
     }
 
     .booking-form {
-      padding: 15px 20px 20px 20px; /* Padding inside the form area */
+      padding: 15px 20px 20px 20px;
       display: flex;
       flex-direction: column;
     }
 
     .form-group {
-      margin-bottom: 12px; /* Reduced margin */
+      margin-bottom: 12px;
     }
 
     .form-group label {
       display: block;
-      margin-bottom: 4px; /* Reduced margin */
-      color: #ccc; /* Slightly dimmer label */
+      margin-bottom: 4px;
+      color: #ccc;
       font-size: 0.9em;
     }
 
@@ -149,26 +682,26 @@
       padding: 10px;
       border: 1px solid #444;
       border-radius: 6px;
-      background-color: #2a2a2a; /* Darker input background */
-      color: #f0f0f0;
+      background-color: #2a2a2a;
+      color: var(--light-text);
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif; /* Ensure consistent font */
+      font-family: 'Poppins', sans-serif;
     }
 
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
       outline: none;
-      border-color: #FFD700; /* Highlight on focus */
+      border-color: var(--primary-gold);
     }
 
     .form-group textarea {
-      height: 70px; /* Reduced height */
+      height: 70px;
       resize: vertical;
     }
 
     .btn-submit {
-      background-color: #FFD700;
+      background-color: var(--primary-gold);
       color: #1a1a1a;
       padding: 12px;
       border: none;
@@ -177,32 +710,31 @@
       font-size: 1.1em;
       font-weight: 600;
       transition: background-color 0.2s, transform 0.1s;
-      margin-top: 5px; /* Reduced top margin */
+      margin-top: 5px;
     }
 
     .btn-submit:hover {
-      background-color: #e6c200; /* Slightly darker on hover */
+      background-color: #e6c200;
     }
 
     .btn-submit:active {
       transform: scale(0.98);
-      background-color: #d6b300; /* Even darker on active */
+      background-color: #d6b300;
     }
 
-    /* Added styles for the message area */
     #bookingMsg {
       margin: 10px 0;
       padding: 10px;
       border-radius: 5px;
-      background-color: #2a2a2a; /* Match form background */
-      border: 1px solid #444; /* Subtle border */
+      background-color: #2a2a2a;
+      border: 1px solid #444;
       font-size: 0.95em;
       text-align: center;
-      min-height: 20px; /* Ensure space for messages */
+      min-height: 20px;
     }
 
     .confirm-button {
-      background-color: #4CAF50; /* Green for confirmation */
+      background-color: #4CAF50;
       color: white;
       padding: 8px 16px;
       border: none;
@@ -215,104 +747,401 @@
     .confirm-button:hover {
       background-color: #45a049;
     }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .about-content {
+        flex-direction: column;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <!-- User avatar (top-right when logged-in) -->
-  <div id="userAvatar" class="user-avatar" hidden>
-    <img src="https://i.imgur.com/7z9vUuW.jpg" alt="User">
-  </div>
-
-  <!-- HERO WITH VIDEO -->
-  <header class="hero-banner">
-    <video class="hero-video" playsinline muted autoplay loop poster="IMG-20250722-WA0027.jpg">
-      <source src="hero1.mp4"  type="video/mp4">
-      <source src="hero1.webm" type="video/webm">
-      <img src="IMG-20250722-WA0027.jpg" alt="Amanfour Barbers">
-    </video>
-
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>Amanfour Barbers Place</h1>
-      <h2>Elite grooming on Tamso New Road, Tarkwa</h2>
-      <div class="hero-ctas">
-        <a href="#services" class="btn-primary">Book Now</a>
-        <a href="https://www.google.com/maps?q=Amanfour+Barbers+Palace,+Tamso+New+Road+Tarkwa"
-           class="btn-directions" target="_blank">Get Directions</a>
-      </div>
-      <div class="hero-contact-hours" style="margin-top:1.2em;display:inline-block;">
-        <strong>Opening Hours:</strong> Monday – Saturday, 9:30am – 9:00pm<br>
-        <em>Closed on Sundays</em><br>
-        <strong>Contact:</strong> <a href="tel:0550770772" class="golden-text">055 077 0772</a> (Mobile / WhatsApp)
-        <span style="margin-left:.5em;">
-          <a href="https://wa.me/233550770772" target="_blank" class="golden-text">WhatsApp Chat</a>
-        </span>
-      </div>
-      <div class="scissors"></div>
-      <div class="clippers"></div>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="#" class="logo">Amanfour<span>Barbers</span></a>
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#team">Team</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
     </div>
   </header>
 
-  <!-- Services -->
-  <section id="services">
-    <h2>Choose Your Service</h2>
-    <div class="service-grid">
-      <div class="service-card">
-        <img src="regularhaircut.jpg" alt="Regular Haircut">
-        <h3>Regular Haircut</h3><p>GHS 100</p>
-        <button class="btn-book" onclick="openBookingModal('Regular Haircut', 'GHS 100', 'regularhaircut.jpg')">Book</button>
-      </div>
-
-      <div class="service-card">
-        <img src="beardtrim2.jpg" alt="Beard Trim">
-        <h3>Beard Trim</h3><p>GHS 80</p>
-        <button class="btn-book" onclick="openBookingModal('Beard Trim', 'GHS 80', 'beardtrim2.jpg')">Book</button>
-      </div>
-
-      <div class="service-card">
-        <img src="cut+enhancements2.jpg" alt="Cut + Enhancement">
-        <h3>Cut + Enhancement</h3><p>GHS 120</p>
-        <button class="btn-book" onclick="openBookingModal('Cut + Enhancement', 'GHS 120', 'cut+enhancements2.jpg')">Book</button>
-      </div>
-
-      <div class="service-card">
-        <img src="Haircut+texturizer2.jpg" alt="Haircut + Texturizer">
-        <h3>Haircut + Texturizer</h3><p>GHS 180</p>
-        <button class="btn-book" onclick="openBookingModal('Haircut + Texturizer', 'GHS 180', 'Haircut+texturizer2.jpg')">Book</button>
-      </div>
-
-      <div class="service-card">
-        <img src="pixiecut2.jpg" alt="Pixie Cut">
-        <h3>Pixie Cut</h3><p>GHS 250</p>
-        <button class="btn-book" onclick="openBookingModal('Pixie Cut', 'GHS 250', 'pixiecut2.jpg')">Book</button>
-      </div>
-
-      <div class="service-card">
-        <img src="extension.jpg" alt="Extensions">
-        <h3>Extensions</h3><p>GHS 500</p>
-        <button class="btn-book" onclick="openBookingModal('Extensions', 'GHS 500', 'extension.jpg')">Book</button>
-      </div>
-
-      <div class="service-card">
-        <img src="completecolor.jpg" alt="Complete Color">
-        <h3>Complete Color</h3><p>GHS 220</p>
-        <button class="btn-book" onclick="openBookingModal('Complete Color', 'GHS 220', 'completecolor.jpg')">Book</button>
-      </div>
-
-      <div class="service-card">
-        <img src="partcolor.jpg" alt="Part Color">
-        <h3>Part Color</h3><p>GHS 180</p>
-        <button class="btn-book" onclick="openBookingModal('Part Color', 'GHS 180', 'partcolor.jpg')">Book</button>
-      </div>
-
-      <div class="service-card">
-        <img src="lowcut+texturizer.jpg" alt="lowcut+texturizer">
-        <h3>lowcut+texturizer</h3><p>GHS 180</p>
-        <button class="btn-book" onclick="openBookingModal('lowcut+texturizer', 'GHS 180', 'lowcut+texturizer.jpg')">Book</button>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <video class="hero-video" playsinline muted autoplay loop poster="IMG-20250722-WA0027.jpg">
+      <source src="hero1.mp4" type="video/mp4">
+      <source src="hero1.webm" type="video/webm">
+      <img src="IMG-20250722-WA0027.jpg" alt="Amanfour Barbers">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Elite Grooming Experience</h1>
+      <p>Amanfour Barbers Palace - Where Style Meets Precision. Located on Tamso New Road, Tarkwa.</p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn">Book Now</a>
+        <a href="#contact" class="btn btn-outline">Contact Us</a>
       </div>
     </div>
   </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>About Us</h2>
+      </div>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Premium Barbering Since 2020</h3>
+          <p>At Amanfour Barbers Palace, we specialize in creating the perfect look for the modern gentleman. Our experienced barbers combine traditional techniques with contemporary styles to deliver exceptional results.</p>
+          <p>Located in the heart of Tarkwa on Tamso New Road, we've been serving the community with premium grooming services for years. Our commitment to excellence and attention to detail has made us the go-to destination for men's grooming needs.</p>
+          <p>With state-of-the-art facilities and premium products, we ensure every visit is a premium experience. Our barbers are trained in the latest techniques and trends to keep you looking your best.</p>
+          <a href="#services" class="btn">Our Services</a>
+        </div>
+        <div class="about-image">
+          <img src="https://placehold.co/600x400/1a1a1a/FFD700?text=Barber+Shop+Interior" alt="Barber Shop Interior">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Services</h2>
+      </div>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="service-image">
+            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Regular+Haircut" alt="Regular Haircut">
+          </div>
+          <div class="service-info">
+            <h3>Regular Haircut</h3>
+            <p>Precision cutting with professional clippers and scissors for a clean, sharp look.</p>
+            <div class="service-price">GHS 100</div>
+            <button class="btn" onclick="openBookingModal('Regular Haircut', 'GHS 100', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Regular+Haircut')">Book Now</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-image">
+            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Beard+Trim" alt="Beard Trim">
+          </div>
+          <div class="service-info">
+            <h3>Beard Trim</h3>
+            <p>Professional shaping and trimming for a perfectly groomed beard.</p>
+            <div class="service-price">GHS 80</div>
+            <button class="btn" onclick="openBookingModal('Beard Trim', 'GHS 80', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Beard+Trim')">Book Now</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-image">
+            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Cut+%2B+Enhancement" alt="Cut + Enhancement">
+          </div>
+          <div class="service-info">
+            <h3>Cut + Enhancement</h3>
+            <p>Haircut with additional styling services for a complete look.</p>
+            <div class="service-price">GHS 120</div>
+            <button class="btn" onclick="openBookingModal('Cut + Enhancement', 'GHS 120', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Cut+%2B+Enhancement')">Book Now</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-image">
+            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Haircut+%2B+Texturizer" alt="Haircut + Texturizer">
+          </div>
+          <div class="service-info">
+            <h3>Haircut + Texturizer</h3>
+            <p>Professional haircut with texturizing treatment for added dimension.</p>
+            <div class="service-price">GHS 180</div>
+            <button class="btn" onclick="openBookingModal('Haircut + Texturizer', 'GHS 180', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Haircut+%2B+Texturizer')">Book Now</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-image">
+            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Pixie+Cut" alt="Pixie Cut">
+          </div>
+          <div class="service-info">
+            <h3>Pixie Cut</h3>
+            <p>Sharp, precise cutting for a modern, edgy look.</p>
+            <div class="service-price">GHS 250</div>
+            <button class="btn" onclick="openBookingModal('Pixie Cut', 'GHS 250', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Pixie+Cut')">Book Now</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-image">
+            <img src="https://placehold.co/300x200/1a1a1a/FFD700?text=Extensions" alt="Extensions">
+          </div>
+          <div class="service-info">
+            <h3>Extensions</h3>
+            <p>Professional hair extensions for added length and volume.</p>
+            <div class="service-price">GHS 500</div>
+            <button class="btn" onclick="openBookingModal('Extensions', 'GHS 500', 'https://placehold.co/300x200/1a1a1a/FFD700?text=Extensions')">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Master Barbers</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-image">
+            <img src="https://placehold.co/150x150/1a1a1a/FFD700?text=Amanfour" alt="Amanfour">
+          </div>
+          <h3 class="member-name">Amanfour</h3>
+          <p class="member-role">Head Barber</p>
+          <p>With over 10 years of experience, Amanfour is our master barber specializing in classic cuts.</p>
+        </div>
+
+        <div class="team-member">
+          <div class="member-image">
+            <img src="https://placehold.co/150x150/1a1a1a/FFD700?text=Kwame" alt="Kwame">
+          </div>
+          <h3 class="member-name">Kwame</h3>
+          <p class="member-role">Senior Barber</p>
+          <p>Kwame brings modern styling techniques and specializes in beard grooming.</p>
+        </div>
+
+        <div class="team-member">
+          <div class="member-image">
+            <img src="https://placehold.co/150x150/1a1a1a/FFD700?text=Kofi" alt="Kofi">
+          </div>
+          <h3 class="member-name">Kofi</h3>
+          <p class="member-role">Senior Barber</p>
+          <p>Kofi focuses on precision cuts and is known for his attention to detail.</p>
+        </div>
+
+        <div class="team-member">
+          <div class="member-image">
+            <img src="https://placehold.co/150x150/1a1a1a/FFD700?text=Kwaku" alt="Kwaku">
+          </div>
+          <h3 class="member-name">Kwaku</h3>
+          <p class="member-role">Stylist</p>
+          <p>Kwaku specializes in trendy cuts and modern grooming techniques.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <div class="section-title">
+        <h2>What Our Clients Say</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">"The best grooming experience I've ever had. The attention to detail and professionalism is unmatched. Amanfour Palace is my go-to spot for all my grooming needs."</p>
+          <div class="testimonial-author">
+            <div class="author-image">
+              <img src="https://placehold.co/50x50/1a1a1a/FFD700?text=J" alt="John">
+            </div>
+            <div class="author-info">
+              <h4>John Mensah</h4>
+              <p>Regular Client</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"I've been coming here for 2 years now. The barbers know exactly what I want and always deliver. The atmosphere is relaxing and the service is top-notch."</p>
+          <div class="testimonial-author">
+            <div class="author-image">
+              <img src="https://placehold.co/50x50/1a1a1a/FFD700?text=M" alt="Michael">
+            </div>
+            <div class="author-info">
+              <h4>Michael Osei</h4>
+              <p>Loyal Customer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Professional service, clean environment, and the best cuts in town. I always leave feeling confident and well-groomed. Highly recommend!"</p>
+          <div class="testimonial-author">
+            <div class="author-image">
+              <img src="https://placehold.co/50x50/1a1a1a/FFD700?text=D" alt="David">
+            </div>
+            <div class="author-info">
+              <h4>David Asante</h4>
+              <p>New Client</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contact Us</h2>
+      </div>
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Location</h4>
+              <p>Amanfour Barbers Palace<br>Tamso New Road, Tarkwa</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Phone</h4>
+              <a href="tel:0550770772">055 077 0772</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="contact-details">
+              <h4>WhatsApp</h4>
+              <a href="https://wa.me/233550770772" target="_blank">Chat with us</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="contact-details">
+              <h4>Opening Hours</h4>
+              <p>Monday - Saturday: 9:30am - 9:00pm<br>Sunday: Closed</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" class="form-control" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Amanfour Barbers</h3>
+          <p>Your premier destination for premium grooming services in Tarkwa. Experience the perfect blend of traditional barbering and modern styling.</p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/amanfour_barbers_palace" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://vm.tiktok.com/ZMAJPjpqu/" target="_blank">
+              <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://wa.me/233550770772" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#team">Our Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Services</h3>
+          <ul class="footer-links">
+            <li><a href="#">Regular Haircut</a></li>
+            <li><a href="#">Beard Trim</a></li>
+            <li><a href="#">Haircut + Texturizer</a></li>
+            <li><a href="#">Extensions</a></li>
+            <li><a href="#">Complete Color</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> Tamso New Road, Tarkwa</li>
+            <li><i class="fas fa-phone"></i> 055 077 0772</li>
+            <li><i class="fab fa-whatsapp"></i> WhatsApp: 055 077 0772</li>
+            <li><i class="fas fa-envelope"></i> info@aman-barber.web.app</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2023 Amanfour Barbers Palace. All rights reserved. | Built by George Nuyekpe</p>
+      </div>
+    </div>
+  </footer>
 
   <!-- Booking Modal -->
   <div id="bookingModal" class="modal">
@@ -329,11 +1158,9 @@
         </div>
       </div>
       <form class="booking-form" id="bookingForm">
-        <!-- Hidden inputs for service details (might be used by other scripts, but form reads dropdown directly) -->
         <input type="hidden" id="serviceNameInput" name="serviceName">
         <input type="hidden" id="servicePriceInput" name="servicePrice">
 
-        <!-- Service Selection Dropdown (This is what the script reads) -->
         <div class="form-group">
           <label for="service">Select Service</label>
           <select id="service" name="service" required>
@@ -400,52 +1227,34 @@
           <label for="notes">Notes (Optional)</label>
           <textarea id="notes" name="notes"></textarea>
         </div>
-        <div id="bookingMsg"></div> <!-- Message area for script feedback -->
+        <div id="bookingMsg"></div>
         <button type="submit" class="btn-submit">Book Now</button>
       </form>
     </div>
   </div>
 
-  <footer>
-    <p>
-      Built by George Nuyekpe | Amanfour Barbers Palace, Tamso New Road, Tarkwa
-      <span class="footer-social-icons">
-        <!-- Instagram -->
-        <a href="https://www.instagram.com/amanfour_barbers_palace?igsh=MWNodzhnaHZxbnFoMA==" target="_blank" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
-        <!-- TikTok -->
-        <a href="https://vm.tiktok.com/ZMAJPjpqu/" target="_blank" aria-label="TikTok">
-          <svg viewBox="0 0 24 24"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-        </a>
-      </span>
-    </p>
-  </footer>
-
-  <!-- 1. Add Firebase SDKs and Booking Logic -->
+  <!-- Firebase SDKs -->
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
     import { getFirestore, collection, addDoc, serverTimestamp, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-    
-const firebaseConfig = {
-  apiKey: "AIzaSyCybqVlasAj69x6EljSlJJXavFJorN-csU",
-  authDomain: "aman-barber.firebaseapp.com",
-  projectId: "aman-barber",
-  storageBucket: "aman-barber.appspot.com", // ✅ FIXED
-  messagingSenderId: "146331198998",
-  appId: "1:146331198998:web:9d2fe984b2d6033127f737"
-};
-
+    const firebaseConfig = {
+      apiKey: "AIzaSyCybqVlasAj69x6EljSlJJXavFJorN-csU",
+      authDomain: "aman-barber.firebaseapp.com",
+      projectId: "aman-barber",
+      storageBucket: "aman-barber.appspot.com",
+      messagingSenderId: "146331198998",
+      appId: "1:146331198998:web:9d2fe984b2d6033127f737"
+    };
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // 💰 Hardcoded service prices (Must match the 'value' attribute of options in the dropdown)
+    // Service prices map
     const servicePrices = {
       "Regular Haircut": 100,
       "Beard Trim": 80,
@@ -455,7 +1264,7 @@ const firebaseConfig = {
       "Extensions": 500,
       "Complete Color": 220,
       "Part Color": 180,
-      "lowcut+texturizer": 180 // Added the new service
+      "lowcut+texturizer": 180
     };
 
     // Firebase anonymous sign-in
@@ -463,15 +1272,10 @@ const firebaseConfig = {
       .then(() => console.log('✅ Firebase signed in anonymously'))
       .catch((error) => console.error("❌ Firebase anonymous login failed:", error.message));
 
-    // Booking form logic - Waits for auth state before attaching listeners
+    // Booking form logic
     onAuthStateChanged(auth, user => {
       if (!user) {
         console.error("❌ Firebase user not available for booking.");
-        // Potentially disable booking UI if user is not authenticated
-        document.getElementById('bookingForm')?.addEventListener('submit', (e) => {
-          e.preventDefault();
-          document.getElementById('bookingMsg').textContent = '❌ Authentication error. Please refresh the page.';
-        });
         return;
       }
 
@@ -490,14 +1294,11 @@ const firebaseConfig = {
       serviceSelect.addEventListener('change', () => {
         const selectedService = serviceSelect.value;
         const price = servicePrices[selectedService];
-        if (price !== undefined) { // Check for undefined explicitly
-          // Update the displayed price in the preview section
+        if (price !== undefined) {
           document.getElementById("selectedServicePrice").textContent = `GHS ${price}`;
-          // Update the hidden input if needed by other parts of your script
           document.getElementById("servicePriceInput").value = `GHS ${price}`;
           msg.innerHTML = `💸 Selected service: <strong>${selectedService}</strong> – GHS ${price}`;
         } else {
-          // If no valid service is selected, clear the preview and message
           const originalPriceElement = document.getElementById("selectedServiceName");
           const originalPrice = originalPriceElement.getAttribute("data-original-price") || "Service Price";
           document.getElementById("selectedServicePrice").textContent = originalPrice;
@@ -507,38 +1308,33 @@ const firebaseConfig = {
       });
 
       form.addEventListener('submit', async e => {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault();
 
-        // Get form values
         const name = document.getElementById('name').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const date = document.getElementById('date').value;
         const time = document.getElementById('time').value;
-        const service = serviceSelect.value; // Get from dropdown
-        const notes = document.getElementById('notes').value.trim(); // Optional notes
-        const amount = servicePrices[service]; // Get price from map
+        const service = serviceSelect.value;
+        const notes = document.getElementById('notes').value.trim();
+        const amount = servicePrices[service];
 
-        // Validation
         if (!name || !phone || !date || !time || !service || amount === undefined) {
              msg.textContent = '❌ Please fill in all required fields and select a valid service.';
              return;
         }
 
-        // Get MoMo number from Firestore
         try {
           const momoSnap = await getDoc(doc(db, "settings", "momo"));
-          const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336'; // Fallback number from TikTok page
+          const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336';
 
           msg.innerHTML = `
             ✅ Please send <strong>GHS ${amount}</strong> to MTN MoMo number:
             <strong>${momoNumber}</strong><br>
-            Then tap the “I’ve Paid” button below to confirm.
+            Then tap the "I've Paid" button below to confirm.
             <br><br>
-            <button id="confirmPaid" class="confirm-button">I’ve Paid</button>
+            <button id="confirmPaid" class="confirm-button">I've Paid</button>
           `;
 
-          // Wait for "I’ve Paid" button click
-          // Using setTimeout to ensure the button is rendered before attaching listener
           setTimeout(() => {
             const confirmBtn = document.getElementById('confirmPaid');
             if (confirmBtn) {
@@ -546,24 +1342,21 @@ const firebaseConfig = {
                 msg.textContent = '⏳ Verifying and saving your booking...';
 
                 try {
-                  // Add the booking to the pending_bookings collection
                   await addDoc(collection(db, 'pending_bookings'), {
                     name,
                     phone,
-                    email: document.getElementById('email').value.trim(), // Optional
+                    email: document.getElementById('email').value.trim(),
                     date,
                     time,
                     service,
                     amount,
-                    notes, // Include notes
-                    momoNumber, // Store the MoMo number used
-                    status: 'pending', // Default status
-                    created: serverTimestamp() // Timestamp
+                    notes,
+                    momoNumber,
+                    status: 'pending',
+                    created: serverTimestamp()
                   });
 
-                  msg.innerHTML = '✅ Booking request received! We’ll confirm once payment is verified.<br><strong>Please close this window.</strong>';
-                  // Optionally disable the form or clear it, but keeping data might be useful if user wants to book again
-                  // form.reset();
+                  msg.innerHTML = '✅ Booking request received! We\'ll confirm once payment is verified.<br><strong>Please close this window.</strong>';
 
                 } catch (err) {
                   console.error("Firestore Error:", err);
@@ -574,7 +1367,7 @@ const firebaseConfig = {
               console.error("Confirm button not found after message update.");
               msg.textContent = '❌ An error occurred. Please try booking again.';
             }
-          }, 100); // Small delay to ensure DOM update
+          }, 100);
 
         } catch (error) {
             console.error("Error fetching MoMo number:", error);
@@ -584,81 +1377,92 @@ const firebaseConfig = {
     });
   </script>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     // Initialize AOS
-    AOS.init({duration:800, once:true});
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the modal element
+      const modal = document.getElementById("bookingModal");
 
-    // Get the modal element
-    const modal = document.getElementById("bookingModal");
+      // Function to open the modal and populate service details
+      function openBookingModal(serviceName, servicePrice, serviceImage) {
+          const nameElement = document.getElementById("selectedServiceName");
+          const priceElement = document.getElementById("selectedServicePrice");
+          const imageElement = document.getElementById("modalServiceImage");
+          const nameInput = document.getElementById("serviceNameInput");
+          const priceInput = document.getElementById("servicePriceInput");
+          const serviceDropdown = document.getElementById('service');
 
-    // Function to open the modal and populate service details
-    function openBookingModal(serviceName, servicePrice, serviceImage) {
-        const nameElement = document.getElementById("selectedServiceName");
-        const priceElement = document.getElementById("selectedServicePrice");
-        const imageElement = document.getElementById("modalServiceImage");
-        const nameInput = document.getElementById("serviceNameInput");
-        const priceInput = document.getElementById("servicePriceInput");
-        const serviceDropdown = document.getElementById('service');
+          // Populate elements
+          nameElement.textContent = serviceName;
+          nameElement.setAttribute("data-original-price", servicePrice);
+          priceElement.textContent = servicePrice;
+          imageElement.src = serviceImage;
+          imageElement.alt = serviceName;
+          nameInput.value = serviceName;
+          priceInput.value = servicePrice;
 
-        // Populate elements
-        nameElement.textContent = serviceName;
-        // Store original price for reset later using a data attribute
-        nameElement.setAttribute("data-original-price", servicePrice);
-        priceElement.textContent = servicePrice;
-        imageElement.src = serviceImage;
-        imageElement.alt = serviceName;
-        nameInput.value = serviceName;
-        priceInput.value = servicePrice;
+          // Pre-select the service in the dropdown
+          if (serviceDropdown.querySelector(`option[value="${serviceName}"]`)) {
+              serviceDropdown.value = serviceName;
+          } else {
+              console.warn(`Service "${serviceName}" not found in dropdown options.`);
+              serviceDropdown.value = '';
+          }
 
-        // Pre-select the service in the dropdown *only* if it exists
-        if (serviceDropdown.querySelector(`option[value="${serviceName}"]`)) {
-            serviceDropdown.value = serviceName; // This will trigger the change event handled by the Firebase script
-        } else {
-            console.warn(`Service "${serviceName}" not found in dropdown options.`);
-            // Optionally reset the dropdown if the service doesn't match
-            serviceDropdown.value = '';
-        }
+          // Show the modal
+          modal.style.display = "block";
+          modal.classList.add('show');
+          document.body.style.overflow = 'hidden';
+      }
 
-        // Show the modal
-        modal.style.display = "block";
-        modal.classList.add('show');
-        // Prevent background scrolling
-        document.body.style.overflow = 'hidden';
-    }
+      // Function to close the modal
+      function closeBookingModal() {
+          modal.classList.remove('show');
+          setTimeout(() => {
+              modal.style.display = "none";
+              document.body.style.overflow = '';
+              document.getElementById("bookingForm")?.reset();
+              document.getElementById("bookingMsg").textContent = '';
+              const nameElement = document.getElementById("selectedServiceName");
+              const originalPrice = nameElement.getAttribute("data-original-price");
+              if (originalPrice) {
+                 document.getElementById("selectedServicePrice").textContent = originalPrice;
+              }
+              document.getElementById('service').value = '';
+          }, 300);
+      }
 
-    // Function to close the modal
-    function closeBookingModal() {
-        // Remove the 'show' class to trigger the reverse animation
-        modal.classList.remove('show');
-        // Hide the modal after animation completes (0.3s)
-        setTimeout(() => {
-            modal.style.display = "none";
-            // Re-enable background scrolling
-            document.body.style.overflow = '';
-            // Reset the form
-            document.getElementById("bookingForm")?.reset();
-            // Reset the message area
-            document.getElementById("bookingMsg").textContent = '';
-            // Reset the displayed price to original (if available)
-            const nameElement = document.getElementById("selectedServiceName");
-            const originalPrice = nameElement.getAttribute("data-original-price");
-            if (originalPrice) {
-               document.getElementById("selectedServicePrice").textContent = originalPrice;
-            }
-            // Reset the service dropdown selection
-            document.getElementById('service').value = '';
-        }, 300);
-    }
+      // Close the modal if the user clicks outside the content box
+      window.onclick = function(event) {
+          if (event.target === modal) {
+              closeBookingModal();
+          }
+      }
 
-    // Close the modal if the user clicks outside the content box
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            closeBookingModal();
-        }
-    }
+      // Add smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
 
-    // Note: The form submission is now handled by the Firebase script above
+      // Contact form submission
+      const contactForm = document.getElementById('contactForm');
+      if(contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('Thank you for your message! We will get back to you soon.');
+          contactForm.reset();
+        });
+      }
+
+      // Expose functions to global scope for button clicks
+      window.openBookingModal = openBookingModal;
+      window.closeBookingModal = closeBookingModal;
+    });
   </script>
 </body>
 </html>
