@@ -4,426 +4,802 @@ AMANFOUR BARBERS – COMPLETE 2025 MASTER
 
 /* 0.  ROOT & RESET */
 :root {
---gold: #d4af37;
---gold-glow: #ffd700;
---black: #0e0e0e;
---white: #ffffff;
---glass: rgba(255, 255, 255, 0.08);
---glass-border: rgba(212, 175, 55, 0.25);
---shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
---shadow-glow: 0 0 25px var(--gold-glow);
---radius: 18px;
---ff: 'Poppins', sans-serif;
+  --gold: #d4af37;
+  --gold-glow: #ffd700;
+  --black: #0e0e0e;
+  --white: #ffffff;
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(212, 175, 55, 0.25);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 25px var(--gold-glow);
+  --radius: 18px;
+  --radius-sm: 12px; /* Added for smaller radius */
+  --ff: 'Poppins', sans-serif;
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-hover: transform 0.4s ease, box-shadow 0.4s ease;
 }
 *,
 *::before,
 *::after {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 html {
-scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 body {
-font-family: var(--ff);
-background: var(--black);
-color: var(--white);
-line-height: 1.6;
+  font-family: var(--ff);
+  background: var(--black);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* 1.  HERO – FULL-SCREEN CINEMATIC */
 .hero-banner {
-position: relative;
-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-background: url('IMG-20250722-WA0027.jpg') center/cover fixed;
-overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1; /* Ensure it's behind other content if needed */
 }
+
+/* Hero Video */
+.hero-video {
+  position: fixed; /* Fixed to viewport */
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%); /* Center the video */
+  object-fit: cover; /* Cover the area, cropping edges if necessary */
+  z-index: 0; /* Behind overlay and content */
+}
+
 .hero-overlay {
-position: absolute;
-inset: 0;
-background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+  z-index: 1; /* Above video, below content */
 }
+
 .hero-content {
-position: relative;
-z-index: 2;
-text-align: center;
-animation: fadeUp 1.2s ease-out;
+  position: relative;
+  z-index: 2; /* Above overlay */
+  text-align: center;
+  animation: fadeUp 1.2s ease-out;
+  max-width: 90%; /* Add max-width for better centering */
+  padding: 0 1rem; /* Add padding */
 }
+
 @keyframes fadeUp {
-from {
-opacity: 0;
-transform: translateY(30px);
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-to {
-opacity: 1;
-transform: translateY(0);
-}
-}
+
 .hero-content h1 {
-font-size: clamp(2.6rem, 7vw, 4.5rem);
-font-weight: 800;
-letter-spacing: 2px;
-background: linear-gradient(90deg, var(--gold), var(--gold-glow));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-filter: drop-shadow(0 0 10px var(--gold-glow));
+  font-size: clamp(2.2rem, 7vw, 4.5rem); /* Refined clamp for better scaling */
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px var(--gold-glow));
+  margin-bottom: 0.5rem; /* Add space below h1 */
 }
+
 .hero-content h2 {
-font-size: clamp(1rem, 2.5vw, 1.5rem);
-font-weight: 300;
-margin: 0.5rem 0 2rem;
-color: var(--white);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  margin: 0.5rem 0 2rem;
+  color: var(--white);
+  max-width: 80%; /* Constrain width on larger screens */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* 2.  HERO BUTTONS */
 .hero-ctas {
-display: flex;
-gap: 1rem;
-justify-content: center;
-flex-wrap: wrap;
+  display: flex;
+  gap: 1.2rem; /* Slightly increased gap */
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem; /* Add space below buttons */
 }
+
 .btn-primary,
 .btn-directions {
-padding: 1rem 2.6rem;
-border: none;
-border-radius: 50px;
-font-weight: 700;
-font-size: 1rem;
-text-decoration: none;
-cursor: pointer;
-transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: 1rem 2.6rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-hover);
+  display: inline-flex; /* Ensure proper alignment */
+  align-items: center;
+  justify-content: center;
 }
+
 .btn-primary {
-background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-color: var(--black);
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
 }
+
 .btn-primary:hover {
-transform: translateY(-4px) scale(1.03);
-box-shadow: 0 8px 30px var(--gold-glow);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 30px var(--gold-glow);
 }
+
 .btn-directions {
-background: transparent;
-color: var(--gold);
-border: 2px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
 }
+
 .btn-directions:hover {
-background: var(--gold);
-color: var(--black);
-transform: translateY(-4px) scale(1.03);
+  background: var(--gold);
+  color: var(--black);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 30px var(--gold-glow);
 }
 
 /* 3.  FLOATING ICONS */
 .scissors,
 .clippers {
-position: absolute;
-width: 60px;
-height: 60px;
-fill: var(--gold);
-opacity: 0.6;
-animation: float 6s ease-in-out infinite alternate;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  fill: var(--gold);
+  opacity: 0.6;
+  animation: float 6s ease-in-out infinite alternate;
+  z-index: 2; /* Above hero content */
 }
+
 .scissors {
-top: 20%;
-left: 5%;
-animation-delay: -2s;
+  top: 15%;
+  left: 5%;
+  animation-delay: -2s;
 }
+
 .clippers {
-bottom: 15%;
-right: 5%;
-animation-delay: -4s;
+  bottom: 15%;
+  right: 5%;
+  animation-delay: -4s;
 }
+
 @keyframes float {
-0% {
-transform: translateY(0) rotate(-5deg);
-}
-100% {
-transform: translateY(-15px) rotate(5deg);
-}
+  0% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(-15px) rotate(5deg);
+  }
 }
 
 /* 4.  SERVICES SECTION */
 #services {
-padding: 6rem 1.5rem;
-max-width: 1200px;
-margin: auto;
+  padding: 6rem 1.5rem;
+  max-width: 1400px; /* Increased max-width for larger screens */
+  margin: auto;
 }
+
 #services h2 {
-font-size: clamp(2rem, 5vw, 3rem);
-text-align: center;
-margin-bottom: 3.5rem;
-background: linear-gradient(90deg, var(--gold), var(--gold-glow));
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 3.5rem;
+  background: linear-gradient(90deg, var(--gold), var(--gold-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
 .service-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-gap: 2.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); /* More flexible grid */
+  gap: 2.8rem; /* Increased gap */
+  justify-items: center; /* Center items within grid cells */
 }
+
 .service-card {
-position: relative;
-background: var(--glass);
-border: 1px solid var(--glass-border);
-border-radius: var(--radius);
-padding: 1.4rem 1.2rem 2rem;
-backdrop-filter: blur(12px);
-box-shadow: var(--shadow-soft);
-transition: transform 0.45s, box-shadow 0.45s;
+  position: relative;
+  width: 100%; /* Ensure full width within grid cell */
+  max-width: 350px; /* Optional: cap card width */
+  border-radius: var(--radius-sm); /* Slightly smaller radius for card */
+  overflow: hidden; /* Clip content to card shape */
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-soft);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  transform-style: preserve-3d; /* For smoother 3D transforms */
 }
+
 .service-card:hover {
-transform: translateY(-12px) rotateX(4deg) rotateY(4deg);
-box-shadow: 0 16px 40px rgba(212, 175, 55, 0.25);
+  transform: translateY(-12px) scale(1.02); /* Slightly scale up on hover */
+  box-shadow: 0 16px 40px rgba(212, 175, 55, 0.35), 0 0 20px var(--gold-glow); /* Enhanced glow */
 }
-.service-card img {
-width: 100%;
-height: 180px;
-object-fit: cover;
-border-radius: var(--radius);
-transition: transform 0.5s ease;
+
+/* Service Card Image - Now the dominant element */
+.service-card .service-image {
+  width: 100%;
+  height: 220px; /* Set a fixed height for consistent card sizes */
+  object-fit: cover; /* Ensure image fills and crops proportionally */
+  display: block; /* Remove inline spacing */
+  transition: var(--transition-smooth);
 }
-.service-card:hover img {
-transform: scale(1.1);
+
+.service-card:hover .service-image {
+  transform: scale(1.05); /* Slight zoom on hover */
 }
+
+/* Overlay content for text and button */
+.service-card-content {
+  position: relative;
+  padding: 1.5rem 1.2rem 1.8rem; /* Adjusted padding */
+  z-index: 2; /* Above image */
+  background: linear-gradient(to top, rgba(14, 14, 14, 0.95), rgba(14, 14, 14, 0.7)); /* Subtle dark overlay */
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm); /* Match card radius */
+}
+
 .service-card h3 {
-margin: 0.8rem 0 0.3rem;
-font-size: 1.3rem;
-font-weight: 600;
-color: var(--gold);
+  margin: 0 0 0.4rem;
+  font-size: 1.4rem; /* Slightly larger font */
+  font-weight: 600;
+  color: var(--gold);
+  text-align: center;
 }
+
 .service-card p {
-font-size: 1.15rem;
-font-weight: 700;
-margin-bottom: 0.8rem;
+  font-size: 1.2rem; /* Slightly larger font */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--white);
 }
+
 .btn-book {
-position: absolute;
-top: 0.7rem;
-right: 0.7rem;
-padding: 0.45em 1em;
-font-size: 0.85rem;
-font-weight: 700;
-border-radius: 999px;
-background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-color: var(--black);
-text-decoration: none;
-transition: 0.3s;
-z-index: 3;
+  position: relative;
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 50px; /* Pill shape */
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
+  text-decoration: none;
+  transition: var(--transition-hover);
+  border: none;
+  cursor: pointer;
+  z-index: 3; /* Above content */
+  text-align: center;
 }
+
 .btn-book:hover {
-transform: scale(1.12);
-box-shadow: 0 0 15px var(--gold-glow);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--gold-glow);
 }
 
 /* 5.  BOOKING PAGES – FRAMED IMAGES  */
 .booking-main img {
-width: 100%;
-max-width: 320px;
-height: 180px;
-object-fit: cover;
-border-radius: var(--radius);
-border: 3px solid var(--gold);
-box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
-display: block;
-margin: 1.5rem auto;
+  width: 100%;
+  max-width: 320px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 3px solid var(--gold);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+  display: block;
+  margin: 1.5rem auto;
 }
 
 /* 6.  LOGIN / BOOKING FORMS */
 .login-card,
 .booking-form {
-max-width: 420px;
-margin: 5rem auto;
-padding: 2.4rem;
-background: var(--glass);
-border: 1px solid var(--gold);
-border-radius: var(--radius);
-backdrop-filter: blur(12px);
+  max-width: 460px; /* Slightly wider */
+  margin: 5rem auto;
+  padding: 2.6rem; /* Slightly more padding */
+  background: var(--glass);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
 }
+
 .login-card h2,
-.booking-form label {
-font-weight: 700;
-color: var(--gold);
+.booking-form h2 { /* Added h2 styling for booking form header */
+  font-weight: 700;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
+
 .login-card input,
 .booking-form input,
-.booking-form select {
-width: 100%;
-padding: 0.9rem;
-margin: 0.6rem 0;
-border: 1px solid var(--gold);
-border-radius: 8px;
-background: var(--black);
-color: var(--white);
-font-size: 1rem;
+.booking-form select,
+.booking-form textarea {
+  width: 100%;
+  padding: 1rem; /* Slightly more padding */
+  margin: 0.8rem 0; /* Slightly more margin */
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5); /* Slightly more opaque background */
+  color: var(--white);
+  font-size: 1rem;
+  transition: var(--transition-smooth);
 }
+
+.login-card input:focus,
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+  outline: none;
+  border-color: var(--gold-glow);
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
 .btn-login,
 .btn-submit {
-width: 100%;
-background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-color: var(--black);
-padding: 0.9rem;
-border: none;
-border-radius: 8px;
-font-weight: 700;
-cursor: pointer;
-transition: 0.3s;
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
+  padding: 1rem; /* Slightly more padding */
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-hover);
+  margin-top: 1rem; /* Add top margin */
 }
+
 .btn-login:hover,
 .btn-submit:hover {
-transform: scale(1.03);
-box-shadow: 0 0 15px var(--gold-glow);
+  transform: scale(1.03);
+  box-shadow: 0 0 20px var(--gold-glow);
 }
 
 /* 7.  ADMIN TABLE */
 .admin-wrapper {
-max-width: 1000px;
-margin: 5rem auto;
-padding: 2.4rem;
-background: var(--glass);
-border: 1px solid var(--gold);
-border-radius: var(--radius);
-backdrop-filter: blur(12px);
+  max-width: 1200px; /* Increased max-width */
+  margin: 5rem auto;
+  padding: 2.8rem; /* Slightly more padding */
+  background: var(--glass);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+  overflow-x: auto; /* Allow horizontal scroll if table is too wide */
 }
+
 .admin-wrapper h2 {
-text-align: center;
-font-size: 2.2rem;
-color: var(--gold);
-margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--gold);
+  margin-bottom: 2rem;
 }
+
 .admin-table {
-width: 100%;
-border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Prevent table from becoming too narrow */
 }
+
 .admin-table th,
 .admin-table td {
-padding: 0.8rem;
-border-bottom: 1px solid var(--gold);
-text-align: left;
-font-size: 0.9rem;
+  padding: 1rem; /* Slightly more padding */
+  border-bottom: 1px solid var(--gold);
+  text-align: left;
+  font-size: 0.95rem; /* Slightly larger font */
 }
+
 .admin-table th {
-background: var(--glass);
-color: var(--gold);
+  background: rgba(0, 0, 0, 0.3); /* Darker header background */
+  color: var(--gold);
+  position: sticky; /* Sticky header */
+  top: 0;
 }
+
+.admin-table tr:hover {
+  background: rgba(212, 175, 55, 0.1); /* Hover row background */
+}
+
 .admin-logout-btn {
-display: block;
-width: 160px;
-margin: 2rem auto;
-background: var(--gold);
-color: var(--black);
-border: none;
-padding: 0.8rem;
-border-radius: 24px;
-font-weight: 700;
-cursor: pointer;
+  display: block;
+  width: 180px; /* Slightly wider */
+  margin: 2.5rem auto 0; /* Centered, top margin only */
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow)); /* Gradient */
+  color: var(--black);
+  border: none;
+  padding: 0.9rem;
+  border-radius: 26px; /* Slightly rounder */
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-hover);
+}
+
+.admin-logout-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--gold-glow);
 }
 
 /* 8.  FOOTER */
 footer {
-text-align: center;
-padding: 2.5rem 1rem;
-color: var(--gold);
-font-size: 0.9rem;
-background: rgba(0, 0, 0, 0.35);
-backdrop-filter: blur(10px);
+  text-align: center;
+  padding: 3rem 1.5rem; /* Slightly more padding */
+  color: var(--gold);
+  font-size: 0.95rem; /* Slightly larger font */
+  background: rgba(0, 0, 0, 0.4); /* Slightly less transparent */
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--gold-glow); /* Subtle top border */
 }
 
 /* 9.  RESPONSIVE */
-@media (max-width: 600px) {
-.service-grid {
-grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  #services {
+    padding: 4rem 1rem; /* Reduced padding */
+  }
+  .service-grid {
+    gap: 2.2rem; /* Reduced gap */
+  }
+  .service-card h3 {
+    font-size: 1.3rem; /* Slightly smaller font */
+  }
+  .service-card p {
+    font-size: 1.1rem; /* Slightly smaller font */
+  }
+  .btn-book {
+    padding: 0.7rem 1rem; /* Slightly smaller button */
+    font-size: 0.95rem; /* Slightly smaller font */
+  }
+  .hero-content h1 {
+    font-size: clamp(1.8rem, 6vw, 3.5rem); /* Adjusted clamp */
+  }
+  .hero-content h2 {
+    font-size: clamp(0.9rem, 2vw, 1.3rem); /* Adjusted clamp */
+    max-width: 90%; /* Adjust max-width */
+  }
+  .hero-ctas {
+    gap: 1rem; /* Reduced gap */
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    align-items: center;
+  }
+  .btn-primary,
+  .btn-directions {
+    width: 100%; /* Full width buttons */
+    max-width: 300px; /* Limit max width */
+  }
+  .scissors,
+  .clippers {
+    width: 45px; /* Smaller icons */
+    height: 45px;
+  }
+  .login-card,
+  .booking-form {
+    margin: 3rem 1rem; /* Reduced margin */
+    padding: 2rem; /* Reduced padding */
+  }
+  .admin-wrapper {
+    margin: 3rem 1rem; /* Reduced margin */
+    padding: 2rem; /* Reduced padding */
+  }
+  .admin-table th,
+  .admin-table td {
+    padding: 0.8rem 0.5rem; /* Reduced padding */
+    font-size: 0.9rem; /* Slightly smaller font */
+  }
 }
-.hero-ctas {
-flex-direction: column;
-align-items: center;
+
+@media (max-width: 480px) {
+  .service-grid {
+    grid-template-columns: 1fr; /* Single column on very small screens */
+  }
+  .service-card {
+    max-width: 100%; /* Full width card */
+  }
+  .service-card .service-image {
+    height: 200px; /* Slightly smaller image height */
+  }
+  .hero-content h1 {
+    font-size: clamp(1.6rem, 5.5vw, 2.8rem); /* Further adjusted clamp */
+  }
+  .hero-content h2 {
+    font-size: clamp(0.8rem, 1.8vw, 1.1rem); /* Further adjusted clamp */
+  }
+  .btn-primary,
+  .btn-directions {
+    padding: 0.8rem 1.5rem; /* Adjusted padding */
+    font-size: 0.9rem; /* Slightly smaller font */
+  }
+  footer {
+    padding: 2rem 1rem; /* Reduced padding */
+    font-size: 0.9rem; /* Slightly smaller font */
+  }
+  .admin-wrapper h2 {
+    font-size: 2rem; /* Slightly smaller font */
+  }
+  .admin-logout-btn {
+    width: 100%; /* Full width button */
+    max-width: 200px; /* Limit max width */
+    padding: 0.8rem; /* Adjusted padding */
+  }
 }
-}
-* 10.  SUCCESS-STORM MODAL (embedded in booking pages) /
+
+/* 10.  SUCCESS-STORM MODAL (embedded in booking pages) */
 #successStorm {
-position: fixed;
-inset: 0;
-display: none;
-align-items: center;
-justify-content: center;
-z-index: 9999;
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.8); /* Darker background */
 }
+
 #successStorm.show {
-display: flex;
+  display: flex;
 }
+
 .success-modal {
-width: 90%;
-max-width: 380px;
-background: linear-gradient(135deg, var(--gold), var(--gold-glow));
-color: var(--black);
-padding: 3rem 2rem 2rem;
-border-radius: var(--radius);
-text-align: center;
-box-shadow: 0 0 40px var(--gold-glow);
+  width: 90%;
+  max-width: 380px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-glow));
+  color: var(--black);
+  padding: 3rem 2rem 2.5rem; /* Slightly more padding */
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: 0 0 40px var(--gold-glow);
+  animation: modalPop 0.4s ease-out; /* Add animation */
 }
+
+@keyframes modalPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .success-modal h2 {
-font-size: 2rem;
-margin-bottom: 0.5rem;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
+
 .success-modal p {
-font-size: 1rem;
-margin-bottom: 2rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
 }
+
 .btn-storm {
-background: var(--black);
-color: var(--gold);
-border: none;
-padding: 0.8rem 2rem;
-border-radius: 50px;
-font-weight: 700;
-cursor: pointer;
-transition: 0.3s;
+  background: var(--black);
+  color: var(--gold);
+  border: none;
+  padding: 0.9rem 2.2rem; /* Slightly more padding */
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-hover);
 }
+
 .btn-storm:hover {
-background: var(--white);
-color: var(--black);
-}
-/ -------------------------------------------------
-HERO VIDEO – FULL-SCREEN
-------------------------------------------------- /
-.hero-banner {
-position: relative;
-width: 100%;
-height: 100vh;            / full viewport height */
-overflow: hidden;
+  background: var(--white);
+  color: var(--black);
+  box-shadow: 0 0 20px var(--gold-glow);
 }
 
-.hero-video {
-position: absolute;
-top: 50%;
-left: 50%;
-min-width: 100%;
-min-height: 100%;
-width: auto;
-height: auto;
-transform: translate(-50%, -50%);
-z-index: 1;               /* behind overlay & content /
-object-fit: cover;        / crop edges, fill screen */
+/* 11.  MODAL STYLES (from index.html embedded styles) */
+/* These styles override or complement the general styles for the modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
 }
 
-.hero-overlay {
-position: absolute;
-inset: 0;
-background: rgba(0, 0, 0, 0.45); /* subtle dim */
-z-index: 2;
+.modal-content {
+  background-color: var(--black);
+  margin: 5% auto;
+  padding: 0;
+  border: 1px solid var(--gold-glow);
+  border-radius: var(--radius);
+  width: 90%;
+  max-width: 450px;
+  color: var(--white);
+  box-shadow: var(--shadow-soft), 0 0 30px var(--gold-glow);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-50px);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
-.hero-content {
-position: relative;
-z-index: 3;
-height: 100%;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-color: #fff;
+.modal.show .modal-content {
+  transform: translateY(0);
+  opacity: 1;
 }
 
+.modal-header {
+  background-color: rgba(42, 42, 42, 0.9); /* Darker header */
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--gold-glow);
+  border-radius: var(--radius) var(--radius) 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: var(--gold-glow);
+  font-size: 1.4em;
+}
+
+.close {
+  color: var(--gold-glow);
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  line-height: 1;
+  background: none;
+  border: none;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close:hover {
+  color: var(--white);
+  background-color: rgba(255, 215, 0, 0.1);
+}
+
+.service-preview {
+  display: flex;
+  padding: 15px;
+  gap: 15px;
+  border-bottom: 1px solid var(--glass-border); /* Match glass border */
+}
+
+.service-preview img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gold);
+}
+
+.service-preview-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.service-preview-info h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.2em;
+  color: var(--white);
+}
+
+.service-preview-info p {
+  margin: 0;
+  font-size: 1.1em;
+  color: var(--gold-glow);
+}
+
+.booking-form {
+  padding: 15px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 4px;
+  color: #ccc; /* Slightly dimmer label */
+  font-size: 0.9em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  background-color: rgba(42, 42, 42, 0.9); /* Darker input background */
+  color: var(--white);
+  box-sizing: border-box;
+  font-family: var(--ff);
+  transition: var(--transition-smooth);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--gold-glow);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.form-group textarea {
+  height: 70px;
+  resize: vertical;
+}
+
+.btn-submit {
+  background-color: var(--gold-glow);
+  color: var(--black);
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 600;
+  transition: var(--transition-hover);
+  margin-top: 5px;
+}
+
+.btn-submit:hover {
+  background-color: #e6c200;
+  box-shadow: 0 0 15px var(--gold-glow);
+}
+
+.btn-submit:active {
+  transform: scale(0.98);
+  background-color: #d6b300;
+}
+
+#bookingMsg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(42, 42, 42, 0.9); /* Match form background */
+  border: 1px solid var(--gold);
+  font-size: 0.95em;
+  text-align: center;
+  min-height: 20px;
+}
+
+.confirm-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-top: 10px;
+  transition: var(--transition-smooth);
+}
+
+.confirm-button:hover {
+  background-color: #45a049;
+}
