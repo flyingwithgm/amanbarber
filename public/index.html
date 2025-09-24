@@ -308,50 +308,72 @@
       margin-bottom: 15px;
     }
 
-    /* Team Section */
-    .team-grid {
+    /* Side Attractions Section */
+    .attractions-section {
+      background: rgba(20, 20, 20, 0.7);
+      padding: 80px 0;
+    }
+
+    .attractions-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
     }
 
-    .team-member {
-      text-align: center;
-      background: rgba(30, 30, 30, 0.7);
+    .attraction-card {
+      background: rgba(30, 30, 30, 0.9);
       border-radius: 10px;
-      padding: 30px 20px;
-      transition: transform 0.3s;
+      overflow: hidden;
+      position: relative;
       border: 1px solid var(--border-color);
+      transition: transform 0.3s;
     }
 
-    .team-member:hover {
+    .attraction-card:hover {
       transform: translateY(-10px);
     }
 
-    .member-image {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
+    .attraction-image {
+      height: 250px;
       overflow: hidden;
-      margin: 0 auto 20px;
-      border: 3px solid var(--primary-gold);
+      position: relative;
     }
 
-    .member-image img {
+    .attraction-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.5s;
     }
 
-    .member-name {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
+    .attraction-card:hover .attraction-image img {
+      transform: scale(1.1);
+    }
+
+    .attraction-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .attraction-title {
+      font-size: 1.8rem;
       color: var(--primary-gold);
+      margin-bottom: 15px;
     }
 
-    .member-role {
-      color: var(--medium-text);
-      margin-bottom: 15px;
+    .attraction-description {
+      color: var(--light-text);
+      font-size: 1rem;
     }
 
     /* Testimonials */
@@ -783,7 +805,7 @@
           <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="#services">Services</a>
-          <a href="#team">Team</a>
+          <a href="#attractions">Attractions</a>
           <a href="#testimonials">Testimonials</a>
           <a href="#contact">Contact</a>
         </div>
@@ -821,9 +843,9 @@
       <div class="about-content">
         <div class="about-text">
           <h3>Premium Barbering Since 2020</h3>
-          <p>At Amanfour Barbers Palace, we specialize in creating the perfect look for the modern gentleman. Our experienced barbers combine traditional techniques with contemporary styles to deliver exceptional results.</p>
+          <p>At Amanfour Barbers Palace, we specialize in creating the perfect look for the modern gentleman. Our experienced barber combines traditional techniques with contemporary styles to deliver exceptional results.</p>
           <p>Located in the heart of Tarkwa on Tamso New Road, we've been serving the community with premium grooming services for years. Our commitment to excellence and attention to detail has made us the go-to destination for men's grooming needs.</p>
-          <p>With state-of-the-art facilities and premium products, we ensure every visit is a premium experience. Our barbers are trained in the latest techniques and trends to keep you looking your best.</p>
+          <p>With state-of-the-art facilities and premium products, we ensure every visit is a premium experience. Our barber is trained in the latest techniques and trends to keep you looking your best.</p>
           <a href="#services" class="btn">Our Services</a>
         </div>
         <div class="about-image">
@@ -915,47 +937,41 @@
     </div>
   </section>
 
-  <!-- Team Section -->
-  <section id="team" class="section">
+  <!-- Side Attractions Section -->
+  <section id="attractions" class="attractions-section">
     <div class="container">
       <div class="section-title">
-        <h2>Our Master Barbers</h2>
+        <h2>Side Attractions</h2>
       </div>
-      <div class="team-grid">
-        <div class="team-member">
-          <div class="member-image">
-            <img src="https://placehold.co/150x150/1a1a1a/FFD700?text=Amanfour" alt="Amanfour">
+      <div class="attractions-grid">
+        <div class="attraction-card">
+          <div class="attraction-image">
+            <img src="https://placehold.co/600x400/1a1a1a/FFD700?text=Entertainment" alt="Entertainment">
+            <div class="attraction-overlay">
+              <h3 class="attraction-title">Entertainment</h3>
+              <p class="attraction-description">Select your preference from a variety of entertainment options such as: Foosball, FIFA, Music and more while you wait for your certy trim.</p>
+            </div>
           </div>
-          <h3 class="member-name">Amanfour</h3>
-          <p class="member-role">Head Barber</p>
-          <p>With over 10 years of experience, Amanfour is our master barber specializing in classic cuts.</p>
         </div>
 
-        <div class="team-member">
-          <div class="member-image">
-            <img src="https://placehold.co/150x150/1a1a1a/FFD700?text=Kwame" alt="Kwame">
+        <div class="attraction-card">
+          <div class="attraction-image">
+            <img src="https://placehold.co/600x400/1a1a1a/FFD700?text=Refreshments" alt="Refreshments">
+            <div class="attraction-overlay">
+              <h3 class="attraction-title">Refreshments</h3>
+              <p class="attraction-description">Serving an array of hot and cold drinks to refresh you while you enjoy our services.</p>
+            </div>
           </div>
-          <h3 class="member-name">Kwame</h3>
-          <p class="member-role">Senior Barber</p>
-          <p>Kwame brings modern styling techniques and specializes in beard grooming.</p>
         </div>
 
-        <div class="team-member">
-          <div class="member-image">
-            <img src="https://placehold.co/150x150/1a1a1a/FFD700?text=Kofi" alt="Kofi">
+        <div class="attraction-card">
+          <div class="attraction-image">
+            <img src="https://placehold.co/600x400/1a1a1a/FFD700?text=Comfortable+Seating" alt="Comfortable Seating">
+            <div class="attraction-overlay">
+              <h3 class="attraction-title">Comfortable Seating</h3>
+              <p class="attraction-description">Enjoy our comfortable seating area designed for maximum relaxation during your visit.</p>
+            </div>
           </div>
-          <h3 class="member-name">Kofi</h3>
-          <p class="member-role">Senior Barber</p>
-          <p>Kofi focuses on precision cuts and is known for his attention to detail.</p>
-        </div>
-
-        <div class="team-member">
-          <div class="member-image">
-            <img src="https://placehold.co/150x150/1a1a1a/FFD700?text=Kwaku" alt="Kwaku">
-          </div>
-          <h3 class="member-name">Kwaku</h3>
-          <p class="member-role">Stylist</p>
-          <p>Kwaku specializes in trendy cuts and modern grooming techniques.</p>
         </div>
       </div>
     </div>
@@ -982,7 +998,7 @@
         </div>
 
         <div class="testimonial-card">
-          <p class="testimonial-text">"I've been coming here for 2 years now. The barbers know exactly what I want and always deliver. The atmosphere is relaxing and the service is top-notch."</p>
+          <p class="testimonial-text">"I've been coming here for 2 years now. The barber knows exactly what I want and always delivers. The atmosphere is relaxing and the service is top-notch."</p>
           <div class="testimonial-author">
             <div class="author-image">
               <img src="https://placehold.co/50x50/1a1a1a/FFD700?text=M" alt="Michael">
@@ -1110,7 +1126,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#team">Our Team</a></li>
+            <li><a href="#attractions">Side Attractions</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
