@@ -30,6 +30,7 @@ html {
 }
 body {
   font-family: var(--ff);
+  /* Changed: Removed the background image from body, now only black */
   background: var(--black);
   color: var(--white);
   line-height: 1.6;
