@@ -1324,27 +1324,24 @@
           msg.textContent = '';
         }
       });
-
-      // --- FIXED BOOKING SUBMISSION LOGIC ---
       form.addEventListener('submit', async e => {
         e.preventDefault();
 
-        // --- 🔧 FIX STARTS HERE: Capture values IMMEDIATELY when form is submitted ---
+        // Capture values IMMEDIATELY when the form is submitted
         const initialName = document.getElementById('name').value.trim();
         const initialPhone = document.getElementById('phone').value.trim();
-        const initialEmail = document.getElementById('email').value.trim();
-        const initialNotes = document.getElementById('notes').value.trim();
+        const initialEmail = document.getElementById('email').value.trim(); // Capture email too
         const date = document.getElementById('date').value;
         const time = document.getElementById('time').value;
         const service = serviceSelect.value;
+        const notes = document.getElementById('notes').value.trim(); // Capture notes too
         const amount = servicePrices[service];
 
-        // Basic validation before showing payment prompt
+        // Validate essential fields early
         if (!initialName || !initialPhone || !date || !time || !service) {
-          msg.textContent = '❌ Please fill in all required fields before submitting.';
-          return;
+           msg.textContent = '❌ Please fill in all required fields before submitting.';
+           return; // Stop execution if required fields are missing
         }
-        // --- 🔧 FIX ENDS HERE: Capture values IMMEDIATELY ---
 
         try {
           const momoSnap = await getDoc(doc(db, "settings", "momo"));
@@ -1362,28 +1359,27 @@
               confirmBtn.addEventListener('click', async () => {
                 msg.textContent = '⏳ Verifying and saving your booking...';
 
-                // --- 🔧 FIX CONTINUES: Use the values captured when "Book Now" was clicked ---
-                const finalName = initialName;
-                const finalPhone = initialPhone;
-                const finalEmail = initialEmail;
-                const finalNotes = initialNotes;
+                // Use the values captured when the form was initially submitted
+                const finalName = initialName; // Use the captured value
+                const finalPhone = initialPhone; // Use the captured value
+                const finalEmail = initialEmail; // Use the captured value
                 const finalDate = date; // Use the captured value
                 const finalTime = time; // Use the captured value
                 const finalService = service; // Use the captured value
                 const finalAmount = amount; // Use the captured value
+                const finalNotes = notes; // Use the captured value
                 const finalMomoNumber = momoNumber; // Use the fetched value
-                // --- 🔧 FIX CONTINUES: Use the values captured when "Book Now" was clicked ---
 
-                // Optional: Log the data being saved for debugging
+                // Log the values being saved (Good for debugging)
                 console.log("Saving booking data to Firestore:", {
                   name: finalName,
                   phone: finalPhone,
                   email: finalEmail,
-                  notes: finalNotes,
                   date: finalDate,
                   time: finalTime,
                   service: finalService,
                   amount: finalAmount,
+                  notes: finalNotes,
                   momoNumber: finalMomoNumber
                 });
 
@@ -1392,18 +1388,18 @@
                     name: finalName,
                     phone: finalPhone,
                     email: finalEmail,
-                    notes: finalNotes, // Include notes in the saved data
                     date: finalDate,
                     time: finalTime,
                     service: finalService,
                     amount: finalAmount,
+                    notes: finalNotes,
                     momoNumber: finalMomoNumber,
                     status: 'pending',
                     created: serverTimestamp()
                   });
                   msg.innerHTML = '✅ Booking request received! We\'ll confirm once payment is verified.<br><strong>Please close this window.</strong>';
                 } catch (err) {
-                  console.error("Firestore Error:", err); // This won't show on mobile console, but it's good practice
+                  console.error("Firestore Error:", err); // Check browser console
                   msg.textContent = '❌ Failed to save booking: ' + err.message;
                 }
               });
@@ -1411,13 +1407,12 @@
               console.error("Confirm button not found after message update.");
               msg.textContent = '❌ An error occurred. Please try booking again.';
             }
-          }, 100); // The delay might be necessary for the button to render
+          }, 100); // The delay might be unnecessary now, but keep it if needed for rendering
         } catch (error) {
             console.error("Error fetching MoMo number:", error);
             msg.textContent = '❌ Could not retrieve payment details. Please contact us directly.';
         }
       });
-      // --- END OF FIXED BOOKING SUBMISSION LOGIC ---
     });
   </script>
   <script>
