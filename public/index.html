@@ -865,7 +865,7 @@
           <div class="service-info">
             <h3>Regular Haircut</h3>
             <p>GHS 100</p>
-            <button class="btn" onclick="openBookingModal('Regular Haircut', 'GHS 100', 'regularhaircut2.jpg')">Book Now</button>
+            <button class="btn" onclick="openBookingModal('Regular Haircut', 'GHS 100', 'regularhaircut.jpg')">Book Now</button>
           </div>
         </div>
         <div class="service-card">
@@ -1250,7 +1250,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
     import { getFirestore, collection, addDoc, serverTimestamp, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-
     const firebaseConfig = {
       apiKey: "AIzaSyCybqVlasAj69x6EljSlJJXavFJorN-csU",
       authDomain: "aman-barber.firebaseapp.com",
@@ -1259,12 +1258,10 @@
       messagingSenderId: "146331198998",
       appId: "1:146331198998:web:9d2fe984b2d6033127f737"
     };
-
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-
     // Service prices map
     const servicePrices = {
       "Regular Haircut": 100,
@@ -1277,29 +1274,24 @@
       "Part Color": 180,
       "Lowcut + Texturizer": 180
     };
-
     // Firebase anonymous sign-in
     signInAnonymously(auth)
-      .then(() => console.log('✅ Firebase signed in anonymously'))
-      .catch((error) => console.error("❌ Firebase anonymous login failed:", error.message));
-
+      .then(() => console.log('âœ… Firebase signed in anonymously'))
+      .catch((error) => console.error("âŒ Firebase anonymous login failed:", error.message));
     // Booking form logic
     onAuthStateChanged(auth, user => {
       if (!user) {
-        console.error("❌ Firebase user not available for booking.");
+        console.error("âŒ Firebase user not available for booking.");
         return;
       }
-      console.log("✅ User authenticated, ready for bookings.");
-
+      console.log("âœ… User authenticated, ready for bookings.");
       const form = document.getElementById('bookingForm');
       const msg = document.getElementById('bookingMsg');
       const serviceSelect = document.getElementById('service');
-
       if (!form || !msg || !serviceSelect) {
-        console.error("❌ Required form elements not found.");
+        console.error("âŒ Required form elements not found.");
         return;
       }
-
       // Live price preview when service is selected
       serviceSelect.addEventListener('change', () => {
         const selectedService = serviceSelect.value;
@@ -1307,10 +1299,10 @@
         if (price !== undefined) {
           document.getElementById("selectedServicePrice").textContent = `GHS ${price}`;
           document.getElementById("servicePriceInput").value = `GHS ${price}`;
-          msg.innerHTML = `💸 Selected service: <strong>${selectedService}</strong> – GHS ${price}`;
+          msg.innerHTML = `ðŸ’¸ Selected service: <strong>${selectedService}</strong> â€“ GHS ${price}`;
           // Update service image based on selection
           const serviceImages = {
-            "Regular Haircut": "regularhaircut2.jpg", // Use the actual image filenames from the service cards
+            "Regular Haircut": "regularhaircut.jpg",
             "Beard Trim": "beardtrim2.jpg",
             "Cut + Enhancement": "cut+enhancements2.jpg",
             "Haircut + Texturizer": "Haircut+texturizer2.jpg",
@@ -1325,7 +1317,6 @@
           document.getElementById("modalServiceImage").alt = selectedService;
           document.getElementById("selectedServiceName").textContent = selectedService;
         } else {
-          // Reset if no valid service selected
           const originalPriceElement = document.getElementById("selectedServiceName");
           const originalPrice = originalPriceElement.getAttribute("data-original-price") || "Service Price";
           document.getElementById("selectedServicePrice").textContent = originalPrice;
@@ -1333,72 +1324,50 @@
           msg.textContent = '';
         }
       });
-
       form.addEventListener('submit', async e => {
         e.preventDefault();
-        console.log("Form submit handler triggered.");
 
-        // --- CRITICAL FIX: Capture ALL values IMMEDIATELY ---
+        // Capture values IMMEDIATELY when the form is submitted
         const initialName = document.getElementById('name').value.trim();
         const initialPhone = document.getElementById('phone').value.trim();
         const initialEmail = document.getElementById('email').value.trim();
-        const initialDate = document.getElementById('date').value;
-        const initialTime = document.getElementById('time').value;
-        const initialService = serviceSelect.value;
-        const initialNotes = document.getElementById('notes').value.trim();
-        const initialAmount = servicePrices[initialService]; // Use initialService to get price
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+        const service = serviceSelect.value;
+        const notes = document.getElementById('notes').value.trim();
+        const amount = servicePrices[service];
 
-        console.log("Captured values:", { initialName, initialPhone, initialEmail, initialDate, initialTime, initialService, initialAmount, initialNotes });
-
-        // --- CRITICAL FIX: Validate ALL required fields IMMEDIATELY ---
-        if (!initialName || !initialPhone || !initialDate || !initialTime || !initialService) {
-           msg.textContent = '❌ Please fill in all required fields before submitting.';
-           console.warn("Validation failed - missing required field.");
+        // Validate essential fields *after* capturing them
+        if (!initialName || !initialPhone || !date || !time || !service) {
+           msg.textContent = 'âŒ Please fill in all required fields before submitting.';
            return; // Stop execution if required fields are missing
         }
 
-        // Check if amount is valid
-        if (typeof initialAmount === 'undefined') {
-            msg.textContent = '❌ Please select a valid service.';
-            console.warn("Validation failed - invalid service selected.");
-            return;
-        }
-
         try {
-          // Fetch MoMo number
           const momoSnap = await getDoc(doc(db, "settings", "momo"));
           const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336';
-          console.log("Fetched MoMo number:", momoNumber);
-
-          // Update UI with MoMo instructions
           msg.innerHTML = `
-            ✅ Please send <strong>GHS ${initialAmount}</strong> to MTN MoMo number:
+            âœ… Please send <strong>GHS ${amount}</strong> to MTN MoMo number:
             <strong>${momoNumber}</strong><br>
             Then tap the "I've Paid" button below to confirm.
             <br><br>
             <button id="confirmPaid" class="confirm-button">I've Paid</button>
           `;
-
-          // Use a more robust way to attach the click listener to the dynamically created button
-          // Wait a bit for the button to be rendered in the DOM
           setTimeout(() => {
             const confirmBtn = document.getElementById('confirmPaid');
             if (confirmBtn) {
-              console.log("Confirm button found, attaching listener.");
-              // Use event delegation or attach listener directly if button exists now
               confirmBtn.addEventListener('click', async () => {
-                console.log("Confirm paid button clicked.");
-                msg.textContent = '⏳ Verifying and saving your booking...';
+                msg.textContent = 'â³ Verifying and saving your booking...';
 
-                // Use the values captured at the START of the submit handler
+                // Use the values captured when the form was initially submitted
                 const finalName = initialName; // Use the captured value
                 const finalPhone = initialPhone; // Use the captured value
                 const finalEmail = initialEmail; // Use the captured value
-                const finalDate = initialDate; // Use the captured value
-                const finalTime = initialTime; // Use the captured value
-                const finalService = initialService; // Use the captured value
-                const finalAmount = initialAmount; // Use the captured value
-                const finalNotes = initialNotes; // Use the captured value
+                const finalDate = date; // Use the captured value
+                const finalTime = time; // Use the captured value
+                const finalService = service; // Use the captured value
+                const finalAmount = amount; // Use the captured value
+                const finalNotes = notes; // Use the captured value
                 const finalMomoNumber = momoNumber; // Use the fetched value
 
                 // Log the values being saved (Good for debugging)
@@ -1428,40 +1397,35 @@
                     status: 'pending',
                     created: serverTimestamp()
                   });
-                  msg.innerHTML = '✅ Booking request received! We\'ll confirm once payment is verified.<br><strong>Please close this window.</strong>';
-                  // Optionally, reset the form after successful submission
-                  // form.reset(); // This might clear the modal preview, so handle carefully if needed
+                  msg.innerHTML = 'âœ… Booking request received! We\'ll confirm once payment is verified.<br><strong>Please close this window.</strong>';
                 } catch (err) {
                   console.error("Firestore Error:", err); // Check browser console
-                  msg.textContent = '❌ Failed to save booking: ' + err.message;
+                  msg.textContent = 'âŒ Failed to save booking: ' + err.message;
                 }
-              }, { once: true }); // Add listener only once
+              });
             } else {
               console.error("Confirm button not found after message update.");
-              msg.textContent = '❌ An error occurred. Please try booking again.';
+              msg.textContent = 'âŒ An error occurred. Please try booking again.';
             }
-          }, 100); // Small delay to ensure button is rendered
-
+          }, 100); // The delay might be unnecessary now, but keep it if needed for rendering
         } catch (error) {
             console.error("Error fetching MoMo number:", error);
-            msg.textContent = '❌ Could not retrieve payment details. Please contact us directly.';
+            msg.textContent = 'âŒ Could not retrieve payment details. Please contact us directly.';
         }
       });
     });
   </script>
   <script>
-    // Initialize AOS - Note: AOS library is not included, so this won't work unless added
+    // Initialize AOS
     document.addEventListener('DOMContentLoaded', function() {
       // Get the modal element
       const modal = document.getElementById("bookingModal");
-
       // Mobile menu toggle
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const navLinks = document.getElementById('navLinks');
       mobileMenuBtn.addEventListener('click', function() {
         navLinks.classList.toggle('active');
       });
-
       // Function to open the modal and populate service details
       function openBookingModal(serviceName, servicePrice, serviceImage) {
           const nameElement = document.getElementById("selectedServiceName");
@@ -1470,7 +1434,6 @@
           const nameInput = document.getElementById("serviceNameInput");
           const priceInput = document.getElementById("servicePriceInput");
           const serviceDropdown = document.getElementById('service');
-
           // Populate elements
           nameElement.textContent = serviceName;
           nameElement.setAttribute("data-original-price", servicePrice);
@@ -1479,7 +1442,6 @@
           imageElement.alt = serviceName;
           nameInput.value = serviceName;
           priceInput.value = servicePrice;
-
           // Pre-select the service in the dropdown
           if (serviceDropdown.querySelector(`option[value="${serviceName}"]`)) {
               serviceDropdown.value = serviceName;
@@ -1487,49 +1449,33 @@
               console.warn(`Service "${serviceName}" not found in dropdown options.`);
               serviceDropdown.value = '';
           }
-
           // Show the modal
           modal.style.display = "block";
           modal.classList.add('show');
           document.body.style.overflow = 'hidden';
       }
-
       // Function to close the modal
       function closeBookingModal() {
           modal.classList.remove('show');
           setTimeout(() => {
               modal.style.display = "none";
               document.body.style.overflow = '';
-              // Reset form fields and message after modal closes
-              const bookingForm = document.getElementById("bookingForm");
-              if (bookingForm) {
-                  bookingForm.reset();
-              }
-              const bookingMsg = document.getElementById("bookingMsg");
-              if (bookingMsg) {
-                  bookingMsg.textContent = '';
-              }
-              // Reset price to original if needed
+              document.getElementById("bookingForm")?.reset();
+              document.getElementById("bookingMsg").textContent = '';
               const nameElement = document.getElementById("selectedServiceName");
               const originalPrice = nameElement.getAttribute("data-original-price");
               if (originalPrice) {
                  document.getElementById("selectedServicePrice").textContent = originalPrice;
               }
-              // Reset dropdown selection
-              const serviceDropdown = document.getElementById('service');
-              if (serviceDropdown) {
-                  serviceDropdown.value = '';
-              }
-          }, 300); // Match the transition time
+              document.getElementById('service').value = '';
+          }, 300);
       }
-
       // Close the modal if the user clicks outside the content box
       window.onclick = function(event) {
           if (event.target === modal) {
               closeBookingModal();
           }
       }
-
       // Add smooth scrolling for navigation links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -1539,7 +1485,6 @@
           });
         });
       });
-
       // Contact form submission
       const contactForm = document.getElementById('contactForm');
       if(contactForm) {
@@ -1549,7 +1494,6 @@
           contactForm.reset();
         });
       }
-
       // Theme toggle
       const themeToggle = document.getElementById('themeToggle');
       const body = document.body;
@@ -1563,7 +1507,6 @@
           }
         });
       }
-
       // Expose functions to global scope for button clicks
       window.openBookingModal = openBookingModal;
       window.closeBookingModal = closeBookingModal;
