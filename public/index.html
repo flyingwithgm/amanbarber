@@ -1330,14 +1330,14 @@
         // Capture values IMMEDIATELY when the form is submitted
         const initialName = document.getElementById('name').value.trim();
         const initialPhone = document.getElementById('phone').value.trim();
-        const initialEmail = document.getElementById('email').value.trim(); // Capture email too
+        const initialEmail = document.getElementById('email').value.trim();
         const date = document.getElementById('date').value;
         const time = document.getElementById('time').value;
         const service = serviceSelect.value;
-        const notes = document.getElementById('notes').value.trim(); // Capture notes too
+        const notes = document.getElementById('notes').value.trim();
         const amount = servicePrices[service];
 
-        // Validate essential fields early
+        // Validate essential fields *after* capturing them
         if (!initialName || !initialPhone || !date || !time || !service) {
            msg.textContent = '❌ Please fill in all required fields before submitting.';
            return; // Stop execution if required fields are missing
