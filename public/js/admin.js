@@ -1,3 +1,5 @@
+// admin.js - With added error handling and logging
+
 import { auth, db } from './firebase.js';
 import {
   signInWithEmailAndPassword,
@@ -21,7 +23,7 @@ import {
 const loginForm = document.getElementById('loginForm');
 const loginCard = document.getElementById('loginCard');
 const adminDashboard = document.getElementById('adminDashboard');
-const tbody = document.querySelector('#bookingsTable tbody');
+const tbody = document.querySelector('#bookingsTable tbody'); // For confirmed bookings
 const logoutBtn = document.getElementById('logoutBtn');
 const momoInput = document.getElementById("momoInput");
 const saveMomoBtn = document.getElementById("saveMomoBtn");
@@ -58,14 +60,22 @@ loginForm.addEventListener('submit', async e => {
     loadMomoNumber();
 
   } catch (err) {
+    console.error("Login Error:", err); // Log login errors
     alert("Login failed: " + err.message);
   }
 });
 
 // ✅ LOAD CONFIRMED BOOKINGS
 function loadBookings() {
+  // Check if tbody exists before proceeding
+  if (!tbody) {
+      console.error("ERROR: Could not find the main bookings table body (tbody).");
+      return;
+  }
+
   const q = query(collection(db, 'bookings'), orderBy('created', 'desc'));
   onSnapshot(q, snapshot => {
+    console.log("Loading confirmed bookings snapshot..."); // Debug log
     tbody.innerHTML = '';
 
     if (snapshot.empty) {
@@ -74,29 +84,42 @@ function loadBookings() {
       tbody.appendChild(tr);
     } else {
       snapshot.forEach(doc => {
-        const b = doc.data();
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${b.name || ''}</td>
-          <td>${b.service || ''}</td>
-          <td>${b.date || ''}</td>
-          <td>${b.time || ''}</td>
-          <td>${b.phone || ''}</td>`;
-        tbody.appendChild(tr);
+        try {
+            const b = doc.data();
+            console.log("Processing confirmed booking doc:", b); // Debug log
+            const tr = document.createElement('tr');
+            // Use template literals with error handling for each field
+            tr.innerHTML = `
+              <td>${b.name || 'N/A'}</td>
+              <td>${b.service || 'N/A'}</td>
+              <td>${b.date || 'N/A'}</td>
+              <td>${b.time || 'N/A'}</td>
+              <td>${b.phone || 'N/A'}</td>`;
+            tbody.appendChild(tr);
+        } catch (innerErr) {
+            console.error("Error processing confirmed booking document:", innerErr, doc.data());
+        }
       });
     }
   }, err => {
-    console.error('Error loading bookings:', err);
-    alert('Could not load bookings. Check console.');
+    console.error('Error loading confirmed bookings (onSnapshot):', err);
+    alert('Could not load confirmed bookings. Check console.');
   });
 }
 
 // 🔁 LOAD PENDING BOOKINGS
 function loadPendingBookings() {
+  // Check if tbodyPending exists before proceeding
   const tbodyPending = document.querySelector('#pendingBookingsTable tbody');
+  if (!tbodyPending) {
+      console.error("ERROR: Could not find the pending bookings table body (tbody).");
+      return;
+  }
+
   const q = query(collection(db, 'pending_bookings'), orderBy('created', 'desc'));
 
   onSnapshot(q, snapshot => {
+    console.log("Loading pending bookings snapshot..."); // Debug log
     tbodyPending.innerHTML = '';
 
     if (snapshot.empty) {
@@ -105,19 +128,26 @@ function loadPendingBookings() {
       tbodyPending.appendChild(tr);
     } else {
       snapshot.forEach(docSnap => {
-        const b = docSnap.data();
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${b.name || ''}</td>
-          <td>${b.service || ''}</td>
-          <td>${b.date || ''}</td>
-          <td>${b.time || ''}</td>
-          <td>${b.phone || ''}</td>
-          <td><button class="confirm-btn" data-id="${docSnap.id}">Confirm</button></td>
-        `;
-        tbodyPending.appendChild(tr);
+        try {
+            const b = docSnap.data();
+            console.log("Processing pending booking doc:", b); // Debug log - Check if name/phone are here
+            const tr = document.createElement('tr');
+            // Use template literals with error handling for each field
+            tr.innerHTML = `
+              <td>${b.name || 'N/A'}</td>
+              <td>${b.service || 'N/A'}</td>
+              <td>${b.date || 'N/A'}</td>
+              <td>${b.time || 'N/A'}</td>
+              <td>${b.phone || 'N/A'}</td>
+              <td><button class="confirm-btn" data-id="${docSnap.id}">Confirm</button></td>
+            `;
+            tbodyPending.appendChild(tr);
+        } catch (innerErr) {
+            console.error("Error processing pending booking document:", innerErr, docSnap.data());
+        }
       });
 
+      // Re-attach event listeners after the table is updated
       document.querySelectorAll('.confirm-btn').forEach(btn => {
         btn.addEventListener('click', async () => {
           const id = btn.getAttribute('data-id');
@@ -125,8 +155,12 @@ function loadPendingBookings() {
         });
       });
     }
+  }, err => {
+    console.error('Error loading pending bookings (onSnapshot):', err); // Log onSnapshot errors
+    alert('Could not load pending bookings. Check console.');
   });
 }
+
 
 // 🟢 CONFIRM A BOOKING
 async function confirmBooking(docId) {
@@ -140,6 +174,7 @@ async function confirmBooking(docId) {
     }
 
     const booking = snapshot.data();
+    console.log("Confirming booking:", booking); // Debug log
 
     await addDoc(collection(db, 'bookings'), {
       ...booking,
@@ -162,6 +197,8 @@ async function loadMomoNumber() {
     const snap = await getDoc(doc(db, "settings", "momo"));
     if (snap.exists()) {
       momoInput.value = snap.data().number;
+    } else {
+        console.log("MoMo number settings document does not exist.");
     }
   } catch (err) {
     console.error("Failed to load MoMo number:", err);
