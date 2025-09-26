@@ -1324,6 +1324,7 @@
           msg.textContent = '';
         }
       });
+
       // --- FIXED BOOKING SUBMISSION LOGIC ---
       form.addEventListener('submit', async e => {
         e.preventDefault();
@@ -1402,7 +1403,7 @@
                   });
                   msg.innerHTML = '✅ Booking request received! We\'ll confirm once payment is verified.<br><strong>Please close this window.</strong>';
                 } catch (err) {
-                  console.error("Firestore Error:", err); // Check browser console
+                  console.error("Firestore Error:", err); // This won't show on mobile console, but it's good practice
                   msg.textContent = '❌ Failed to save booking: ' + err.message;
                 }
               });
