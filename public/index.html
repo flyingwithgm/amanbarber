@@ -1338,9 +1338,9 @@
         const amount = servicePrices[service];
 
         // Validate essential fields *after* capturing them
-        if (!initialName || !initialPhone || !date || !time || !service) {
+        if (!Name || !Phone || !date || !time || !service) {
            msg.textContent = '❌ Please fill in all required fields before submitting.';
-           return; // Stop execution if required fields are missing
+           // Stop execution if required fields are missing
         }
 
         try {
