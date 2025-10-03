@@ -1364,13 +1364,7 @@
 
         // Validate essential fields *after* capturing them, using the captured variables
         // This is the most critical part - ensure all required fields have values
-        if (!initialName || !initialPhone || !initialDate || !initialTime || !initialService) {
-           msg.textContent = '❌ Please fill in all required fields before submitting.';
-           console.error("Validation failed - Missing required fields.",
-                         "Name:", initialName, "Phone:", initialPhone, "Date:", initialDate, "Time:", initialTime, "Service:", initialService);
-           // Stop execution immediately if required fields are missing
-           return; // <--- This line is crucial to stop the function
-        }
+        
 
         // If validation passes, proceed with payment prompt
         try {
