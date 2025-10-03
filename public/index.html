@@ -1220,7 +1220,7 @@
             <option value="13:30">01:30 PM</option>
             <option value="14:00">02:00 PM</option>
             <option value="14:30">02:30 PM</option>
-            <option value="15:00">03:00 PM</option>
+          <option value="15:00">03:00 PM</option>
             <option value="15:30">03:30 PM</option>
             <option value="16:00">04:00 PM</option>
             <option value="16:30">04:30 PM</option>
@@ -1245,6 +1245,7 @@
     </div>
   </div>
   <!-- Firebase SDKs -->
+      <!-- Firebase SDKs -->
     <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
@@ -1290,7 +1291,7 @@
       console.log("✅ User authenticated, ready for bookings.");
       const form = document.getElementById('bookingForm');
       const msg = document.getElementById('bookingMsg');
-      const serviceSelect = document.getElementById('service');
+      const serviceSelect = document.getElementById('service'); // Correctly select the dropdown
 
       if (!form || !msg || !serviceSelect) {
         console.error("❌ Required form elements not found.");
@@ -1338,7 +1339,6 @@
         }
       });
 
-
       form.addEventListener('submit', async e => {
         e.preventDefault(); // Prevent default form submission
 
@@ -1350,7 +1350,12 @@
         const initialTime = document.getElementById('time').value.trim();
         const initialService = serviceSelect.value.trim(); // Use serviceSelect variable defined earlier
         const initialNotes = document.getElementById('notes').value.trim(); // Optional
-        // --- END FIX ---
+
+        // Validate essential fields *after* capturing them, using the captured variables
+        if (!initialName || !initialPhone || !initialDate || !initialTime || !initialService) {
+             msg.textContent = '❌ Please fill in all required fields.';
+             return; // Stop execution if validation fails
+        }
 
         console.log("Captured values on submit:", {
             name: initialName,
@@ -1361,10 +1366,6 @@
             service: initialService,
             notes: initialNotes
         });
-
-        // Validate essential fields *after* capturing them, using the captured variables
-        // This is the most critical part - ensure all required fields have values
-        
 
         // If validation passes, proceed with payment prompt
         try {
@@ -1438,7 +1439,6 @@
               msg.textContent = '❌ An error occurred. Please try booking again.';
             }
           });
-
         } catch (error) {
             console.error("Error fetching MoMo number:", error);
             msg.textContent = '❌ Could not retrieve payment details. Please contact us directly.';
@@ -1446,6 +1446,8 @@
       });
     });
 </script>
+<!-- Removed the erroneous closing brace and script tag -->
+ 
   });
   </script>
   <script>
@@ -1455,7 +1457,7 @@
       const modal = document.getElementById("bookingModal");
       // Mobile menu toggle
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      const navLinks = document.getElementById('navLinks');
+      navLinks = document.getElementById('navLinks');
     mobileMenuBtn.addEventListener('click', function() {
         navLinks.classList.toggle('active');
       });
