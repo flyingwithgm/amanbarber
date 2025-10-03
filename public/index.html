@@ -1245,7 +1245,7 @@
     </div>
   </div>
   <!-- Firebase SDKs -->
-  <script type="module">
+    <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
@@ -1262,6 +1262,7 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+
     // Service prices map
     const servicePrices = {
       "Regular Haircut": 100,
@@ -1274,10 +1275,12 @@
       "Part Color": 180,
       "Lowcut + Texturizer": 180
     };
+
     // Firebase anonymous sign-in
     signInAnonymously(auth)
       .then(() => console.log('✅ Firebase signed in anonymously'))
       .catch((error) => console.error("❌ Firebase anonymous login failed:", error.message));
+
     // Booking form logic
     onAuthStateChanged(auth, user => {
       if (!user) {
@@ -1288,10 +1291,12 @@
       const form = document.getElementById('bookingForm');
       const msg = document.getElementById('bookingMsg');
       const serviceSelect = document.getElementById('service');
+
       if (!form || !msg || !serviceSelect) {
         console.error("❌ Required form elements not found.");
         return;
       }
+
       // Live price preview when service is selected
       serviceSelect.addEventListener('change', () => {
         const selectedService = serviceSelect.value;
@@ -1302,7 +1307,7 @@
           msg.innerHTML = `💸 Selected service: <strong>${selectedService}</strong> – GHS ${price}`;
           // Update service image based on selection
           const serviceImages = {
-            "Regular Haircut": "regularhaircut.jpg",
+            "Regular Haircut": "regularhaircut.jpg", // Ensure these image paths exist
             "Beard Trim": "beardtrim2.jpg",
             "Cut + Enhancement": "cut+enhancements2.jpg",
             "Haircut + Texturizer": "Haircut+texturizer2.jpg",
@@ -1312,41 +1317,67 @@
             "Part Color": "partcolor.jpg",
             "Lowcut + Texturizer": "lowcut+texturizer.jpg"
           };
-          const serviceImage = serviceImages[selectedService] || "IMG-20250722-WA0027.jpg";
+          const serviceImage = serviceImages[selectedService] || "IMG-20250722-WA0027.jpg"; // Fallback image
           document.getElementById("modalServiceImage").src = serviceImage;
           document.getElementById("modalServiceImage").alt = selectedService;
           document.getElementById("selectedServiceName").textContent = selectedService;
         } else {
+          // Handle case where no service is selected (value is empty string)
+          // Restore original price if stored, otherwise clear
           const originalPriceElement = document.getElementById("selectedServiceName");
           const originalPrice = originalPriceElement.getAttribute("data-original-price") || "Service Price";
           document.getElementById("selectedServicePrice").textContent = originalPrice;
-          document.getElementById("servicePriceInput").value = originalPrice;
-          msg.textContent = '';
+          document.getElementById("servicePriceInput").value = originalPrice; // Store original price text as value too if needed, or clear
+          // Clear image if no service is selected
+          if (!selectedService) {
+             document.getElementById("modalServiceImage").src = "IMG-20250722-WA0027.jpg"; // Or clear the src
+             document.getElementById("modalServiceImage").alt = "Service Image";
+             document.getElementById("selectedServiceName").textContent = "Service Name";
+          }
+          msg.textContent = selectedService ? '' : 'Please select a service.'; // Show message if needed when clearing selection
         }
       });
+
+
       form.addEventListener('submit', async e => {
-        e.preventDefault();
-        // Capture values IMMEDIATELY when the form is submitted
+        e.preventDefault(); // Prevent default form submission
+
+        // --- CRITICAL FIX: Capture values IMMEDIATELY when the form is submitted ---
         const initialName = document.getElementById('name').value.trim();
         const initialPhone = document.getElementById('phone').value.trim();
-        const initialEmail = document.getElementById('email').value.trim();
+        const initialEmail = document.getElementById('email').value.trim(); // Optional, so don't validate for presence
         const initialDate = document.getElementById('date').value.trim();
         const initialTime = document.getElementById('time').value.trim();
         const initialService = serviceSelect.value.trim(); // Use serviceSelect variable defined earlier
         const initialNotes = document.getElementById('notes').value.trim(); // Optional
+        // --- END FIX ---
+
+        console.log("Captured values on submit:", {
+            name: initialName,
+            phone: initialPhone,
+            email: initialEmail,
+            date: initialDate,
+            time: initialTime,
+            service: initialService,
+            notes: initialNotes
+        });
+
         // Validate essential fields *after* capturing them, using the captured variables
+        // This is the most critical part - ensure all required fields have values
         if (!initialName || !initialPhone || !initialDate || !initialTime || !initialService) {
            msg.textContent = '❌ Please fill in all required fields before submitting.';
            console.error("Validation failed - Missing required fields.",
                          "Name:", initialName, "Phone:", initialPhone, "Date:", initialDate, "Time:", initialTime, "Service:", initialService);
-           // Stop execution if required fields are missing
-           return; // <--- This line was missing or crucially needed
+           // Stop execution immediately if required fields are missing
+           return; // <--- This line is crucial to stop the function
         }
+
         // If validation passes, proceed with payment prompt
         try {
           const momoSnap = await getDoc(doc(db, "settings", "momo"));
           const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336';
           const serviceAmount = servicePrices[initialService]; // Use captured service name to get price
+
           msg.innerHTML = `
             ✅ Booking details verified! Please send <strong>GHS ${serviceAmount}</strong> to MTN MoMo number:
             <strong>${momoNumber}</strong><br>
@@ -1354,12 +1385,15 @@
             <br><br>
             <button id="confirmPaid" class="confirm-button">I've Paid</button>
           `;
+
           // Wait for the button to be rendered, then attach the event listener
-          setTimeout(() => {
+          // Using requestAnimationFrame instead of setTimeout for better timing
+          requestAnimationFrame(() => {
             const confirmBtn = document.getElementById('confirmPaid');
             if (confirmBtn) {
               confirmBtn.addEventListener('click', async () => {
                 msg.textContent = '⏳ Verifying and saving your booking...';
+
                 // --- CRITICAL FIX: Use the values captured when the form was initially submitted ---
                 const finalName = initialName; // Use the captured value
                 const finalPhone = initialPhone; // Use the captured value
@@ -1370,6 +1404,8 @@
                 const finalAmount = serviceAmount; // Use the captured amount
                 const finalNotes = initialNotes; // Use the captured value
                 const finalMomoNumber = momoNumber; // Use the fetched value
+                // --- END FIX ---
+
                 // Log the values being saved (Good for debugging)
                 console.log("Saving booking data to Firestore:", {
                   name: finalName,
@@ -1382,6 +1418,7 @@
                   notes: finalNotes,
                   momoNumber: finalMomoNumber
                 });
+
                 try {
                   await addDoc(collection(db, 'pending_bookings'), {
                     name: finalName,
@@ -1406,13 +1443,16 @@
               console.error("Confirm button not found after message update.");
               msg.textContent = '❌ An error occurred. Please try booking again.';
             }
-          }, 100); // Small delay to ensure button is rendered
+          });
+
         } catch (error) {
             console.error("Error fetching MoMo number:", error);
             msg.textContent = '❌ Could not retrieve payment details. Please contact us directly.';
         }
       });
     });
+</script>
+  });
   </script>
   <script>
     // Initialize AOS
@@ -1422,7 +1462,7 @@
       // Mobile menu toggle
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const navLinks = document.getElementById('navLinks');
-      mobileMenuBtn.addEventListener('click', function() {
+    mobileMenuBtn.addEventListener('click', function() {
         navLinks.classList.toggle('active');
       });
       // Function to open the modal and populate service details
