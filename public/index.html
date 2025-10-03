@@ -1347,7 +1347,7 @@
         // Notes field is removed: const initialNotes = document.getElementById('notes').value.trim(); // Optional
         // --- END FIX ---
 
-        console.log("Captured values on submit (notes removed):", {
+        console.log("Captured values on submit (validation removed):", {
             name: initialName,
             phone: initialPhone,
             email: initialEmail,
@@ -1357,14 +1357,7 @@
             // notes: initialNotes // This line is removed
         });
 
-        // Validate essential fields *after* capturing them, using the captured variables
-        // This is the most critical part - ensure all required fields have values
-        if (!initialName || !initialPhone || !initialDate || !initialTime || !initialService) {
-             msg.textContent = '❌ Please fill in all required fields.';
-             console.error("❌ Validation failed on submit. Captured values:", { name: initialName, phone: initialPhone, date: initialDate, time: initialTime, service: initialService });
-             return; // Stop execution if validation fails
-        }
-
+        // Validation removed as requested.
         // If validation passes, proceed with payment prompt
         try {
           const momoSnap = await getDoc(doc(db, "settings", "momo"));
@@ -1400,7 +1393,7 @@
                 // --- END FIX ---
 
                 // Log the values being saved (Good for debugging)
-                console.log("Saving booking data to Firestore (notes removed):", {
+                console.log("Saving booking data to Firestore (validation removed):", {
                   name: finalName,
                   phone: finalPhone,
                   email: finalEmail,
