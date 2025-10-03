@@ -1330,47 +1330,46 @@
         const initialName = document.getElementById('name').value.trim();
         const initialPhone = document.getElementById('phone').value.trim();
         const initialEmail = document.getElementById('email').value.trim();
-        const date = document.getElementById('date').value;
-        const time = document.getElementById('time').value;
-        const service = serviceSelect.value;
-        const notes = document.getElementById('notes').value.trim();
-        const amount = servicePrices[service];
-        // Validate essential fields *after* capturing them
-        // FIXED: Use 'initialName' and 'initialPhone'
-        if (!initialName || !initialPhone || !date || !time || !service) {
+        const initialDate = document.getElementById('date').value.trim();
+        const initialTime = document.getElementById('time').value.trim();
+        const initialService = serviceSelect.value.trim(); // Use serviceSelect variable defined earlier
+        const initialNotes = document.getElementById('notes').value.trim(); // Optional
+        // Validate essential fields *after* capturing them, using the captured variables
+        if (!initialName || !initialPhone || !initialDate || !initialTime || !initialService) {
            msg.textContent = '❌ Please fill in all required fields before submitting.';
-           console.error("Validation failed - Missing required fields. Name:", initialName, "Phone:", initialPhone, "Date:", date, "Time:", time, "Service:", service);
+           console.error("Validation failed - Missing required fields.",
+                         "Name:", initialName, "Phone:", initialPhone, "Date:", initialDate, "Time:", initialTime, "Service:", initialService);
            // Stop execution if required fields are missing
-           return; // <--- ADD THIS LINE TO STOP THE FUNCTION
+           return; // <--- This line was missing or crucially needed
         }
-
+        // If validation passes, proceed with payment prompt
         try {
           const momoSnap = await getDoc(doc(db, "settings", "momo"));
           const momoNumber = momoSnap.exists() ? momoSnap.data().number : '0598374336';
+          const serviceAmount = servicePrices[initialService]; // Use captured service name to get price
           msg.innerHTML = `
-            ✅ Booking details verified! Please send <strong>GHS ${amount}</strong> to MTN MoMo number:
+            ✅ Booking details verified! Please send <strong>GHS ${serviceAmount}</strong> to MTN MoMo number:
             <strong>${momoNumber}</strong><br>
             Then tap the "I've Paid" button below to confirm your booking.
             <br><br>
             <button id="confirmPaid" class="confirm-button">I've Paid</button>
           `;
+          // Wait for the button to be rendered, then attach the event listener
           setTimeout(() => {
             const confirmBtn = document.getElementById('confirmPaid');
             if (confirmBtn) {
               confirmBtn.addEventListener('click', async () => {
                 msg.textContent = '⏳ Verifying and saving your booking...';
-                // Use the values captured when the form was initially submitted
-                // These values are now guaranteed to be correct due to the validation
+                // --- CRITICAL FIX: Use the values captured when the form was initially submitted ---
                 const finalName = initialName; // Use the captured value
                 const finalPhone = initialPhone; // Use the captured value
                 const finalEmail = initialEmail; // Use the captured value
-                const finalDate = date; // Use the captured value
-                const finalTime = time; // Use the captured value
-                const finalService = service; // Use the captured value
-                const finalAmount = amount; // Use the captured value
-                const finalNotes = notes; // Use the captured value
+                const finalDate = initialDate; // Use the captured value
+                const finalTime = initialTime; // Use the captured value
+                const finalService = initialService; // Use the captured value
+                const finalAmount = serviceAmount; // Use the captured amount
+                const finalNotes = initialNotes; // Use the captured value
                 const finalMomoNumber = momoNumber; // Use the fetched value
-
                 // Log the values being saved (Good for debugging)
                 console.log("Saving booking data to Firestore:", {
                   name: finalName,
@@ -1383,7 +1382,6 @@
                   notes: finalNotes,
                   momoNumber: finalMomoNumber
                 });
-
                 try {
                   await addDoc(collection(db, 'pending_bookings'), {
                     name: finalName,
@@ -1408,7 +1406,7 @@
               console.error("Confirm button not found after message update.");
               msg.textContent = '❌ An error occurred. Please try booking again.';
             }
-          }, 100); // The delay might be unnecessary now, but keep it if needed for rendering
+          }, 100); // Small delay to ensure button is rendered
         } catch (error) {
             console.error("Error fetching MoMo number:", error);
             msg.textContent = '❌ Could not retrieve payment details. Please contact us directly.';
