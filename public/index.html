@@ -1220,7 +1220,7 @@
             <option value="13:30">01:30 PM</option>
             <option value="14:00">02:00 PM</option>
             <option value="14:30">02:30 PM</option>
-          <option value="15:00">03:00 PM</option>
+            <option value="15:00">03:00 PM</option>
             <option value="15:30">03:30 PM</option>
             <option value="16:00">04:00 PM</option>
             <option value="16:30">04:30 PM</option>
@@ -1245,7 +1245,6 @@
     </div>
   </div>
   <!-- Firebase SDKs -->
-      <!-- Firebase SDKs -->
     <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
@@ -1446,10 +1445,7 @@
       });
     });
 </script>
-<!-- Removed the erroneous closing brace and script tag -->
- 
-  });
-  </script>
+  <!-- Removed the erroneous closing brace and script tag -->
   <script>
     // Initialize AOS
     document.addEventListener('DOMContentLoaded', function() {
@@ -1457,7 +1453,7 @@
       const modal = document.getElementById("bookingModal");
       // Mobile menu toggle
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      navLinks = document.getElementById('navLinks');
+      const navLinks = document.getElementById('navLinks');
     mobileMenuBtn.addEventListener('click', function() {
         navLinks.classList.toggle('active');
       });
